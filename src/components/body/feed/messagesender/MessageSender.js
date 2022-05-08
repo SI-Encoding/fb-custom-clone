@@ -44,7 +44,8 @@ function MessageSender() {
               username: user.name,    
               image: downloadURL,    
               favourite: fav,  
-              gif: true            
+              gif: true,
+              userId: user.id            
             })
         }
         )
@@ -60,7 +61,8 @@ function MessageSender() {
                 username: user.name,        
                 image: downloadURL,      
                 favourite: fav,      
-                gif: false    
+                gif: false,
+                userId: user.id    
               })
           }
           )
@@ -73,7 +75,8 @@ function MessageSender() {
           profilePic: user.picture,              
           username: user.name,              
           favourite: fav,
-          gif: false    
+          gif: false,
+          userId: user.id    
         })
       } 
       setInput('');  

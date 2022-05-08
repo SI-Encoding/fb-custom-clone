@@ -20,7 +20,7 @@ import PopupAttachment from '../../popupattachment/PopupAttachment'
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopUp from '../../error/ErrorPopUp'
 
-const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite},ref) =>{
+const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
   const user = useSelector((state) => (state.user))
   const [open, setOpen] = useState(false)
   const [popUp, setPopUp] = useState(false)
@@ -199,7 +199,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 <h3>{username}</h3>
                 <p>{new Date(timestamp?.toDate()).toUTCString()}</p>        
               </div>  
-              {username !== user.name ? '' : (<MenuIcon onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
+              {userId !== user.id ? '' : (<MenuIcon onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
           </div>
 
           {/* render edit and delete menu */}

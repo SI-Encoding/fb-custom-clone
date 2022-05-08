@@ -13,9 +13,9 @@ function GifPosts() {
         let isMounted = true;
         
         if (isMounted) {
-            db.collection("posts").where("username", "!=", user.name).orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
+            db.collection("posts").where("userId", "!=", user.id).onSnapshot((snapshot) => 
             setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
-            );
+        );
         }
 
         return () => {
@@ -36,6 +36,7 @@ function GifPosts() {
                         username = {post.data.username}
                         image = {post.data.image}
                         favourite = {post.data.favourite}
+                        userId = {post.data.userId}
                     />
                 </FlipMove>
             ))}

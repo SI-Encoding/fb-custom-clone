@@ -51,6 +51,7 @@ function ChatBody() {
             username: user.name,
             time: firebase.firestore.FieldValue.serverTimestamp(),
             img: downloadURL,
+            userId: user.id
           })
         })
       } else {
@@ -62,7 +63,8 @@ function ChatBody() {
               username: user.name,
               time: firebase.firestore.FieldValue.serverTimestamp(),
               url: downloadURL,
-              fileName: fileName
+              fileName: fileName,
+              userId: user.id
             })
           })
         }
@@ -70,7 +72,8 @@ function ChatBody() {
         db.collection('chat').add({
           message: input,
           username: user.name,
-          time: firebase.firestore.FieldValue.serverTimestamp()
+          time: firebase.firestore.FieldValue.serverTimestamp(),
+          userId: user.id
         })
       }
       setInput('')
@@ -90,7 +93,7 @@ function ChatBody() {
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>
         {chat.map(c => (
-          <ChatMessage key={c.data.id} id={c.id} username={c.data.username} message={c.data.message} time={c.data.time} img={c.data.img} fileName={c.data.fileName} url={c.data.url} deleteComment={ deleteComment }/>
+          <ChatMessage key = {c.id} userId = {c.data.userId} id = {c.id} username = {c.data.username} message = {c.data.message} time = {c.data.time} img = {c.data.img} fileName = {c.data.fileName} url = {c.data.url} deleteComment = {deleteComment}/>
         ))}
         {previewFile && <div ref={messageRef} id='preview' className='preview_container'> 
           <div className='preview_delete' onClick={()=> setPreviewFile(null)}> <CancelIcon/> </div>

@@ -34,6 +34,7 @@ function GifPosts() {
                         username = {post.data.username}
                         image = {post.data.image}
                         favourite = {post.data.favourite}
+                        userId = {post.data.userId}
                     />
                 </FlipMove>
             ))}
