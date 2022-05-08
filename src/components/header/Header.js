@@ -139,7 +139,7 @@ function Header() {
                 <NotificationsActiveIcon/>
                 </IconButton>
             */}
-            {/* SignOut */ }
+            {/* SignOut */}
              <IconButton onClick={()=> setLogoutPopup(!logoutPopup)}>
                 <ExpandMoreIcon className={`header_arrow ${logoutPopup? 'active' : 'inactive'}`}/>
              </IconButton>
