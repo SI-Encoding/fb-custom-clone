@@ -11,7 +11,7 @@ function GifPosts() {
         let isMounted = true;
         
         if (isMounted) {
-            db.collection("posts").where("gif", "==", true).onSnapshot((snapshot) => 
+            db.collection("posts").where("gif", "==", true).orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
             setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
             );
         }
