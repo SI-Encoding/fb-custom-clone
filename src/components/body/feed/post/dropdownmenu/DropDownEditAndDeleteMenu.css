@@ -1,0 +1,42 @@
+.dropdown_container {
+  position:relative;
+  width: 70px;
+  height: 40px;
+  transform: translateX(25%) translateY(-30%);
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: hidden;
+  transition: height 500ms ease;
+  margin-left:auto;
+  display: flex;
+  align-items: center
+}
+
+li {  
+  list-style: none;
+  font-size: medium;
+  color: gray;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center
+}
+   
+li:hover {
+  cursor: pointer;
+  background-color: #eff2f5;
+  border-radius: 10px;
+  color: #2e81f4;
+}
+   
+ ul {
+   padding:0;
+ }
+
+ li > .MuiSvgIcon-root {
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+ }

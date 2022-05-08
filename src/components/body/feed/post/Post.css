@@ -1,0 +1,118 @@
+.post_container {
+    width:100%;
+    margin-top:15px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+}
+
+.post_avatar {
+    margin-right: 10px;
+}
+
+.post_top {
+    display:flex;
+    position: relative;
+    align-items: center;
+    padding: 15px;
+}
+
+.post_image >img {
+    width: 100%;
+}
+
+.post_info_top > h3 {
+    font-size: medium;
+}
+
+.post_info_top > p {
+    font-size: small;
+    color: gray;
+    margin-top: 3px;
+}
+
+.menu_icon{
+    margin-left: auto; 
+}
+
+.menu_icon:hover {
+    background-color: #eff2f5;
+    border-radius: 10px;
+    color: #2e81f4;
+    cursor: pointer;
+}
+
+.post_bottom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+}
+
+.post_options {
+    padding-top: 10px;
+    border-top: 1px solid lightgray;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: medium;
+    color: gray;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.post_option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    flex: 1;
+}
+
+.post_option >p {
+    margin-left: 10px;
+}
+
+.post_option:hover{
+    background-color: #eff2f5;
+    border-radius: 10px;
+}
+
+.post_option:hover > .MuiSvgIcon-root{
+    color: #2e81f4;
+}
+
+.drop_down {
+    height:0; margin:0; padding:0;
+}
+
+.messsageContainer {
+    height: 0; margin: 0; padding: 0;
+}
+
+.messageSender_location {
+    display:flex;
+    position: fixed;
+    margin-top:30px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid #2e81f4;
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
+    width: 54%;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ .post_option.active {
+    color: #2e81f4;
+}
+
+.post_option.active:hover > .MuiSvgIcon-root{
+    color: #2e81f4;
+}
+
+.post_arrow.active {
+    transform: rotate(180deg)
+}
+

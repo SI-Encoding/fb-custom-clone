@@ -1,0 +1,7 @@
+.chat_toolbar_container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    right: 2px;
+}

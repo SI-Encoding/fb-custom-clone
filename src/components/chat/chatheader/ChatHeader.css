@@ -1,0 +1,64 @@
+.chat_header{
+    bottom: 0;
+    right: 2px;
+    align-items: center;
+    width:348px;
+    height:15px;
+    background-color: royalblue;
+    padding: 10px;
+    display:flex;
+}
+
+.chat_header.active {
+    z-index: 9;
+    right: 2px;
+    bottom: 0;
+    align-items: center;
+    width:348px;
+    height:15px;
+    background-color: royalblue;
+    display:flex;
+}
+
+.toolbar_status_logo {
+    background-color: royalblue;
+    padding: 10px;
+    display:flex;
+    top: 100px;
+}
+
+.toobar_enlarger_button {
+    display:flex;
+    margin-left: auto;
+}
+.max {
+    color: #fff;
+}
+
+.minus {
+    color: #fff;
+    margin-top: 7.5px;
+}
+
+.minus:hover {
+    cursor:pointer;
+}
+
+.max:hover {
+    cursor:pointer;
+}
+
+.status {
+    height: 12px;
+    width: 12px;
+    background-color: #40d421;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+.title {
+    color:white;
+    text-shadow: 1px 1px 2px, 0 0 25px blue, 0 0 5px darkblue;
+}
+ 

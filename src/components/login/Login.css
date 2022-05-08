@@ -1,0 +1,44 @@
+.login_container > div >img {
+    object-fit: contain;
+    height: 150px;
+}
+
+.login_container > div {
+    display:flex;
+    flex-direction: column;
+}
+
+.login_container {
+    display:grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.login_button {
+    display: flex;
+    justify-content: center;
+}
+
+.login_divider {
+    height: 85px;
+}
+
+.login_button > button {
+    width: 300px;
+    background-color: #2e81f4;
+    color: #eff2f5;
+    font-weight: 800;
+    margin-bottom: 85px;
+}
+
+.login_button:hover > button {
+    background-color: white;
+    color: #2e81f4;
+}
+
+.login_container > button:hover {
+    background-color: white;
+    color: #2e81f4;
+}
+
+
