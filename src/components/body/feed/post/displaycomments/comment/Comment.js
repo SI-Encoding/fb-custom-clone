@@ -21,8 +21,8 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
        db.collection('posts').doc(postId).collection('comments').doc(commentId).update({
            message: comment,
            time: firebase.firestore.FieldValue.serverTimestamp(),
-           user: username.displayName,
-           userImage: username.photoURL
+           user: username.name,
+           userImage: username.picture
        })
        setComment('')
     }
@@ -41,9 +41,9 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
             <div className='edit_box' ref={editRef}>
                 {editPop && <div className='comment_container'>
                     <div className='comment_area'>
-                        <Avatar src={username.photoURL} className='comment_avatar'/>     
+                        <Avatar src={username.picture} className='comment_avatar'/>     
                         <div className="comment_username">   
-                            <h3>{username.displayName}</h3>
+                            <h3>{username.name}</h3>
                         </div>
                     </div>  
                     <div className="comment_form">
@@ -66,7 +66,7 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
                         <h3 className='display_username'>{user}</h3>
                             <div className='display_message'>
                                 <p>{message}</p>
-                                {displayMenuItems && user === username.displayName && 
+                                {displayMenuItems && user === username.name && 
                                 <div className='display_menu'> 
                                     <p onClick={() => setEditPop(!editPop)}>Edit</p> 
                                     <p onClick={deleteComment}>Delete</p> 

@@ -3,7 +3,7 @@ import Post from '../feed/post/Post'
 import db from '../../../firebase/firebase'
 import FlipMove from 'react-flip-move'
 import '../feed/Feed.css'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 function MyPosts() {
     const [posts,setPosts] = useState([]);
@@ -13,7 +13,7 @@ function MyPosts() {
         let isMounted = true;
         
         if (isMounted) {
-            db.collection("posts").where("username", "==", user.displayName).orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
+            db.collection("posts").where("username", "==", user.name).orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
             setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
         );
         }

@@ -13,10 +13,6 @@ function ChatBody() {
   const [input, setInput] = useState('')
   const [chat, setChat] = useState([])
   const messageRef = useRef(null);
-  const dropRef = useRef()
-  const previewRef = useRef()
-  const [drag, setDrag] = useState(false)
-  const [dragCounter, setDragCounter] = useState(0)
   const [previewFile, setPreviewFile] = useState(null)
   const [fileName, setFileName] = useState('')
   const [fileType, setFileType] = useState(null)
@@ -52,7 +48,7 @@ function ChatBody() {
         }).then(downloadURL => {
           db.collection('chat').add({
             message: input,
-            username: user.displayName,
+            username: user.name,
             time: firebase.firestore.FieldValue.serverTimestamp(),
             img: downloadURL,
           })
@@ -63,7 +59,7 @@ function ChatBody() {
           }).then(downloadURL => {
             db.collection('chat').add({
               message: input,
-              username: user.displayName,
+              username: user.name,
               time: firebase.firestore.FieldValue.serverTimestamp(),
               url: downloadURL,
               fileName: fileName
@@ -73,7 +69,7 @@ function ChatBody() {
     } else {
         db.collection('chat').add({
           message: input,
-          username: user.displayName,
+          username: user.name,
           time: firebase.firestore.FieldValue.serverTimestamp()
         })
       }

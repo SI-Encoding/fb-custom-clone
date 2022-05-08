@@ -40,8 +40,8 @@ function MessageSender() {
               message: input,  
               timestamp: firebase.firestore.      
               FieldValue.serverTimestamp(),
-              profilePic: user.photoURL,      
-              username: user.displayName,    
+              profilePic: user.picture,      
+              username: user.name,    
               image: downloadURL,    
               favourite: fav,  
               gif: true            
@@ -56,8 +56,8 @@ function MessageSender() {
                 message: input,            
                 timestamp: firebase.firestore.            
                 FieldValue.serverTimestamp(),    
-                profilePic: user.photoURL,      
-                username: user.displayName,        
+                profilePic: user.picture,      
+                username: user.name,        
                 image: downloadURL,      
                 favourite: fav,      
                 gif: false    
@@ -70,8 +70,8 @@ function MessageSender() {
           message: input,              
           timestamp: firebase.firestore.              
           FieldValue.serverTimestamp(),              
-          profilePic: user.photoURL,              
-          username: user.displayName,              
+          profilePic: user.picture,              
+          username: user.name,              
           favourite: fav,
           gif: false    
         })
@@ -114,12 +114,12 @@ function MessageSender() {
  return (               
   <div className = 'messageSender'>     
     <div className = 'messageSender__top'>        
-      <Avatar src={user.photoURL}/>            
+      <Avatar src={user.picture}/>            
       <form>                
         <input            
           value = {input}                 
           onChange = {e => setInput(e.target.value)}                
-          placeholder = {`What's on your mind?, ${user.displayName}?`}                
+          placeholder = {`What's on your mind?, ${user.name}?`}                
           className = "messageSender__input"/>                
         <label for = "imageFile" className = 'upload_button'>                
           <div style={{marginTop:'7px'}}> Upload Image</div>

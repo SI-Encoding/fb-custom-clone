@@ -17,7 +17,7 @@ function Login() {
         auth.signInWithPopup(provider).then((result => {
             dispatch({
                 type: set_user,
-                user: result.user,       
+                user: result.additionalUserInfo.profile,       
             })
     })).catch(error => alert(error.message));
 }

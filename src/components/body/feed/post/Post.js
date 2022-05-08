@@ -77,8 +77,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 message: input,
                 timestamp: firebase.firestore.
                 FieldValue.serverTimestamp(),
-                profilePic: user.photoURL,
-                username: user.displayName,
+                profilePic: user.picture,
+                username: user.name,
                 image: downloadURL,
                 favourite: fav,
                 gif: true
@@ -92,8 +92,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 message: input,
                 timestamp: firebase.firestore.
                 FieldValue.serverTimestamp(),
-                profilePic: user.photoURL,
-                username: user.displayName,
+                profilePic: user.picture,
+                username: user.name,
                 image: downloadURL,
                 favourite: fav,
                 gif: false
@@ -104,8 +104,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
               message: input,
               timestamp: firebase.firestore.
               FieldValue.serverTimestamp(),
-              profilePic: user.photoURL,
-              username: user.displayName,
+              profilePic: user.picture,
+              username: user.name,
               favourite: fav,
               gif: false
             })
@@ -199,7 +199,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 <h3>{username}</h3>
                 <p>{new Date(timestamp?.toDate()).toUTCString()}</p>        
               </div>  
-              {username !== user.displayName ? '' : (<MenuIcon onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
+              {username !== user.name ? '' : (<MenuIcon onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
           </div>
 
           {/* render edit and delete menu */}
@@ -249,12 +249,12 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             <div ref = {popUpRef} className='messsageContainer'>
               {popUp && <div className='messageSender_location'>
               <div className='messageSender__top'>
-                <Avatar src={user.photoURL}/>
+                <Avatar src={user.picture}/>
                 <form>
                   <input 
                     value={input}
                     onChange={e => setInput(e.target.value)}
-                    placeholder={`What's on your mind?, ${user.displayName}?`}
+                    placeholder={`What's on your mind?, ${user.name}?`}
                     className="messageSender__input"
                   />
                   <label for="updateFile" className='upload_button'>

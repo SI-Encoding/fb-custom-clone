@@ -16,8 +16,8 @@ function WriteAComment({theId, setDisplayComment}) {
         db.collection('posts').doc(theId).collection('comments').add({
             message: comment,    
             time: firebase.firestore.FieldValue.serverTimestamp(),        
-            user: user.displayName,        
-            userImage: user.photoURL            
+            user: user.name,        
+            userImage: user.picture            
         })             
         setDisplayComment(true)            
         setComment('')            
@@ -28,9 +28,9 @@ function WriteAComment({theId, setDisplayComment}) {
         {/* render writing a comment */ }        
         <div className='comment_container'>        
             <div className='comment_area'>        
-                <Avatar src={user.photoURL} className='comment_avatar'/>            
+                <Avatar src={user.picture} className='comment_avatar'/>            
                     <div className="comment_username">
-                        <h3>{user.displayName}</h3>
+                        <h3>{user.name}</h3>
                     </div>
             </div>        
             <div className="comment_form">        

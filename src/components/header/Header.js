@@ -125,8 +125,8 @@ function Header() {
              {/* signout */ }
              <div className = "header_right">
                 <div className= "header_info">
-                    <Avatar src={user.photoURL}/>
-                    <h4>{user.displayName}</h4>
+                    <Avatar src={user.picture}/>
+                    <h4>{user.name}</h4>
              </div>
     
             {/* <IconButton>

@@ -11,8 +11,8 @@ function ChatMessage({id, username, message, time, deleteComment, img, fileName,
 
     return (
         <div className='chat_Message_container' >
-            {username === user.displayName && <DeleteIcon onClick={deleteFunc} /> }
-            <p  className={`${username == user.displayName ? 'chat_receiver' : 'chat_message'}`}>
+            {username === user.name && <DeleteIcon onClick={deleteFunc} /> }
+            <p  className={`${username == user.name ? 'chat_receiver' : 'chat_message'}`}>
             <span className="chat_name">{username}</span>
             {img ? <><div> <img style={{width:'300px'}} src={img}/></div> 
             <div>{message}  <span className="chat_timestamp">{new Date(time?.toDate()).toUTCString()}</span></div> </>
