@@ -28,7 +28,7 @@ function GifPosts() {
             {posts.map((post) => (
                 <FlipMove typeName={null}>
                     <Post
-                        key = {post.data.id}
+                        key = {post.id}
                         id = {post.id}
                         profilePic = {post.data.profilePic}
                         message = {post.data.message}
