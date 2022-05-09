@@ -97,11 +97,11 @@ function Header() {
                 </div>
             </Link>
             {/* move to flagPage*/}           
-            <Link to="favourites" style={{ color: `${flagPage? '#2e81f4' : 'gray'}`, textDecoration: 'none'}}>
+           {/* <Link to="favourites" style={{ color: `${flagPage? '#2e81f4' : 'gray'}`, textDecoration: 'none'}}>
                 <div onClick = {flagPageActivated} className={ `header_option ${flagPage? 'active' : 'inactive'}`}>
                     <FlagIcon fontSize="large"/> 
                 </div>
-            </Link>
+            </Link> */}
             {/* move to gifpage */}
             <Link to="gifposts" style={{ color: `${gifsPage? '#2e81f4' : 'gray'}`, textDecoration: 'none'}}>
                 <div onClick = {gifsPageActivated} className={ `header_option ${gifsPage? 'active' : 'inactive'}`}>
