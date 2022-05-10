@@ -87,6 +87,8 @@ function ChatBody() {
     db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
       setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
     })
+    let inputSelector = document.getElementById('textfield');
+    inputSelector.select()
   },[])
 
   return (

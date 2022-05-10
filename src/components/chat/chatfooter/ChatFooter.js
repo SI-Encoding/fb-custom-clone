@@ -1,17 +1,25 @@
 import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
-import PopupAttachment from '../../body/popupattachment/PopupAttachment'
 
 function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setFileName, setFileType, previewFile }) {
   const [openEmoji, setOpenEmoji] = useState(false)
   const [openPopup, setOpenPopup] = useState(false)
   const emojiRef = useRef()
   const popupRef = useRef()
+  const fileUploadRef = useRef()
 
   const autoSelect = () => {
-    var input = document.getElementById('textfield');
-    input.select()
+    let inputSelector = document.getElementById('textfield');
+    inputSelector.select()
+  }
+
+  const handleKeyDown = (e) => {
+    if(previewFile) {
+      if (e.key === 'Enter') {
+      sendMessage(e)
+      }
+    }  
   }
 
   useEffect( () => {
@@ -73,21 +81,24 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       }
       {/* Submit message */}
       <form>
-        <input id="textfield" value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder="Type a message"/>
+        <input id="textfield" onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder="Type a message"/>
         <button type="submit" onClick={sendMessage} disabled={!input}> Send a Message</button>
       </form>
       {/* Attach File */}
       <label for="inputFile">
         <AddIcon className='addIcon' />
       </label>
-      <input type="file" id="inputFile" style={{display:"none"}} onChange={(e) => {
-        setPreviewFile(URL.createObjectURL(e.target.files[0])); 
-        setFileName(e.target.files[0].name); 
-        setFileType(e.target.files[0].type); 
-        setFile(e.target.files[0]); 
-        autoSelect();
-        URL.revokeObjectURL(e.target.files[0]);
-        }}
+      <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {
+        if (e.target.files[0]) {
+          setPreviewFile(URL.createObjectURL(e.target.files[0])); 
+          setFileName(e.target.files[0].name); 
+          setFileType(e.target.files[0].type); 
+          setFile(e.target.files[0]); 
+          setInput(input + ' ');
+          autoSelect();
+          URL.revokeObjectURL(e.target.files[0]);
+        }
+      }}
         />
     </div> 
   )
