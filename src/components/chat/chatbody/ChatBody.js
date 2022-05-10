@@ -18,6 +18,19 @@ function ChatBody() {
   const [fileType, setFileType] = useState(null)
   const [file, setFile] = useState(null)
 
+  const autoSelect = () => {
+    let inputSelector = document.getElementById('textfield')
+    inputSelector.select()
+  }
+
+  const resetState = () => {
+    setInput('')
+    setPreviewFile(null)
+    setFileName(null)
+    setFileType(null)
+    setFile(null)
+  }
+
   const deleteComment = (id) => {
     db.collection('chat').doc(id).delete().then(function() {
       console.log('comment successfully deleted ')
@@ -76,19 +89,14 @@ function ChatBody() {
           userId: user.id
         })
       }
-      setInput('')
-      setPreviewFile(null)
-      setFileName(null)
-      setFileType(null)
-      setFile(null)
+      resetState();
   }
  
   useEffect( () => {
     db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
       setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
     })
-    let inputSelector = document.getElementById('textfield');
-    inputSelector.select()
+    autoSelect()
   },[])
 
   return (
@@ -98,12 +106,12 @@ function ChatBody() {
           <ChatMessage key = {c.id} userId = {c.data.userId} id = {c.id} username = {c.data.username} message = {c.data.message} time = {c.data.time} img = {c.data.img} fileName = {c.data.fileName} url = {c.data.url} deleteComment = {deleteComment}/>
         ))}
         {previewFile && <div ref={messageRef} id='preview' className='preview_container'> 
-          <div className='preview_delete' onClick={()=> setPreviewFile(null)}> <CancelIcon/> </div>
+          <div className='preview_delete' onClick={()=> {setPreviewFile(null); autoSelect();}}> <CancelIcon/> </div>
           {fileType.includes('image') ?<img src={previewFile} className='preview_image'/>: <a href={fileName}>{fileName}</a> }
         </div>
         }        
         </div> 
-      <ChatFooter previewFile={previewFile} sendMessage={sendMessage} input={input} setInput={setInput} setFile={setFile} setPreviewFile={setPreviewFile} setFileName={setFileName} setFileType={setFileType}/>
+      <ChatFooter autoSelect={autoSelect} previewFile={previewFile} sendMessage={sendMessage} input={input} setInput={setInput} setFile={setFile} setPreviewFile={setPreviewFile} setFileName={setFileName} setFileType={setFileType}/>
     </>
   )
 }

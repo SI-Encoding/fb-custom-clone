@@ -2,17 +2,12 @@ import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
 
-function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setFileName, setFileType, previewFile }) {
+function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setFileName, setFileType, previewFile, autoSelect }) {
   const [openEmoji, setOpenEmoji] = useState(false)
   const [openPopup, setOpenPopup] = useState(false)
   const emojiRef = useRef()
   const popupRef = useRef()
   const fileUploadRef = useRef()
-
-  const autoSelect = () => {
-    let inputSelector = document.getElementById('textfield');
-    inputSelector.select()
-  }
 
   const handleKeyDown = (e) => {
     if(previewFile) {
@@ -20,6 +15,17 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       sendMessage(e)
       }
     }  
+  }
+
+  const handleFile = (e) => {
+    setPreviewFile(URL.createObjectURL(e.target.files[0])); 
+    setFileName(e.target.files[0].name); 
+    setFileType(e.target.files[0].type); 
+    setFile(e.target.files[0]); 
+    if (!input) {} else { setInput(input + ' ');}
+    autoSelect();
+    URL.revokeObjectURL(e.target.files[0]);
+    e.target.value = null;
   }
 
   useEffect( () => {
@@ -90,14 +96,7 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       </label>
       <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {
         if (e.target.files[0]) {
-          setPreviewFile(URL.createObjectURL(e.target.files[0])); 
-          setFileName(e.target.files[0].name); 
-          setFileType(e.target.files[0].type); 
-          setFile(e.target.files[0]); 
-          setInput(input + ' ');
-          autoSelect();
-          URL.revokeObjectURL(e.target.files[0]);
-          e.target.value = null;
+          handleFile(e)
         }
       }}
         />
