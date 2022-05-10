@@ -10,7 +10,8 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 2. Rename .firebaserc.example to .firebaserc and replace ENTER_YOUR_FIREBASE_PROJECTID_HERE with your projectId from the Project settings at your Firebase Console.
 3. Rename .env.example to .env and replace all ENTER_YOUR_FIREBASE with your Project's settings. It should be found at SDK setup and configuration for npm.
 4. In your terminal, run 'npm install'.
-5. Next, run 'npm start'.
+5. Next, run 'npm update --force' to fix any dependency issues.
+5. Finally, run 'npm start'.
 
 
 # Getting Started with Create React App
