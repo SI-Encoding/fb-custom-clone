@@ -8,10 +8,14 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 ***
 1. Follow Step 1 to create your Firebase Project and registration: https://firebase.google.com/docs/web/setup
 2. Rename .firebaserc.example to .firebaserc and replace ENTER_YOUR_FIREBASE_PROJECTID_HERE with your projectId from the Project settings at your Firebase Console.
-3. Rename .env.example to .env and replace all ENTER_YOUR_FIREBASE with your Project's settings. It should be found at SDK setup and configuration for npm.
-4. In your terminal, run 'npm install'.
-5. Next, run 'npm update --force' to fix any dependency issues.
-5. Finally, run 'npm start'.
+3. In the Firebase console, head to Authentication -> Sign-in Method. Select Google as the provider and click enable and save.
+4. Next, head to Firebase Firestore, and click Create database, and start in production mode. Select location you want, and click enable.
+6. In Firebase Firestore, head to Rules, and delete false in line 5, create a newline on line 6, and paste 'request.time < timestamp.date(yyyy, mm, dd);'
+REPLACE 'yyyy','mm', 'dd' with the date you want. Click publish.
+7. Rename .env.example to .env and replace all ENTER_YOUR_FIREBASE with your Project's settings. It should be found at SDK setup and configuration for npm.
+8. In your terminal, run 'npm install'.
+9. Next, run 'npm update --force' to fix any dependency issues.
+10. Finally, run 'npm start'.
 
 
 # Getting Started with Create React App
