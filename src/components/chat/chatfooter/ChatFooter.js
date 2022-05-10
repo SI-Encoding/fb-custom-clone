@@ -97,6 +97,7 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
           setInput(input + ' ');
           autoSelect();
           URL.revokeObjectURL(e.target.files[0]);
+          e.target.value = null;
         }
       }}
         />

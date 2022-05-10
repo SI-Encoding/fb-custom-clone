@@ -138,7 +138,8 @@ function MessageSender() {
                 setImageUrl(e.target.files[0]); 
                 setFileName(e.target.files[0].name); 
                 setFileType(e.target.files[0].type);    
-                URL.revokeObjectURL(e.target.files[0]);          
+                URL.revokeObjectURL(e.target.files[0]);   
+                e.target.value = null;       
             }
           } 
         }
