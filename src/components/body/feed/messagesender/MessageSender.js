@@ -25,6 +25,24 @@ function MessageSender() {
   const popupRef = useRef()    
   const errorPopUpRef = useRef()   
 
+  const resetState = () => {
+    setInput('');  
+    setImageUrl(null);
+    setFileName(null);
+    setImagePreview(null);            
+    setFileType(null);
+  }
+  
+  const handleFile = e => {
+    setImagePreview(URL.createObjectURL(e.target.files[0]));                
+    setOpenPopup(!openPopup); 
+    setImageUrl(e.target.files[0]); 
+    setFileName(e.target.files[0].name); 
+    setFileType(e.target.files[0].type);    
+    URL.revokeObjectURL(e.target.files[0]);   
+    e.target.value = null;
+  }
+
   const handleSubmit = e => {    
     e.preventDefault();
     const storageRef = firebase.storage();    
@@ -79,11 +97,7 @@ function MessageSender() {
           userId: user.id    
         })
       } 
-      setInput('');  
-      setImageUrl(null);
-      setFileName(null);
-      setImagePreview(null);            
-      setFileType(null);            
+      resetState();            
   } 
 
   useEffect( () => {            
@@ -133,13 +147,7 @@ function MessageSender() {
             if (!fileTypeData.includes('image/')) {             
               setError(true)
             } else {               
-                setImagePreview(URL.createObjectURL(e.target.files[0]));                
-                setOpenPopup(!openPopup); 
-                setImageUrl(e.target.files[0]); 
-                setFileName(e.target.files[0].name); 
-                setFileType(e.target.files[0].type);    
-                URL.revokeObjectURL(e.target.files[0]);   
-                e.target.value = null;       
+                handleFile(e)       
             }
           } 
         }
@@ -165,7 +173,7 @@ function MessageSender() {
       </div>                
     </div>    
 
-    { openPopup && <div ref = {popupRef} >                
+    {openPopup && <div ref = {popupRef}>                
       <PopupAttachment setFileType = {setFileType} 
         imagePreview = {imagePreview} 
         setImagePreview = {setImagePreview} 

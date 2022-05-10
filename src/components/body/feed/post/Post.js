@@ -49,6 +49,24 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     })
   }
 
+  const resetState = () => {
+    setInput('');
+    setImageUrl(null);
+    setFileName(null);
+    setImagePreview(null);
+    setFileType(null);
+  }
+
+  const handleFile = (e) => {
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
+    setOpenPopup(!openPopup); 
+    setImageUrl(e.target.files[0]); 
+    setFileName(e.target.files[0].name); 
+    setFileType(e.target.files[0].type);
+    URL.revokeObjectURL(e.target.files[0]);
+    e.target.value = null;
+  }
+
   const deleteThis = (id) => {
     setPopUp(false)
     db.collection('posts').doc(id).delete().then(function() {
@@ -110,12 +128,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
               gif: false
             })
           }
-      
-          setInput('');
-          setImageUrl(null);
-          setFileName(null);
-          setImagePreview(null);
-          setFileType(null);
+          resetState(); 
         }
     
     
@@ -267,13 +280,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                           setError(true)
                           setOpenPopup(false)
                         } else {
-                            setImagePreview(URL.createObjectURL(e.target.files[0]));
-                            setOpenPopup(!openPopup); 
-                            setImageUrl(e.target.files[0]); 
-                            setFileName(e.target.files[0].name); 
-                            setFileType(e.target.files[0].type);
-                            URL.revokeObjectURL(e.target.files[0]);
-                            e.target.value = null;
+                            handleFile(e)
                         }
                     }  
                   }}
