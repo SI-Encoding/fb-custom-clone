@@ -80,7 +80,15 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       <label for="inputFile">
         <AddIcon className='addIcon' />
       </label>
-      <input type="file" id="inputFile" style={{display:"none"}} onChange={(e) => {setPreviewFile(URL.createObjectURL(e.target.files[0])); setFileName(e.target.files[0].name); setFileType(e.target.files[0].type); setFile(e.target.files[0]); autoSelect()}}/>
+      <input type="file" id="inputFile" style={{display:"none"}} onChange={(e) => {
+        setPreviewFile(URL.createObjectURL(e.target.files[0])); 
+        setFileName(e.target.files[0].name); 
+        setFileType(e.target.files[0].type); 
+        setFile(e.target.files[0]); 
+        autoSelect();
+        URL.revokeObjectURL(e.target.files[0]);
+        }}
+        />
     </div> 
   )
 }

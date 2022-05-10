@@ -12,7 +12,14 @@ function PopupAttachment({setOpenPopup, openPopup, imagePreview, handleSubmit, s
       <img src={imagePreview} alt= 'your_uploaded_image'/>
       </div>
       <div className='popup_buttons'>
-        <Button type ='submit' onClick={()=> {setOpenPopup(!openPopup); setFileName(null); setImageUrl(null); setImagePreview(null); setFileType(null);}}>Cancel</Button>
+        <Button type ='submit' onClick={()=> {
+          setOpenPopup(!openPopup); 
+          setFileName(null); 
+          setImageUrl(null); 
+          setImagePreview(null); 
+          setFileType(null);
+          }}
+          >Cancel</Button>
       <div className='popup_divide_buttons'></div>
         <Button type ='submit' onClick={(e)=> {setOpenPopup(!openPopup); handleSubmit(e) }}>Submit</Button>
       </div>
