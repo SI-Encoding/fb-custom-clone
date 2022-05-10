@@ -18,6 +18,10 @@ function ChatBody() {
   const [fileType, setFileType] = useState(null)
   const [file, setFile] = useState(null)
 
+  const storageRef = firebase.storage();
+  
+  let store = storageRef.ref(`/files/${fileName}`);
+
   const autoSelect = () => {
     let inputSelector = document.getElementById('textfield')
     inputSelector.select()
@@ -38,6 +42,44 @@ function ChatBody() {
       console.log('error failed to delete comment')
     })
   }
+
+  const sendMessageWithImage = () => {
+    uploadBytes(store, file).then(snapshot => {
+      return getDownloadURL(snapshot.ref)
+      }).then(downloadURL => {
+        db.collection('chat').add({
+          message: input,
+          username: user.name,
+          time: firebase.firestore.FieldValue.serverTimestamp(),
+          img: downloadURL,
+          userId: user.id
+        })
+      })
+  }
+
+  const sendMessageWithOtherFiles = () => {
+    uploadBytes(store, file).then(snapshot => {
+      return getDownloadURL(snapshot.ref)
+      }).then(downloadURL => {
+        db.collection('chat').add({
+          message: input,
+          username: user.name,
+          time: firebase.firestore.FieldValue.serverTimestamp(),
+          url: downloadURL,
+          fileName: fileName,
+          userId: user.id
+        })
+      })
+  }
+
+  const sendMessageWithNoFiles = () => {
+    db.collection('chat').add({
+      message: input,
+      username: user.name,
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      userId: user.id
+    })
+  }
  
   useEffect( () => {
     if (messageRef) {
@@ -48,46 +90,16 @@ function ChatBody() {
     }
   },[])
 
-  const storageRef = firebase.storage();
-
   const sendMessage = (e) => {
     e.preventDefault()
     if (previewFile) {
-      let store = storageRef.ref(`/files/${fileName}`);
-
       if (fileType.includes('image')) {
-        uploadBytes(store, file).then(snapshot => {
-        return getDownloadURL(snapshot.ref)
-        }).then(downloadURL => {
-          db.collection('chat').add({
-            message: input,
-            username: user.name,
-            time: firebase.firestore.FieldValue.serverTimestamp(),
-            img: downloadURL,
-            userId: user.id
-          })
-        })
+        sendMessageWithImage()
       } else {
-          uploadBytes(store, file).then(snapshot => {
-          return getDownloadURL(snapshot.ref)
-          }).then(downloadURL => {
-            db.collection('chat').add({
-              message: input,
-              username: user.name,
-              time: firebase.firestore.FieldValue.serverTimestamp(),
-              url: downloadURL,
-              fileName: fileName,
-              userId: user.id
-            })
-          })
+        sendMessageWithOtherFiles()
         }
     } else {
-        db.collection('chat').add({
-          message: input,
-          username: user.name,
-          time: firebase.firestore.FieldValue.serverTimestamp(),
-          userId: user.id
-        })
+        sendMessageWithNoFiles()
       }
       resetState();
   }
