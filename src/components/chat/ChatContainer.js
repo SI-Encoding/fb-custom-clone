@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 import ChatBody from './chatbody/ChatBody'
 import ChatHeader from './chatheader/ChatHeader'
 import './ChatContainer.css'
@@ -13,7 +13,7 @@ function ChatContainer() {
   return (
     <div className='chat_toolbar_container'>
       <ChatHeader expand={expand} expandMenu={expandMenu}/>
-      {expand && <ChatBody/>}
+      {expand && <ChatBody expand={expand}/>}
     </div>
   )
 }

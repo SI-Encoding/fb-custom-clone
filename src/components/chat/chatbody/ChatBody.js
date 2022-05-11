@@ -36,10 +36,10 @@ function ChatBody() {
   }
 
   const deleteComment = (id) => {
-    db.collection('chat').doc(id).delete().then(function() {
+    db.collection('chat').doc(id).delete().then(() => {
       console.log('comment successfully deleted ')
-    }).catch(function(error) {
-      console.log('error failed to delete comment')
+    }).catch((error) => {
+      console.log('error failed to delete comment', error)
     })
   }
 
@@ -82,6 +82,10 @@ function ChatBody() {
   }
  
   useEffect( () => {
+    db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
+      setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
+    })
+    autoSelect()
     if (messageRef) {
       messageRef.current.addEventListener('DOMNodeInserted', event => {
       const { currentTarget: target } = event;
@@ -104,13 +108,6 @@ function ChatBody() {
       resetState();
   }
  
-  useEffect( () => {
-    db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
-      setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
-    })
-    autoSelect()
-  },[])
-
   return (
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>

@@ -74,9 +74,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
   const deleteThis = (id) => {
     setUpdatePostPopUp(false)
-    db.collection('posts').doc(id).delete().then(function() {
+    db.collection('posts').doc(id).delete().then(() => {
       console.log('document deleted');
-    }).catch(function(error) {
+    }).catch((error) => {
       console.log('error could not delete this document', error)
     })}
 
