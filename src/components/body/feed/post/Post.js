@@ -249,75 +249,75 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             <p>Like</p>
           </div>
 
-                { /* create a message */}    
-                <div onClick = {() => setWriteComment(!writeComment)} className={`post_option ${writeComment? 'active':'inactive'}`}>
-                    <ChatBubbleOutlineIcon />
-                    <p>Comment</p>
-                </div>
-                <div className="post_option">
-                    <NearMeIcon />
-                    <p>Share</p>
-                </div>
-                <div onClick = {() => setDisplayComment(!displayComment) } className={`post_option ${displayComment? 'active' : 'inactive'}`}>
-                    <AccountCircleIcon/>
-                    <ExpandMoreOutlined className={`post_arrow ${displayComment? 'active' : 'inactive'}`}/>
-                </div>
+          { /* create a message */}    
+          <div onClick = {() => setWriteComment(!writeComment)} className={`post_option ${writeComment? 'active':'inactive'}`}>
+            <ChatBubbleOutlineIcon />
+            <p>Comment</p>
+          </div>
+          <div className="post_option">
+            <NearMeIcon />
+            <p>Share</p>
+          </div>
+          <div onClick = {() => setDisplayComment(!displayComment) } className={`post_option ${displayComment? 'active' : 'inactive'}`}>
+            <AccountCircleIcon/>
+            <ExpandMoreOutlined className={`post_arrow ${displayComment? 'active' : 'inactive'}`}/>
+          </div>
 
+          </div>
+
+          {/* render creating a message */}
+          {writeComment && <WriteAComment  theId={id} setDisplayComment={setDisplayComment}/>}
+
+          {/* render displaying the messages */}
+          {displayComment && <DisplayComments theId = {id}/>}
+
+          { /* render the popup used to update the post */}
+          <div ref = {popUpRef} className='messsageContainer'>
+            {popUp && <div className='messageSender_location'>
+            <div className='messageSender__top'>
+              <Avatar src={user.picture}/>
+              <form>
+                <input 
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  placeholder={`What's on your mind?, ${user.name}?`}
+                  className="messageSender__input"
+                />
+                <label for="updateFile" className='upload_button'>
+                  <div style={{marginTop:'7px'}}> Upload Image</div>    
+                </label> 
+                <input type="file" id="updateFile" accept="image/*" style={{display:"none"}} onChange={(e) => {  
+                  if (e.target.files[0]) {
+                    let fileTypeData = e.target.files[0].type;   
+                      if (!fileTypeData.includes('image/')) {
+                        setError(true)
+                        setOpenPopup(false)
+                      } else {
+                          handleFile(e)
+                      }
+                  }  
+                }}
+                /> 
+                <button onClick={handleSubmit} type="submit" disabled={!input && !imageUrl}>
+                Hidden Submit
+                </button>
+              </form> 
             </div>
-
-            {/* render creating a message */}
-            {writeComment && <WriteAComment  theId={id} setDisplayComment={setDisplayComment}/>}
-
-            {/* render displaying the messages */}
-            {displayComment && <DisplayComments theId = {id}/>}
-
-            { /* render the popup used to update the post */}
-            <div ref = {popUpRef} className='messsageContainer'>
-              {popUp && <div className='messageSender_location'>
-              <div className='messageSender__top'>
-                <Avatar src={user.picture}/>
-                <form>
-                  <input 
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    placeholder={`What's on your mind?, ${user.name}?`}
-                    className="messageSender__input"
-                  />
-                  <label for="updateFile" className='upload_button'>
-                    <div style={{marginTop:'7px'}}> Upload Image</div>    
-                  </label> 
-                  <input type="file" id="updateFile" accept="image/*" style={{display:"none"}} onChange={(e) => {  
-                    if (e.target.files[0]) {
-                      let fileTypeData = e.target.files[0].type;   
-                        if (!fileTypeData.includes('image/')) {
-                          setError(true)
-                          setOpenPopup(false)
-                        } else {
-                            handleFile(e)
-                        }
-                    }  
-                  }}
-                  /> 
-                    <button onClick={handleSubmit} type="submit" disabled={!input && !imageUrl}>
-                    Hidden Submit
-                    </button>
-                  </form> 
+            <div className="messageSender__bottom">
+              <div className="messageSender__option">
+                <MessageIcon style={{color: 'red'}}/>
+                <h3 className='messageSender__text'>Message</h3>
               </div>
-              <div className="messageSender__bottom">
-                <div className="messageSender__option">
-                  <MessageIcon style={{color: 'red'}}/>
-                  <h3 className='messageSender__text'>Message</h3>
-                </div>
-                <div className="messageSender__option">
-                  <PhotoLibraryIcon style={{color: 'green'}}/>
-                  <h3 className='messageSender__text'>Image/Gif</h3>
-                </div>
-                <div className="messageSender__option">
-                  <InsertEmoticonIcon style={{color: 'orange'}}/>
-                  <h3 className='messageSender__text'>Feeling/Activity</h3>
-                </div>
+              <div className="messageSender__option">
+                <PhotoLibraryIcon style={{color: 'green'}}/>
+                <h3 className='messageSender__text'>Image/Gif</h3>
+              </div>
+              <div className="messageSender__option">
+                <InsertEmoticonIcon style={{color: 'orange'}}/>
+                <h3 className='messageSender__text'>Feeling/Activity</h3>
               </div>
             </div>
+          </div>
             }
           </div>
           {openPopup && <div ref = {uploadRef} >
