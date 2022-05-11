@@ -12,7 +12,7 @@ function ChatBody() {
   const user = useSelector((state) => (state.user))
   const [input, setInput] = useState('')
   const [chat, setChat] = useState([])
-  const messageRef = useRef(null);
+  const messageRef = useRef();
   const [previewFile, setPreviewFile] = useState(null)
   const [fileName, setFileName] = useState('')
   const [fileType, setFileType] = useState(null)
@@ -81,17 +81,15 @@ function ChatBody() {
     })
   }
  
-  useEffect( () => {
+  useEffect(() => {
     db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
       setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
     })
     autoSelect()
-    if (messageRef) {
       messageRef.current.addEventListener('DOMNodeInserted', event => {
       const { currentTarget: target } = event;
       target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
       });
-    }
   },[])
 
   const sendMessage = (e) => {
@@ -111,10 +109,10 @@ function ChatBody() {
   return (
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>
-        {chat.map(c => (
+        {chat.map(c => ( 
           <ChatMessage key = {c.id} userId = {c.data.userId} id = {c.id} username = {c.data.username} message = {c.data.message} time = {c.data.time} img = {c.data.img} fileName = {c.data.fileName} url = {c.data.url} deleteComment = {deleteComment}/>
         ))}
-        {previewFile && <div ref={messageRef} id='preview' className='preview_container'> 
+        {previewFile && <div id='preview' className='preview_container'> 
           <div className='preview_delete' onClick={()=> {setPreviewFile(null); autoSelect();}}> <CancelIcon/> </div>
           {fileType.includes('image') ?<img src={previewFile} className='preview_image'/>: <a href={fileName}>{fileName}</a> }
         </div>

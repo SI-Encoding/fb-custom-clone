@@ -13,7 +13,7 @@ function ChatContainer() {
   return (
     <div className='chat_toolbar_container'>
       <ChatHeader expand={expand} expandMenu={expandMenu}/>
-      {expand && <ChatBody expand={expand}/>}
+      {expand && <ChatBody/>}
     </div>
   )
 }
