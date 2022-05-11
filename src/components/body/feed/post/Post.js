@@ -39,6 +39,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const errorPopUpRef = useRef()
   const uploadRef = useRef()
     
+  const storageRef = firebase.storage();
+  let store = storageRef.ref(`/posts/${fileName}`);
+
   {/* add to favourites */}
   const addToFavourite = (e) => {
     e.preventDefault()
@@ -79,58 +82,68 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
       setPopUp(true)
     }
 
+    const postWithGif = () => {
+      uploadBytes(store, imageUrl).then(snapshot => {
+        return getDownloadURL(snapshot.ref)
+      }).then(downloadURL => {
+        db.collection('posts').doc(id).update({
+          message: input,
+          timestamp: firebase.firestore.
+          FieldValue.serverTimestamp(),
+          profilePic: user.picture,
+          username: user.name,
+          image: downloadURL,
+          favourite: fav,
+          gif: true
+        })
+      })
+    }
+  
+    const postWithImage = () => {
+      uploadBytes(store, imageUrl).then(snapshot => {
+        return getDownloadURL(snapshot.ref)
+      }).then(downloadURL => {
+        db.collection('posts').doc(id).update({
+          message: input,
+          timestamp: firebase.firestore.
+          FieldValue.serverTimestamp(),
+          profilePic: user.picture,
+          username: user.name,
+          image: downloadURL,
+          favourite: fav,
+          gif: false
+        })})
+
+    }
+
+    const postWithNoAttachment = () => {
+      db.collection('posts').doc(id).update({
+        message: input,
+        timestamp: firebase.firestore.
+        FieldValue.serverTimestamp(),
+        profilePic: user.picture,
+        username: user.name,
+        favourite: fav,
+        gif: false
+      })
+    }
+
     {/* update the post with new message */}
     const handleSubmit = (e) => {
         e.preventDefault()
         setPopUp(false)
-        const storageRef = firebase.storage();
-        let store = storageRef.ref(`/posts/${fileName}`);
-
+        
         if (imageUrl) { 
           if(fileType === 'image/gif'){
-            uploadBytes(store, imageUrl).then(snapshot => {
-              return getDownloadURL(snapshot.ref)
-            }).then(downloadURL => {
-              db.collection('posts').doc(id).update({
-                message: input,
-                timestamp: firebase.firestore.
-                FieldValue.serverTimestamp(),
-                profilePic: user.picture,
-                username: user.name,
-                image: downloadURL,
-                favourite: fav,
-                gif: true
-              })
-            })
+            postWithGif()
           } else {
-            uploadBytes(store, imageUrl).then(snapshot => {
-              return getDownloadURL(snapshot.ref)
-            }).then(downloadURL => {
-              db.collection('posts').doc(id).update({
-                message: input,
-                timestamp: firebase.firestore.
-                FieldValue.serverTimestamp(),
-                profilePic: user.picture,
-                username: user.name,
-                image: downloadURL,
-                favourite: fav,
-                gif: false
-              })})
+            postWithImage()
             }
           } else {
-            db.collection('posts').doc(id).update({
-              message: input,
-              timestamp: firebase.firestore.
-              FieldValue.serverTimestamp(),
-              profilePic: user.picture,
-              username: user.name,
-              favourite: fav,
-              gif: false
-            })
+            postWithNoAttachment()
           }
           resetState(); 
         }
-    
     
         {/* used for managing the edit and delete menu */}
         useEffect(()=> {
