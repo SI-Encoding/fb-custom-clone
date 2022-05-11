@@ -3,7 +3,7 @@ import './ChatHeader.css'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import MaximizeIcon from '@material-ui/icons/Maximize';
 
-function ChatHeader({expand, expandMenu, closeMenu}) {
+function ChatHeader({expand, expandMenu}) {
 
     return (
         <div className={`chat_header ${expand ? 'active' : 'inactive'}`}>
@@ -14,7 +14,7 @@ function ChatHeader({expand, expandMenu, closeMenu}) {
             <p className='title'>Public Chat</p>
             </div>
             <div className='toobar_enlarger_button'>
-            {expand? <MaximizeIcon onClick={closeMenu} className='minus'/> :<CheckBoxOutlineBlankIcon onClick={expandMenu} className='max'/>    }
+            {expand? <MaximizeIcon onClick={expandMenu} className='minus'/> :<CheckBoxOutlineBlankIcon onClick={expandMenu} className='max'/>}
             </div>            
         </div>   
     )

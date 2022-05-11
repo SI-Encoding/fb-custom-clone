@@ -7,16 +7,12 @@ function ChatContainer() {
   const [expand, setExpand] = useState(false);
 
   const expandMenu = () => {
-    setExpand(true)
+    setExpand(!expand)
   }
 
-  const closeMenu = () => {
-    setExpand(false)
-  }
-  
   return (
     <div className='chat_toolbar_container'>
-      <ChatHeader expand={expand} expandMenu={expandMenu} closeMenu={closeMenu}/>
+      <ChatHeader expand={expand} expandMenu={expandMenu}/>
       {expand && <ChatBody/>}
     </div>
   )
