@@ -5,7 +5,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
-function UpdatePost({input, setInput, handleFile, handleSubmit, setError, popUp, setPopUp, imageUrl}) {
+function UpdatePost({input, setInput, handleFile, handleSubmit, setError, updatePostPopUp, setUpdatePostPopUp, imageUrl}) {
     const user = useSelector((state) => (state.user))
     const popUpRef = useRef(null)
 
@@ -14,12 +14,12 @@ function UpdatePost({input, setInput, handleFile, handleSubmit, setError, popUp,
 
         const pageUpdater = (e) => {
           if (popUpRef.current !== null && !popUpRef.current.contains(e.target)){
-            setPopUp(!popUp)
+            setUpdatePostPopUp(!updatePostPopUp)
           }
         }
 
         {/* add window event listeners */}
-        if (popUp) {
+        if (updatePostPopUp) {
           window.addEventListener('click', pageUpdater)
         }
         
@@ -27,7 +27,7 @@ function UpdatePost({input, setInput, handleFile, handleSubmit, setError, popUp,
         return () => {
           window.removeEventListener('click',pageUpdater)
         }
-        },[popUp])
+        },[updatePostPopUp])
 
     return (
     <div ref = {popUpRef} className='messsageContainer'>

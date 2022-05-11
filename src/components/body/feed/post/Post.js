@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState, forwardRef} from 'react'
+import React, {useState, forwardRef} from 'react'
 import './Post.css'
 import {Avatar} from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
@@ -11,9 +11,6 @@ import {useSelector} from 'react-redux';
 import DropDownEditAndDeleteMenu from './dropdownmenu/DropDownEditAndDeleteMenu'
 import db from '../../../../firebase/firebase'
 import firebase from 'firebase/compat'
-import MessageIcon from '@material-ui/icons/Message'
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import WriteAComment from './writeacomment/WriteAComment'
 import DisplayComments from './displaycomments/DisplayComments'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
@@ -23,23 +20,27 @@ import UpdatePost from './updatepost/UpdatePost'
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
   const user = useSelector((state) => (state.user))
+  
+  // State to manage submitting posts
   const [open, setOpen] = useState(false)
-  const [popUp, setPopUp] = useState(false)
   const [input, setInput] = useState("")
   const [imageUrl, setImageUrl] = useState("")
   const [fav, setFav] = useState(false)
-  const dropDownRef = useRef(null)
-  const popUpRef = useRef(null)
-  const [writeComment, setWriteComment] = useState('')
-  const [fileName, setFileName] = useState(null)
-  const [displayComment, setDisplayComment] = useState(false)
-  const [imagePreview, setImagePreview] = useState(null)
-  const [openPopup, setOpenPopup] = useState(false)
-  const [fileType, setFileType] = useState(null)
-  const [error, setError] = useState(false)
 
-  const uploadRef = useRef()
-    
+  // State to manage commenting on posts
+  const [writeComment, setWriteComment] = useState('')
+  const [displayComment, setDisplayComment] = useState(false)
+
+  // State to manage popups
+  const [UpdatePostPopUp, setUpdatePostPopUp] = useState(false)
+  const [popUpAttachmentPopUp, setPopUpAttachmentPopUp] = useState(false)
+  const [errorPopUp, setErrorPopUp] = useState(false)
+
+  // State to manage uploading files
+  const [fileName, setFileName] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
+  const [fileType, setFileType] = useState(null)
+  
   const storageRef = firebase.storage();
   let store = storageRef.ref(`/posts/${fileName}`);
 
@@ -63,7 +64,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
   const handleFile = (e) => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
-    setOpenPopup(!openPopup); 
+    setPopUpAttachmentPopUp(!popUpAttachmentPopUp); 
     setImageUrl(e.target.files[0]); 
     setFileName(e.target.files[0].name); 
     setFileType(e.target.files[0].type);
@@ -72,7 +73,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   }
 
   const deleteThis = (id) => {
-    setPopUp(false)
+    setUpdatePostPopUp(false)
     db.collection('posts').doc(id).delete().then(function() {
       console.log('document deleted');
     }).catch(function(error) {
@@ -80,7 +81,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     })}
 
     const editThis = () => {
-      setPopUp(true)
+      setUpdatePostPopUp(true)
     }
 
     const postWithGif = () => {
@@ -132,7 +133,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     {/* update the post with new message */}
     const handleSubmit = (e) => {
         e.preventDefault()
-        setPopUp(false)
+        setUpdatePostPopUp(false)
         
         if (imageUrl) { 
           if(fileType === 'image/gif'){
@@ -146,65 +147,6 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           resetState(); 
         }
     
-        {/* used for managing the edit and delete menu */}
-        useEffect(()=> {
-
-        const pageClickEvent = (e) => {
-          if (dropDownRef.current !== null && !dropDownRef.current.contains(e.target)) {
-            setOpen(!open);}
-          };
-       
-          {/* If the item is active (ie open) then listen for clicks */}
-          if (open) {
-            window.addEventListener('click', pageClickEvent);
-          }
-
-          {/* cleans up when unmounted */}
-          return () => {
-            window.removeEventListener('click', pageClickEvent);
-          }
-        },[open])
-
-        {/* used for managing the post updater */}
-        useEffect(() => {
-
-        const pageUpdater = (e) => {
-          if (popUpRef.current !== null && !popUpRef.current.contains(e.target)){
-            setPopUp(!popUp)
-          }
-        }
-
-        {/* add window event listeners */}
-        if (popUp) {
-          window.addEventListener('click', pageUpdater)
-        }
-        
-        {/* clean it up */}
-        return () => {
-          window.removeEventListener('click',pageUpdater)
-        }
-        },[popUp])
-
-        useEffect(()=> {
-
-        const detectOutside = e => {
-          if (openPopup && uploadRef.current && !uploadRef.current.contains(e.target)) {
-            setOpenPopup(false);
-            setImageUrl(null);
-            setFileName(null);
-            setImagePreview(null);
-            setFileType(null);
-          }
-        }
-  
-        window.addEventListener('click', detectOutside)
-        return () => {
-          window.removeEventListener('click', detectOutside )
-        }
-        }, [openPopup])
-
-        
-
      {/* render the post */}
       return (
         <div ref = {ref} className='post_container'>
@@ -218,8 +160,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           </div>
 
           {/* render edit and delete menu */}
-          <div ref = {dropDownRef} className='drop_down'>
-            {open && <DropDownEditAndDeleteMenu postId={id} deleteThis={deleteThis} editThis={editThis}/>}
+          <div className='drop_down'>
+            {open && <DropDownEditAndDeleteMenu open={open} setOpen={setOpen} postId={id} deleteThis={deleteThis} editThis={editThis}/>}
           </div>
 
           {/* render the post's bottom icon */}
@@ -232,13 +174,13 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           </div>
           <div className="post_options">
 
-          {/* add post to favourites */ }
+          {/* add post to favourites */}
           <div onClick ={addToFavourite} className={`post_option ${favourite? 'active':'inactive'}`}>
             <ThumbUpIcon/>
             <p>Like</p>
           </div>
 
-          { /* create a message */}    
+          {/* create a message */}    
           <div onClick = {() => setWriteComment(!writeComment)} className={`post_option ${writeComment? 'active':'inactive'}`}>
             <ChatBubbleOutlineIcon />
             <p>Comment</p>
@@ -259,26 +201,37 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           {/* render displaying the messages */}
           {displayComment && <DisplayComments theId = {id}/>}
 
-          { /* render the popup used to update the post */}
-          {popUp && 
-          <UpdatePost 
-            popUp={popUp} 
-            setPopUp = {setPopUp} 
-            input={input} 
-            setInput={setInput} 
-            handleFile={handleFile} 
-            handleSubmit={handleSubmit} 
-            setError={setError} 
-            imageUrl={imageUrl}
-          />
+          {/* render the popup used to update the post */}
+          {UpdatePostPopUp && 
+            <UpdatePost 
+              UpdatePostPopUp={UpdatePostPopUp} 
+              setUpdatePostPopUp = {setUpdatePostPopUp} 
+              input={input} 
+              setInput={setInput} 
+              handleFile={handleFile} 
+              handleSubmit={handleSubmit} 
+              setError={setErrorPopUp} 
+              imageUrl={imageUrl}
+            />
           }
-    
-          {openPopup && <div ref = {uploadRef} >
-            <PopupAttachment imagePreview={imagePreview} setImagePreview={setImagePreview} setOpenPopup={setOpenPopup} openPopup={openPopup} handleSubmit={handleSubmit} setImageUrl={setImageUrl} setFileName={setFileName} setFileType={setFileType}/>
-          </div>
+
+          {/* render the popup used to upload preview of image */}
+          {popUpAttachmentPopUp && 
+            <PopupAttachment 
+              imagePreview={imagePreview} 
+              setImagePreview={setImagePreview} 
+              setOpenPopup={setPopUpAttachmentPopUp} 
+              openPopup={popUpAttachmentPopUp} 
+              handleSubmit={handleSubmit} 
+              setImageUrl={setImageUrl} 
+              setFileName={setFileName} 
+              setFileType={setFileType}
+            />
           }
-          {error && 
-            <ErrorPopUp setError={setError} error={error}/>
+
+          {/* render the popup used to show wrong file type supported */}
+          {errorPopUp && 
+            <ErrorPopUp setErrorPopUp={setErrorPopUp} errorPopUp={errorPopUp}/>
           }
         </div>
       )

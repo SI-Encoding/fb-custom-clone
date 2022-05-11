@@ -3,14 +3,14 @@ import {Button} from '@material-ui/core'
 import './ErrorPopUp.css'
 import WarningIcon from '@mui/icons-material/Warning';
 
-function ErrorPopUp({setError,error}) {
+function ErrorPopUp({setErrorPopUp,errorPopUp}) {
   const errorPopUpRef = useRef()
-  
+
   useEffect(()=> {
 
     const popUpUpdated = e => {
-      if (error && errorPopUpRef.current && !errorPopUpRef.current.contains(e.target)) {
-        setError(false)
+      if (errorPopUp && errorPopUpRef.current && !errorPopUpRef.current.contains(e.target)) {
+        setErrorPopUp(false)
       }
     }
 
@@ -18,7 +18,7 @@ function ErrorPopUp({setError,error}) {
     return () => {
       window.removeEventListener('click', popUpUpdated)
     }
-  }, [error])
+  }, [errorPopUp])
 
   return (
     <div ref = {errorPopUpRef} className='popup_error_container'>
@@ -34,7 +34,7 @@ function ErrorPopUp({setError,error}) {
           <div style={{textAlign:'center'}}>Please upload a image file. </div></h4></div>
         </div>
         <div className='popup_error_buttons'>
-          <Button type ='submit' onClick={(e)=> { setError(false)}}>Ok</Button>
+          <Button type ='submit' onClick={(e)=> { setErrorPopUp(false)}}>Ok</Button>
         </div>
     </div>
   )

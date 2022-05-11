@@ -1,10 +1,30 @@
-import React from 'react'
+import React,{useEffect, useRef} from 'react'
 import './PopupAttachment.css'
 import {Button} from '@material-ui/core'
 
 function PopupAttachment({setOpenPopup, openPopup, imagePreview, handleSubmit, setFileName, setImageUrl, setImagePreview, setFileType}) {
+  const uploadRef = useRef(null)
+
+  useEffect(()=> {
+
+    const detectOutside = e => {
+      if (openPopup && uploadRef.current && !uploadRef.current.contains(e.target)) {
+        setOpenPopup(false);
+        setImageUrl(null);
+        setFileName(null);
+        setImagePreview(null);
+        setFileType(null);
+      }
+    }
+
+    window.addEventListener('click', detectOutside)
+    return () => {
+      window.removeEventListener('click', detectOutside )
+    }
+    }, [openPopup])
+
   return (
-    <div className='popup_container'>
+    <div ref={uploadRef} className='popup_container'>
       <div className='popup_top'>
         <h3 className='popup_title'>Upload File</h3>
       </div>
