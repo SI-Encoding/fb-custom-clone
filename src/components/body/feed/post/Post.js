@@ -19,6 +19,7 @@ import DisplayComments from './displaycomments/DisplayComments'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopUp from '../../error/ErrorPopUp'
+import UpdatePost from './updatepost/UpdatePost'
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
   const user = useSelector((state) => (state.user))
@@ -262,7 +263,6 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             <AccountCircleIcon/>
             <ExpandMoreOutlined className={`post_arrow ${displayComment? 'active' : 'inactive'}`}/>
           </div>
-
           </div>
 
           {/* render creating a message */}
@@ -272,54 +272,19 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           {displayComment && <DisplayComments theId = {id}/>}
 
           { /* render the popup used to update the post */}
-          <div ref = {popUpRef} className='messsageContainer'>
-            {popUp && <div className='messageSender_location'>
-            <div className='messageSender__top'>
-              <Avatar src={user.picture}/>
-              <form>
-                <input 
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  placeholder={`What's on your mind?, ${user.name}?`}
-                  className="messageSender__input"
-                />
-                <label for="updateFile" className='upload_button'>
-                  <div style={{marginTop:'7px'}}> Upload Image</div>    
-                </label> 
-                <input type="file" id="updateFile" accept="image/*" style={{display:"none"}} onChange={(e) => {  
-                  if (e.target.files[0]) {
-                    let fileTypeData = e.target.files[0].type;   
-                      if (!fileTypeData.includes('image/')) {
-                        setError(true)
-                        setOpenPopup(false)
-                      } else {
-                          handleFile(e)
-                      }
-                  }  
-                }}
-                /> 
-                <button onClick={handleSubmit} type="submit" disabled={!input && !imageUrl}>
-                Hidden Submit
-                </button>
-              </form> 
-            </div>
-            <div className="messageSender__bottom">
-              <div className="messageSender__option">
-                <MessageIcon style={{color: 'red'}}/>
-                <h3 className='messageSender__text'>Message</h3>
-              </div>
-              <div className="messageSender__option">
-                <PhotoLibraryIcon style={{color: 'green'}}/>
-                <h3 className='messageSender__text'>Image/Gif</h3>
-              </div>
-              <div className="messageSender__option">
-                <InsertEmoticonIcon style={{color: 'orange'}}/>
-                <h3 className='messageSender__text'>Feeling/Activity</h3>
-              </div>
-            </div>
-          </div>
-            }
-          </div>
+          {popUp && 
+          <UpdatePost 
+            popUp={popUp} 
+            setPopUp = {setPopUp} 
+            input={input} 
+            setInput={setInput} 
+            handleFile={handleFile} 
+            handleSubmit={handleSubmit} 
+            setError={setError} 
+            imageUrl={imageUrl}
+          />
+          }
+    
           {openPopup && <div ref = {uploadRef} >
             <PopupAttachment imagePreview={imagePreview} setImagePreview={setImagePreview} setOpenPopup={setOpenPopup} openPopup={openPopup} handleSubmit={handleSubmit} setImageUrl={setImageUrl} setFileName={setFileName} setFileType={setFileType}/>
           </div>

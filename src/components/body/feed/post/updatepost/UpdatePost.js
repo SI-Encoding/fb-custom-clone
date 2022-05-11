@@ -5,7 +5,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
-function UpdatePost({input, setInput, handleFile, handleSubmit, setErrorPopUp, setOpenPopUpAttachment, setUpdatePostPopUp, updatePostPopUp, imageUrl}) {
+function UpdatePost({input, setInput, handleFile, handleSubmit, setError, popUp, setPopUp, imageUrl}) {
     const user = useSelector((state) => (state.user))
     const popUpRef = useRef(null)
 
@@ -14,12 +14,12 @@ function UpdatePost({input, setInput, handleFile, handleSubmit, setErrorPopUp, s
 
         const pageUpdater = (e) => {
           if (popUpRef.current !== null && !popUpRef.current.contains(e.target)){
-            setUpdatePostPopUp(!updatePostPopUp)
+            setPopUp(!popUp)
           }
         }
 
         {/* add window event listeners */}
-        if (updatePostPopUp) {
+        if (popUp) {
           window.addEventListener('click', pageUpdater)
         }
         
@@ -27,7 +27,7 @@ function UpdatePost({input, setInput, handleFile, handleSubmit, setErrorPopUp, s
         return () => {
           window.removeEventListener('click',pageUpdater)
         }
-        },[updatePostPopUp])
+        },[popUp])
 
     return (
     <div ref = {popUpRef} className='messsageContainer'>
@@ -48,8 +48,7 @@ function UpdatePost({input, setInput, handleFile, handleSubmit, setErrorPopUp, s
                   if (e.target.files[0]) {
                     let fileTypeData = e.target.files[0].type;   
                       if (!fileTypeData.includes('image/')) {
-                        setErrorPopUp(true)
-                        setOpenPopUpAttachment(false)
+                        setError(true)
                       } else {
                           handleFile(e)
                       }
