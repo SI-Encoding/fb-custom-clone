@@ -37,7 +37,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const [openPopup, setOpenPopup] = useState(false)
   const [fileType, setFileType] = useState(null)
   const [error, setError] = useState(false)
-  const errorPopUpRef = useRef()
+
   const uploadRef = useRef()
     
   const storageRef = firebase.storage();
@@ -203,19 +203,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         }
         }, [openPopup])
 
-        useEffect(()=> {
-
-        const popUpUpdated = e => {
-          if (error && errorPopUpRef.current && !errorPopUpRef.current.contains(e.target)) {
-            setError(false)
-          }
-        }
-
-        window.addEventListener('click', popUpUpdated)
-        return () => {
-          window.removeEventListener('click', popUpUpdated)
-        }
-      }, [error])
+        
 
      {/* render the post */}
       return (
@@ -289,9 +277,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             <PopupAttachment imagePreview={imagePreview} setImagePreview={setImagePreview} setOpenPopup={setOpenPopup} openPopup={openPopup} handleSubmit={handleSubmit} setImageUrl={setImageUrl} setFileName={setFileName} setFileType={setFileType}/>
           </div>
           }
-          {error && <div ref = {errorPopUpRef} >
-            <ErrorPopUp setError={setError}/>
-          </div>
+          {error && 
+            <ErrorPopUp setError={setError} error={error}/>
           }
         </div>
       )
