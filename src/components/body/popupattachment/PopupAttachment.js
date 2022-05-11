@@ -21,7 +21,7 @@ function PopupAttachment({setOpenPopup, openPopup, imagePreview, handleSubmit, s
     return () => {
       window.removeEventListener('click', detectOutside )
     }
-    }, [openPopup])
+  }, [openPopup])
 
   return (
     <div ref={uploadRef} className='popup_container'>

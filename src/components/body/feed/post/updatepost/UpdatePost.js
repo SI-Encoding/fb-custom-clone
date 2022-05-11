@@ -7,27 +7,26 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
 function UpdatePost({input, setInput, handleFile, handleSubmit, setError, updatePostPopUp, setUpdatePostPopUp, imageUrl}) {
     const user = useSelector((state) => (state.user))
-    const popUpRef = useRef(null)
+    const popUpRef = useRef()
 
     {/* used for managing the post updater */}
     useEffect(() => {
 
         const pageUpdater = (e) => {
-          if (popUpRef.current !== null && !popUpRef.current.contains(e.target)){
-            setUpdatePostPopUp(!updatePostPopUp)
+          if (popUpRef.current && !popUpRef.current.contains(e.target)){
+            setUpdatePostPopUp(false)
           }
         }
 
         {/* add window event listeners */}
-        if (updatePostPopUp) {
-          window.addEventListener('click', pageUpdater)
-        }
+        window.addEventListener('click', pageUpdater)
+   
         
         {/* clean it up */}
         return () => {
           window.removeEventListener('click',pageUpdater)
         }
-        },[updatePostPopUp])
+    },[updatePostPopUp])
 
     return (
     <div ref = {popUpRef} className='messsageContainer'>

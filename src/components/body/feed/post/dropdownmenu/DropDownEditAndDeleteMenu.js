@@ -33,7 +33,7 @@ function DropDownEditAndDeleteMenu({postId, deleteThis, editThis, open, setOpen}
           return () => {
             window.removeEventListener('click', pageClickEvent);
           }
-        },[open])
+    },[open])
 
     return (
         <div ref = {dropDownRef} className='dropdown_container'>        
