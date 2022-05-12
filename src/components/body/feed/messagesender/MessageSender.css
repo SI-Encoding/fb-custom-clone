@@ -46,7 +46,7 @@
     padding:20px;
     display: flex;
     align-items: center;
-    color: gray;
+    color: var(--fb-theme-colour-grey);
     margin: 5px;
     left: 5px;
 }

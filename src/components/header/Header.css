@@ -76,6 +76,7 @@
 }
 
 .header_info > h4{
+    color: var(--fb-theme-colour-black);
     margin-left: 10px;
 }
 
