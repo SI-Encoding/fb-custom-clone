@@ -16,6 +16,7 @@ body {
   --fb-theme-colour-white: white;
   --fb-theme-colour-grey: gray;
   --fb-theme-colour-black: #000000;
+  --fb-theme-colour-background: #f1f2f5;
 }
 
 code {
