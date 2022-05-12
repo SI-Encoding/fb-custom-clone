@@ -17,7 +17,7 @@
 li {  
   list-style: none;
   font-size: medium;
-  color: gray;
+  color: var(--fb-theme-colour-grey);
   margin-bottom: 5px;
   display: flex;
   align-items: center

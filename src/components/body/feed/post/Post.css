@@ -27,7 +27,7 @@
 
 .post_info_top > p {
     font-size: small;
-    color: gray;
+    color: var(--fb-theme-colour-grey);
     margin-top: 3px;
 }
 
@@ -54,7 +54,7 @@
     display: flex;
     justify-content: space-evenly;
     font-size: medium;
-    color: gray;
+    color: var(--fb-theme-colour-grey);
     cursor: pointer;
     padding: 15px;
 }

@@ -18,7 +18,7 @@
   }
 
 .popup_title {
-  color: gray
+  color: var(--fb-theme-colour-grey)
 }
 
 .popup_input {

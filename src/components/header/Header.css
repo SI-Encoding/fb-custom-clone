@@ -39,7 +39,7 @@
 }
 
 .header_option > .MuiSvgIcon-root{
-    color: gray;
+    color: var(--fb-theme-colour-grey);
 }
 
 

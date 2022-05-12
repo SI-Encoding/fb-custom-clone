@@ -31,7 +31,7 @@ function DisplayComments({theId}) {
         ) : <div className='displayComments_container' style={{paddingLeft: 0, alignItems: 'center'}}>
                 <div className="displayComments_area">
                     <div className='display_message'>
-                        <p style={{fontSize: 'small', color: 'gray'}}> There are currently no comments. Be the first to leave a comment.</p>
+                        <p style={{fontSize: 'small', color: 'var(--fb-theme-colour-grey)'}}> There are currently no comments. Be the first to leave a comment.</p>
                     </div>
                 </div>
             </div>
