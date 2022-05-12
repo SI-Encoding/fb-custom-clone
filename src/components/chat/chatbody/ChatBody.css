@@ -34,7 +34,7 @@
 
 .chat_receiver{
     margin-left: auto;
-    background-color: #2e81f4; 
+    background-color: var(--fb-theme-colour); 
     position: relative; 
     margin-right: 10px; 
     word-break: break-word; 
@@ -116,7 +116,7 @@
   
 .emoji-icon:hover {
      cursor: pointer;
-     background-color: #2e81f4;      
+     background-color: var(--fb-theme-colour);      
 }        
 
 .preview_delete {
@@ -156,7 +156,7 @@
 }
 
 .preview_container {
-    background-color: #2e81f4; 
+    background-color: var(--fb-theme-colour); 
     position: relative; 
     border-radius: 10px;
     padding: 10px;

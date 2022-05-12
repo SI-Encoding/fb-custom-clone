@@ -38,7 +38,7 @@
 .menu_icon:hover {
     background-color: #eff2f5;
     border-radius: 10px;
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
     cursor: pointer;
 }
 
@@ -77,7 +77,7 @@
 }
 
 .post_option:hover > .MuiSvgIcon-root{
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 }
 
 .drop_down {
@@ -95,7 +95,7 @@
     flex-direction: column;
     background-color: white;
     border-radius: 15px;
-    border: 1px solid #2e81f4;
+    border: 1px solid var(--fb-theme-colour);
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
     width: 54%;
     z-index: 1;
@@ -105,11 +105,11 @@
 }
 
  .post_option.active {
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 }
 
 .post_option.active:hover > .MuiSvgIcon-root{
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 }
 
 .post_arrow.active {

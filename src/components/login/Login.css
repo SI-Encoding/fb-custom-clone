@@ -25,7 +25,7 @@
 
 .login_button > button {
     width: 300px;
-    background-color: #2e81f4;
+    background-color: var(--fb-theme-colour);
     color: #eff2f5;
     font-weight: 800;
     margin-bottom: 85px;
@@ -33,12 +33,12 @@
 
 .login_button:hover > button {
     background-color: white;
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 }
 
 .login_container > button:hover {
     background-color: white;
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 }
 
 

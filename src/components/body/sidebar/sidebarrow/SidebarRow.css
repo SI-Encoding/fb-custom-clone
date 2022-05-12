@@ -16,6 +16,6 @@
 
 .sidebarrow_container > .MuiSvgIcon-root {
     font-size: xx-large;
-    color: #2e81f4;
+    color: var(--fb-theme-colour);
 
 }
