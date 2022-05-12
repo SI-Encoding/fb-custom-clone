@@ -30,7 +30,7 @@
        cursor: pointer;
        background-color: #eff2f5;
        border-radius: 10px;
-       color: var(--fb-theme-colour);
+       color: var(--fb-theme-colour-blue);
      }
      
    ul {

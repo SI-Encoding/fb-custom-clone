@@ -44,15 +44,15 @@
 
 
 .header_option:hover > .MuiSvgIcon-root{
-    color: var(--fb-theme-colour);
+    color: var(--fb-theme-colour-blue);
 }
 
 .header_option.active > .MuiSvgIcon-root{
-    color: var(--fb-theme-colour);
+    color: var(--fb-theme-colour-blue);
 }
 
 .header_option.active{
-    border-bottom: 4px solid var(--fb-theme-colour);
+    border-bottom: 4px solid var(--fb-theme-colour-blue);
 }
 
 .header_option {

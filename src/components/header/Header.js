@@ -91,7 +91,7 @@ function Header() {
             </div>
             <div className = "header_center">
            {/* link to homepage*/}
-           <Link to="/" style={{ color: `${homePage? 'var(--fb-theme-colour)' : 'gray'}`, textDecoration: 'none'}}> 
+           <Link to="/" style={{ color: `${homePage? 'var(--fb-theme-colour-blue)' : 'gray'}`, textDecoration: 'none'}}> 
                 <div onClick = {homePageActivated} className={ `header_option  ${homePage? 'active' : 'inactive'}`}>
                     <HomeIcon fontSize="large"/> 
                 </div>
@@ -103,19 +103,19 @@ function Header() {
                 </div>
             </Link> */}
             {/* move to gifpage */}
-            <Link to="gifposts" style={{ color: `${gifsPage? 'var(--fb-theme-colour)' : 'gray'}`, textDecoration: 'none'}}>
+            <Link to="gifposts" style={{ color: `${gifsPage? 'var(--fb-theme-colour-blue)' : 'gray'}`, textDecoration: 'none'}}>
                 <div onClick = {gifsPageActivated} className={ `header_option ${gifsPage? 'active' : 'inactive'}`}>
                     <SubscriptionsIcon fontSize="large"/> 
                 </div>
             </Link>
             {/* move to myposts */}  
-            <Link to="myposts" style={{ color: `${myPostsPage? 'var(--fb-theme-colour)' : 'gray'}`, textDecoration: 'none'}}> 
+            <Link to="myposts" style={{ color: `${myPostsPage? 'var(--fb-theme-colour-blue)' : 'gray'}`, textDecoration: 'none'}}> 
                 <div onClick = {myPostsPageActivated} className={ `header_option ${myPostsPage? 'active' : 'inactive'}`}>
                     <StorefrontIcon fontSize="large"/> 
                 </div>
             </Link>
              {/* move to otherusersposts */}         
-             <Link to="otherusersposts" style={{ color: `${otherUsersPostsPage? 'var(--fb-theme-colour)' : 'gray'}`, textDecoration: 'none'}}> 
+             <Link to="otherusersposts" style={{ color: `${otherUsersPostsPage? 'var(--fb-theme-colour-blue)' : 'gray'}`, textDecoration: 'none'}}> 
                 <div onClick = {otherUsersPostsPageActivated} className={ `header_option ${otherUsersPostsPage? 'active' : 'inactive'}`}>
                     <SupervisedUserCircleIcon fontSize="large"/> 
                 </div>

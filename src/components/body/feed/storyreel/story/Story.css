@@ -18,7 +18,7 @@
 
 .story_avatar {
     margin: 30px;
-    border: 5px solid var(--fb-theme-colour);
+    border: 5px solid var(--fb-theme-colour-blue);
 }
 
 .story_container > h4 {

@@ -58,7 +58,7 @@
 
 .upload_button {
     cursor: pointer;
-    background-color: var(--fb-theme-colour);
+    background-color: var(--fb-theme-colour-blue);
     color: #eff2f5;
     font-weight: 800;
     width: 151px;
@@ -76,5 +76,5 @@
   
   .upload_button:hover {
     background-color: #eff2f5;
-    color:var(--fb-theme-colour);
+    color: var(--fb-theme-colour-blue);
   }
