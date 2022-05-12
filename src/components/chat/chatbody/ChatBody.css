@@ -65,7 +65,7 @@
     bottom:0;
     width:368px;
     padding-top: 5px;
-    background-color:white;
+    background-color: var(--fb-theme-colour-white);
     padding-bottom: 3px;
 }
 
@@ -102,7 +102,7 @@
     width: 80px;
     height: 60px;
     transform: translateX(-30%) translateY(-65%);
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 1rem;

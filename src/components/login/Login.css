@@ -32,12 +32,12 @@
 }
 
 .login_button:hover > button {
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     color: var(--fb-theme-colour-blue);
 }
 
 .login_container > button:hover {
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     color: var(--fb-theme-colour-blue);
 }
 

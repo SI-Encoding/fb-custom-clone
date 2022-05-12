@@ -3,7 +3,7 @@
   width: 70px;
   height: 40px;
   transform: translateX(25%) translateY(-30%);
-  background-color: white;
+  background-color: var(--fb-theme-colour-white);
   border: 1px solid lightgray;
   border-radius: 8px;
   padding: 1rem;

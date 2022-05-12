@@ -4,7 +4,7 @@
     height: 20px;
     right: 2%;
     top: 7%;
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 1rem;

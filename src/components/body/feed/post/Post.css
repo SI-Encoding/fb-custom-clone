@@ -2,7 +2,7 @@
     width:100%;
     margin-top:15px;
     border-radius: 15px;
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
 }
 
@@ -93,7 +93,7 @@
     position: fixed;
     margin-top:30px;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     border-radius: 15px;
     border: 1px solid var(--fb-theme-colour-blue);
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);

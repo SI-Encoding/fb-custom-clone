@@ -1,5 +1,5 @@
 .comment_container {
-    background-color: white;
+    background-color: var(--fb-theme-colour-white);
     border-top: 1px solid lightgray;
     display: flex;
     margin-bottom: 3px;

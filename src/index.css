@@ -13,6 +13,7 @@ body {
 
 :root {
   --fb-theme-colour-blue: #2e81f4;
+  --fb-theme-colour-white: white;
 }
 
 code {
