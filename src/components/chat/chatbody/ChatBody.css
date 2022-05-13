@@ -1,7 +1,8 @@
 .chat_body {
     bottom: 0;
     right: 2px;
-    width:368px;
+    width:367px;
+    margin-left: 2px;
     height: 489px;
     background-color:#c8c9cb;
     box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2); 
