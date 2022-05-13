@@ -3,9 +3,9 @@
 }
 
 .app {
-  background-color: var(--fb-theme-colour-background);
+  background-color: #f1f2f5;
 }
 
-/*.app.active {
-  width: fit-content;
-}*/
+.app.active {
+  background-color: var(--fb-theme-colour-background);
+}

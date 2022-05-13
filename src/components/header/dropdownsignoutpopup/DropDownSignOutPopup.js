@@ -1,15 +1,16 @@
-import React, {useState,useEffect} from 'react'
+import React, {useEffect} from 'react'
 import './DropDownSignOutPopup.css'
 import EditIcon from '@material-ui/icons/Edit';
-import {useDispatch} from 'react-redux'
-import {set_user} from '../../../rootReducer'
+import {useDispatch, useSelector} from 'react-redux'
+import {set_user, set_dark_mode} from '../../../rootReducer'
 import {auth} from '../../../firebase/firebase'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 function DropDownSignOutPopup({setLogoutPopup}){
     const dispatch = useDispatch(); 
-    const [darkMode, setDarkMode] = useState(false)
+    const user = useSelector((state) => state.user)
+    const darkMode = useSelector((state) => state.darkMode)
 
     const signOut = () => {
         auth.signOut();
@@ -19,6 +20,15 @@ function DropDownSignOutPopup({setLogoutPopup}){
             user: null
         })   
         setLogoutPopup(false)
+    }
+
+    const setMode = (mode) => {
+
+        localStorage.setItem("mode", mode)
+           dispatch({
+                type: set_dark_mode,
+                darkMode: mode
+            })
     }
 
     const darkModeColours = {
@@ -76,19 +86,15 @@ function DropDownSignOutPopup({setLogoutPopup}){
         document.documentElement.style.setProperty("--fb-theme-colour-storyreel", lightModeColours.storyReel);
         document.documentElement.style.setProperty("--fb-theme-colour-background", lightModeColours.background);
     }
-    const changeColour = () => {
-        setDarkMode(!darkMode)
-        if (!darkMode) {
-            setPropertyOfDarkMode()
-        } else {
-            setPropertyOfLightMode()
-        }
-    }
+
+   useEffect(()=> {
+    darkMode?  setPropertyOfDarkMode() :  setPropertyOfLightMode()
+  },[darkMode])
 
     return (
         <div className='dropDownSignOut_container'>
             <ul>
-                <li onClick={()=> changeColour()}> {!darkMode? (<><DarkModeIcon/>Dark Mode</>) : (<><LightModeIcon/>Light Mode</>)}</li>
+                <li onClick={()=> darkMode? setMode(false) : setMode(true)}> {darkMode?  (<><LightModeIcon/>Light Mode</>) : (<><DarkModeIcon/>Dark Mode</>)}</li>
                 <li onClick={signOut}><EditIcon/>Sign Out</li>
             </ul>
         </div>    
