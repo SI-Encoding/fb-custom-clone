@@ -1,6 +1,6 @@
 .comment_container {
-    background-color: var(--fb-theme-colour-white);
-    border-top: 1px solid lightgray;
+    background-color: var(--fb-theme-colour-white-posts);
+    border-top: 1px solid var(--fb-theme-colour-post-border-top);
     display: flex;
     margin-bottom: 3px;
     padding: 10px;
@@ -21,7 +21,7 @@
 .comment_username > h3 {
     font-size: medium;
     margin-right: 15px;
-
+    color: var(--fb-theme-colour-text);
 }
 
 
@@ -41,11 +41,10 @@
     outline-width: 0;
     border-color: #c8c9cb;
     align-items: center;
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-textfield);
     padding: 10px;
     margin-right: 10px;
     flex:1;
-  
 }
 
 button {

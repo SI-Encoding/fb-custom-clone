@@ -10,7 +10,7 @@
 }
 
 .sidebarrow_container > h4 {
-    color: var(--fb-theme-colour-black);
+    color: var(--fb-theme-colour-text);
     margin-left: 20px;
     font-weight: 600;
 }

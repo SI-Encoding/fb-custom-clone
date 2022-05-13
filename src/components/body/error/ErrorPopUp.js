@@ -30,7 +30,7 @@ function ErrorPopUp({setErrorPopUp,errorPopUp}) {
           <WarningIcon sx={{ color: '#f30000', fontSize: '84px' }}/>
         </div> 
         <div> 
-          <h4 style={{textAlign:'center'}}>Sorry, this is not the supported file type. <br/> 
+          <h4 style={{textAlign:'center', color:'var(--fb-theme-colour-text)'}}>Sorry, this is not the supported file type. <br/> 
           <div style={{textAlign:'center'}}>Please upload a image file. </div></h4></div>
         </div>
         <div className='popup_error_buttons'>

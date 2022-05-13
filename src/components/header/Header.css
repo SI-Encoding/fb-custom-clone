@@ -3,7 +3,7 @@
     padding: 15px 20px;
     justify-content: space-between; 
     position: sticky;
-    background-color: var(--fb-theme-colour-white);
+    background-color: var(--fb-theme-colour-white-header);
     z-index: 100;
     top: 0;
     box-shadow: 0px 5px 8px -9px rgba(0,0,0,0.75);
@@ -27,7 +27,7 @@
 .header__input {
     display: flex;
     align-items: center;
-    background-color:#eff2f5;
+    background-color: var(--fb-theme-colour-textfield);
     margin-left: 10px;
     border-radius: 999px;
 }
@@ -76,7 +76,7 @@
 }
 
 .header_info > h4{
-    color: var(--fb-theme-colour-black);
+    color:  var(--fb-theme-colour-text);
     margin-left: 10px;
 }
 

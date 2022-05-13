@@ -85,7 +85,7 @@ function Header() {
             <div className = "header_left">
                 <img src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png" alt="fb_logo"/>
             <div className="header__input">
-                <SearchIcon/>
+                <SearchIcon style={{color:'var(--fb-theme-colour-arrow)'}}/>
                 <input placeholder="Search Facebook" type="text" disabled/>
             </div>
             </div>
@@ -141,7 +141,7 @@ function Header() {
             */}
             {/* SignOut */}
              <IconButton onClick={()=> setLogoutPopup(!logoutPopup)}>
-                <ExpandMoreIcon className={`header_arrow ${logoutPopup? 'active' : 'inactive'}`}/>
+                <ExpandMoreIcon style={{color:'var(--fb-theme-colour-arrow)'}} className={`header_arrow ${logoutPopup? 'active' : 'inactive'}`}/>
              </IconButton>
              </div>
              {logoutPopup && <div ref={signOutRef} > <DropDownSignOutPopup setLogoutPopup={setLogoutPopup}/> </div>}

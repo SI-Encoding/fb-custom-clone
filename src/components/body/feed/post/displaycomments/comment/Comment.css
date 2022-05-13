@@ -1,6 +1,6 @@
 .displayComments_container {
-    background-color: var(--fb-theme-colour-white);
-    border-top: 1px solid lightgray;
+    background-color: var(--fb-theme-colour-white-posts);
+    border-top: 1px var(--fb-theme-colour-post-border-top);
     display: flex;
     margin-bottom: 3px;
     padding: 10px;
@@ -27,17 +27,22 @@
     font-size: 15px;
     margin-right: 10px;
     margin-bottom: 0;
+    color: var(--fb-theme-colour-post-text);
 }
 
 .display_time {
     font-size: small;
     margin-top: 2px;
+    color: var(--fb-theme-colour-post-text);
 }
 
 .display_menu {
     Display: flex;
 }
 
+.display_message {
+    color: var(--fb-theme-colour-post-text);
+}
 .display_menu >p {
     font-size: 10px;
     margin-right: 5px;

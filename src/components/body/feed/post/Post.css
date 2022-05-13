@@ -2,7 +2,7 @@
     width:100%;
     margin-top:15px;
     border-radius: 15px;
-    background-color: var(--fb-theme-colour-white);
+    background-color: var(--fb-theme-colour-white-posts);
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);
 }
 
@@ -22,7 +22,7 @@
 }
 
 .post_info_top > h3 {
-    color: var(--fb-theme-colour-black);
+    color: var(--fb-theme-colour-text);
     font-size: medium;
 }
 
@@ -44,6 +44,7 @@
 }
 
 .post_bottom {
+    color: var(--fb-theme-colour-post-text);
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 15px 25px;
@@ -51,7 +52,7 @@
 
 .post_options {
     padding-top: 10px;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid var(--fb-theme-colour-post-border-top);
     display: flex;
     justify-content: space-evenly;
     font-size: medium;
@@ -94,7 +95,7 @@
     position: fixed;
     margin-top:30px;
     flex-direction: column;
-    background-color: var(--fb-theme-colour-white);
+    background-color: var(--fb-theme-colour-white-posts);
     border-radius: 15px;
     border: 1px solid var(--fb-theme-colour-blue);
     box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.75);

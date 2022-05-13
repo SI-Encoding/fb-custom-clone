@@ -14,9 +14,19 @@ body {
 :root {
   --fb-theme-colour-blue: #2e81f4;
   --fb-theme-colour-white: white;
+  --fb-theme-colour-white-posts: white;
+  --fb-theme-colour-white-header: white;
   --fb-theme-colour-grey: gray;
   --fb-theme-colour-black: #000000;
   --fb-theme-colour-background: #f1f2f5;
+  --fb-theme-colour-textfield: #eff2f5;
+  --fb-theme-colour-text: #000000;
+  --fb-theme-colour-post-option: gray;
+  --fb-theme-colour-post-border-top: lightgray;
+  --fb-theme-colour-post-text: #000000;
+  --fb-theme-colour-messenger-sender-border-top: #eff2f5;
+  --fb-theme-colour-arrow: rgba(0, 0, 0, 0.54);
+  --fb-theme-colour-storyreel: #2e81f4;
 }
 
 code {

@@ -156,7 +156,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 <h3>{username}</h3>
                 <p>{new Date(timestamp?.toDate()).toUTCString()}</p>        
               </div>  
-              {userId !== user.id ? '' : (<MenuIcon onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
+              {userId !== user.id ? '' : (<MenuIcon style={{color:'var(--fb-theme-colour-arrow)'}} onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
           </div>
 
           {/* render edit and delete menu */}
