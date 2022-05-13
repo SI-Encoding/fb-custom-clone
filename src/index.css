@@ -27,6 +27,7 @@ body {
   --fb-theme-colour-messenger-sender-border-top: #eff2f5;
   --fb-theme-colour-arrow: rgba(0, 0, 0, 0.54);
   --fb-theme-colour-storyreel: #2e81f4;
+  --fb-theme-colour-chat-toolbar: royalblue;
 }
 
 code {

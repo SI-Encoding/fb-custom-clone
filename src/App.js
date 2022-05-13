@@ -29,7 +29,8 @@ function App() {
     text: '#a29b9f',
     textField: '#444148',
     posts: '#2a292e',
-    header: '#2a292e'
+    header: '#2a292e',
+    chatToolbar: '#393b40'
 }
 
 const lightModeColours = {
@@ -43,7 +44,8 @@ const lightModeColours = {
     text: '#000000',
     textField: '#eff2f5',
     posts: 'white',
-    header: 'white'
+    header: 'white',
+    chatToolbar: 'royalblue'
 }
 
 const setPropertyOfDarkMode = () => {
@@ -58,6 +60,7 @@ const setPropertyOfDarkMode = () => {
     document.documentElement.style.setProperty("--fb-theme-colour-arrow", darkModeColours.arrow);
     document.documentElement.style.setProperty("--fb-theme-colour-storyreel", darkModeColours.storyReel);
     document.documentElement.style.setProperty("--fb-theme-colour-background", darkModeColours.background);
+    document.documentElement.style.setProperty("--fb-theme-colour-chat-toolbar", darkModeColours.chatToolbar);
 }
 
 const setPropertyOfLightMode = () => {
@@ -72,6 +75,7 @@ const setPropertyOfLightMode = () => {
     document.documentElement.style.setProperty("--fb-theme-colour-arrow", lightModeColours.arrow);
     document.documentElement.style.setProperty("--fb-theme-colour-storyreel", lightModeColours.storyReel);
     document.documentElement.style.setProperty("--fb-theme-colour-background", lightModeColours.background);
+    document.documentElement.style.setProperty("--fb-theme-colour-chat-toolbar", lightModeColours.chatToolbar);
 }
 
 useEffect(()=> {

@@ -4,7 +4,7 @@
     align-items: center;
     width:348px;
     height:15px;
-    background-color: royalblue;
+    background-color: var(--fb-theme-colour-chat-toolbar);
     padding: 10px;
     display:flex;
 }
@@ -16,12 +16,12 @@
     align-items: center;
     width:348px;
     height:15px;
-    background-color: royalblue;
+    background-color: var(--fb-theme-colour-chat-toolbar);
     display:flex;
 }
 
 .toolbar_status_logo {
-    background-color: royalblue;
+    background-color: var(--fb-theme-colour-chat-toolbar);
     padding: 10px;
     display:flex;
     top: 100px;
