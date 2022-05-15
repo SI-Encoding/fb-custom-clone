@@ -5,16 +5,16 @@ import MessageIcon from '@material-ui/icons/Message';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
-function UpdatePost({input, setInput, handleFile, handleSubmit, setError, updatePostPopUp, setUpdatePostPopUp, imageUrl}) {
+function UpdatePost({updatePostPopUp, setUpdatePostPopUp, input, setInput, handleFile, handleSubmit, setError, imageUrl}) {
     const user = useSelector((state) => (state.user))
-    const popUpRef = useRef()
+    const popUpRef = useRef(null)
 
     {/* used for managing the post updater */}
     useEffect(() => {
 
       const pageUpdater = (e) => {
         if (popUpRef.current && !popUpRef.current.contains(e.target)){
-          setUpdatePostPopUp(false)
+          setUpdatePostPopUp(!updatePostPopUp)
         }
       }
 

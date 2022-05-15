@@ -1,4 +1,4 @@
-import React, {useState, forwardRef} from 'react'
+import React, {useState, forwardRef, useEffect, useRef} from 'react'
 import './Post.css'
 import {Avatar} from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
@@ -15,7 +15,7 @@ import WriteAComment from './writeacomment/WriteAComment'
 import DisplayComments from './displaycomments/DisplayComments'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
-import ErrorPopUp from '../../error/ErrorPopUp'
+import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -32,9 +32,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const [displayComment, setDisplayComment] = useState(false)
 
   // State to manage popups
-  const [UpdatePostPopUp, setUpdatePostPopUp] = useState(false)
+  const [updatePostPopUp, setUpdatePostPopUp] = useState(false)
   const [popUpAttachmentPopUp, setPopUpAttachmentPopUp] = useState(false)
-  const [errorPopUp, setErrorPopUp] = useState(false)
+  const [error, setError] = useState(false)
 
   // State to manage uploading files
   const [fileName, setFileName] = useState(null)
@@ -146,7 +146,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           }
           resetState(); 
         }
-    
+   
      {/* render the post */}
       return (
         <div ref = {ref} className='post_container'>
@@ -202,15 +202,15 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           {displayComment && <DisplayComments theId = {id}/>}
 
           {/* render the popup used to update the post */}
-          {UpdatePostPopUp && 
+          {updatePostPopUp && 
             <UpdatePost 
-              UpdatePostPopUp={UpdatePostPopUp} 
+              updatePostPopUp={updatePostPopUp} 
               setUpdatePostPopUp = {setUpdatePostPopUp} 
               input={input} 
               setInput={setInput} 
               handleFile={handleFile} 
               handleSubmit={handleSubmit} 
-              setError={setErrorPopUp} 
+              setError={setError} 
               imageUrl={imageUrl}
             />
           }
@@ -230,8 +230,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           }
 
           {/* render the popup used to show wrong file type supported */}
-          {errorPopUp && 
-            <ErrorPopUp setErrorPopUp={setErrorPopUp} errorPopUp={errorPopUp}/>
+          {error && 
+            <ErrorPopup setError={setError} error={error} />
           }
         </div>
       )

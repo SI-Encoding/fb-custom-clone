@@ -116,18 +116,7 @@ function MessageSender() {
     }        
   },[openPopup])    
 
-  useEffect( () => {    
-    const popUpUpdated = e => {      
-      if (error && errorPopUpRef.current && !errorPopUpRef.current.contains(e.target)) {
-        setError(false)        
-      }        
-    }          
-    window.addEventListener('click', popUpUpdated)        
-    return () => {      
-      window.removeEventListener('click', popUpUpdated)        
-    }
-  },[error])        
-          
+                
  return (               
   <div className = 'messageSender'>     
     <div className = 'messageSender__top'>        
@@ -146,6 +135,7 @@ function MessageSender() {
             let fileTypeData = e.target.files[0].type;                
             if (!fileTypeData.includes('image/')) {             
               setError(true)
+              e.target.value = null;
             } else {               
                 handleFile(e)       
             }
@@ -183,10 +173,10 @@ function MessageSender() {
         setImageUrl = {setImageUrl} 
         setFileName = {setFileName}/>                
     </div>
-    }                
-    {error && <div ref = {errorPopUpRef} >                
-      <ErrorPopUp setError={setError}/>            
-    </div>
+    }     
+
+    {error &&               
+      <ErrorPopUp setError={setError} error={error}/>            
     }            
 </div>   
 )       

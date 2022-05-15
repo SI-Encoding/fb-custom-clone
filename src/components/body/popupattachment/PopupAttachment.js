@@ -8,8 +8,8 @@ function PopupAttachment({setOpenPopup, openPopup, imagePreview, handleSubmit, s
   useEffect(()=> {
 
     const detectOutside = e => {
-      if (openPopup && uploadRef.current && !uploadRef.current.contains(e.target)) {
-        setOpenPopup(false);
+      if (uploadRef.current && !uploadRef.current.contains(e.target)) {
+        setOpenPopup(!openPopup);
         setImageUrl(null);
         setFileName(null);
         setImagePreview(null);
