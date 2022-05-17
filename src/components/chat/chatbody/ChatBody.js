@@ -84,12 +84,11 @@ function ChatBody() {
   useEffect(() => {
     db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
       setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
-    })
-    autoSelect()
-      messageRef.current.addEventListener('DOMNodeInserted', event => {
-      const { currentTarget: target } = event;
-      target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-      });
+        if (messageRef.current) {
+          messageRef.current.scrollTop = messageRef.current.scrollHeight;  
+        }
+    })   
+    autoSelect()       
   },[])
 
   const sendMessage = (e) => {

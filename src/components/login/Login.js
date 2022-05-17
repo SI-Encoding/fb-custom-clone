@@ -20,7 +20,8 @@ function Login() {
                 user: result.additionalUserInfo.profile,       
             })
     })).catch(error => alert(error.message));
-}
+    }
+    
 return (
     <div className='login_container'>
         <div className='login_logo'>
