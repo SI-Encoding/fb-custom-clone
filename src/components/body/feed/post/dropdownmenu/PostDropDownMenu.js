@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react'
-import './DropDownEditAndDeleteMenu.css'
+import './PostDropDownMenu.css'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-function DropDownEditAndDeleteMenu({postId, deleteThis, editThis, open, setOpen}){
+function PostDropDownMenu({postId, deleteThis, editThis, open, setOpen}){
     const [openMenu, setOpenMenu] = useState(false)
     const dropDownRef = useRef(null)
     
@@ -46,4 +46,4 @@ function DropDownEditAndDeleteMenu({postId, deleteThis, editThis, open, setOpen}
     )       
 }            
         
-export default DropDownEditAndDeleteMenu
+export default PostDropDownMenu

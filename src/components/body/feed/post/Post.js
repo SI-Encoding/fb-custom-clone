@@ -8,7 +8,7 @@ import {ExpandMoreOutlined} from '@material-ui/icons'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import MenuIcon from '@material-ui/icons/Menu';
 import {useSelector} from 'react-redux';
-import DropDownEditAndDeleteMenu from './dropdownmenu/DropDownEditAndDeleteMenu'
+import PostDropDownMenu from './dropdownmenu/PostDropDownMenu'
 import db from '../../../../firebase/firebase'
 import firebase from 'firebase/compat'
 import WriteAComment from './writeacomment/WriteAComment'
@@ -161,7 +161,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
           {/* render edit and delete menu */}
           <div className='drop_down'>
-            {open && <DropDownEditAndDeleteMenu open={open} setOpen={setOpen} postId={id} deleteThis={deleteThis} editThis={editThis}/>}
+            {open && <PostDropDownMenu open={open} setOpen={setOpen} postId={id} deleteThis={deleteThis} editThis={editThis}/>}
           </div>
 
           {/* render the post's bottom icon */}
