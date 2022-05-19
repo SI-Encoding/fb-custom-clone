@@ -14,7 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {useStateValue} from '../../StateProvider'
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import DropDownSignOutPopup from './dropdownsignoutpopup/DropDownSignOutPopup';
+import HeaderDropDownMenu from './headerdropdownmenu/HeaderDropDownMenu'
 
 function Header() {
     const user = useSelector((state) => state.user)
@@ -144,7 +144,7 @@ function Header() {
                 <ExpandMoreIcon style={{color:'var(--fb-theme-colour-arrow)'}} className={`header_arrow ${logoutPopup? 'active' : 'inactive'}`}/>
              </IconButton>
              </div>
-             {logoutPopup && <div ref={signOutRef} > <DropDownSignOutPopup setLogoutPopup={setLogoutPopup}/> </div>}
+             {logoutPopup && <div ref={signOutRef} > <HeaderDropDownMenu setLogoutPopup={setLogoutPopup}/> </div>}
         </div>
     )
 }
