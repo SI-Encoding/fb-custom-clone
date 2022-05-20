@@ -18,6 +18,7 @@ import OtherUsersPosts from './components/body/otherusersposts/OtherUsersPosts';
 function App() {
   const user = useSelector((state) => state.user)
   const darkMode = useSelector((state) => state.darkMode)
+
   const darkModeColours = {
     background: '#18191a',
     storyReel: '#a29b9f',
