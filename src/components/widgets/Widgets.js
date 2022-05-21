@@ -8,7 +8,7 @@ function Widgets() {
 
 return (
     <div className='widgets_container'>
-        <iFrame src= {page}
+        <iframe src= {page}
             width='340'
             height='100%'
             style={{border: 'none', overflow: 'hidden'}}
@@ -16,7 +16,7 @@ return (
             frameborder='0'
             allowTransparency='true'
             allow='encrypted-media'>
-        </iFrame>
+        </iframe>
     </div>
 )
 }
