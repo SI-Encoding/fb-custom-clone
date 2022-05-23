@@ -91,7 +91,7 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
         <button type="submit" onClick={sendMessage} disabled={!input}> Send a Message</button>
       </form>
       {/* Attach File */}
-      <label for="inputFile">
+      <label htmlFor="inputFile">
         <AddIcon className='addIcon' />
       </label>
       <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {

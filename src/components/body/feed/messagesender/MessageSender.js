@@ -127,7 +127,7 @@ function MessageSender() {
           onChange = {e => setInput(e.target.value)}                
           placeholder = {`What's on your mind?, ${user.name}?`}                
           className = "messageSender__input"/>                
-        <label for = "imageFile" className = 'upload_button'>                
+        <label htmlFor = "imageFile" className = 'upload_button'>                
           <div style={{marginTop:'7px'}}> Upload Image</div>
         </label>           
         <input type="file" id="imageFile" accept="image/*" style={{display:"none"}} onChange={(e) => {                 

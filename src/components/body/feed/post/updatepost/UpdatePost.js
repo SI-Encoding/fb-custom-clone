@@ -39,7 +39,7 @@ function UpdatePost({updatePostPopUp, setUpdatePostPopUp, input, setInput, handl
                 placeholder={`What's on your mind?, ${user.name}?`}
                 className="messageSender__input"
               />
-              <label for="updateFile" className='upload_button'>
+              <label htmlFor="updateFile" className='upload_button'>
                 <div style={{marginTop:'7px'}}> Upload Image</div>    
               </label> 
               <input type="file" id="updateFile" accept="image/*" style={{display:"none"}} onChange={(e) => {  
