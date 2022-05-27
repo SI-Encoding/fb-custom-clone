@@ -7,6 +7,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ChatMessage from './chatmessage/ChatMessage'
 import ChatFooter from '../chatfooter/ChatFooter'
 import {uploadBytes, getDownloadURL} from 'firebase/storage'
+import DeleteFromFirebaseCollection from '../../../functions/Delete'
 
 function ChatBody() {
   const user = useSelector((state) => (state.user))
@@ -36,11 +37,7 @@ function ChatBody() {
   }
 
   const deleteComment = (id) => {
-    db.collection('chat').doc(id).delete().then(() => {
-      console.log('comment successfully deleted ')
-    }).catch((error) => {
-      console.log('error failed to delete comment', error)
-    })
+    DeleteFromFirebaseCollection('chat', id)
   }
 
   const sendMessageWithImage = () => {
