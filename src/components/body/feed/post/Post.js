@@ -17,6 +17,7 @@ import PopupAttachment from '../../popupattachment/PopupAttachment'
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
+import DeleteFromFirebaseCollection from '../../../../functions/Delete'
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
   const user = useSelector((state) => (state.user))
@@ -74,12 +75,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
   const deleteThis = (id) => {
     setUpdatePostPopUp(false)
-    db.collection('posts').doc(id).delete().then(() => {
-      console.log('document deleted');
-    }).catch((error) => {
-      console.log('error could not delete this document', error)
-    })}
-
+    DeleteFromFirebaseCollection('posts',id)
+  }
     const editThis = () => {
       setUpdatePostPopUp(true)
     }
