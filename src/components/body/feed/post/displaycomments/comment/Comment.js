@@ -7,6 +7,7 @@ import './Comment.css'
 import '../../writeacomment/WriteAComment.css'
 import db from '../../../../../../firebase/firebase'
 import firebase from 'firebase/compat'
+import {DeletePostCommentFromFirebaseCollection} from '../../../../../../functions/Delete'
 
 const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref) => {
     const [displayMenuItems, setDisplayMenuItems] = useState(false)
@@ -28,11 +29,7 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
     }
 
     const deleteComment = () => {
-        db.collection('posts').doc(postId).collection('comments').doc(commentId).delete().then(() => {
-            console.log('comment successfully deleted ')
-        }).catch(function(error) {
-            console.log('error failed to delete comment')
-        })
+        DeletePostCommentFromFirebaseCollection('posts', 'comments', postId, commentId)
     }
 
     return (
