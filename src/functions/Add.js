@@ -31,7 +31,21 @@ function AddMessageWithNoFilesToFirebaseCollection(input,username,userId) {
     })
 }
 
+function AddPostWithGifToFirebaseCollection(input,userPicture,userName,downloadURL,fav,gif,userId) {
+    db.collection('posts').add({    
+        message: input,  
+        timestamp: firebase.firestore.      
+        FieldValue.serverTimestamp(),
+        profilePic: userPicture,      
+        username: userName,    
+        image: downloadURL,    
+        favourite: fav,  
+        gif: gif,
+        userId: userId            
+      })
+}
+
 export default AddMessageWithImageToFirebaseCollection
 
-export {AddMessageWithOtherFilesToFirebaseCollection, AddMessageWithNoFilesToFirebaseCollection}
+export {AddMessageWithOtherFilesToFirebaseCollection, AddMessageWithNoFilesToFirebaseCollection, AddPostWithGifToFirebaseCollection}
 
