@@ -11,7 +11,7 @@ import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
-import {AddPostWithGifToFirebaseCollection} from '../../../../functions/Add'
+import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection} from '../../../../functions/Add'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -62,17 +62,7 @@ function MessageSender() {
           uploadBytes(store, imageUrl).then(snapshot => {            
             return getDownloadURL(snapshot.ref)            
           }).then(downloadURL => {            
-              db.collection('posts').add({            
-                message: input,            
-                timestamp: firebase.firestore.            
-                FieldValue.serverTimestamp(),    
-                profilePic: user.picture,      
-                username: user.name,        
-                image: downloadURL,      
-                favourite: fav,      
-                gif: false,
-                userId: user.id    
-              })
+            AddPostWithImageToFirebaseCollection(input,user.picture,user.name,downloadURL,fav,false,user.id)
           }
           )
       }              
