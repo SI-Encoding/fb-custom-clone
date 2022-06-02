@@ -11,7 +11,7 @@ import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
-import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection} from '../../../../functions/Add'
+import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImagetoFirebaseCollection} from '../../../../functions/Add'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -67,16 +67,7 @@ function MessageSender() {
           )
       }              
     } else {              
-        db.collection('posts').add({              
-          message: input,              
-          timestamp: firebase.firestore.              
-          FieldValue.serverTimestamp(),              
-          profilePic: user.picture,              
-          username: user.name,              
-          favourite: fav,
-          gif: false,
-          userId: user.id    
-        })
+        AddPostWithoutImagetoFirebaseCollection(input,user.picture,user.name,fav,false,user.id)
       } 
       resetState();            
   } 
