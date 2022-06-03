@@ -18,6 +18,7 @@ import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
+import UpdatePostFav from '../../../../functions/Update'
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
   const user = useSelector((state) => (state.user))
@@ -49,10 +50,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const addToFavourite = (e) => {
     e.preventDefault()
     setFav(!fav)
-    
-    db.collection('posts').doc(id).update({
-      favourite: fav
-    })
+    UpdatePostFav('posts', id, fav)
   }
 
   const resetState = () => {
