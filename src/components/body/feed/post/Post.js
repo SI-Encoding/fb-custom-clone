@@ -18,7 +18,7 @@ import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
-import UpdatePostFav, {UpdatePostWithGif} from '../../../../functions/Update'
+import UpdatePostFav, {UpdatePostWithGif, UpdatePostWithImage} from '../../../../functions/Update'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -92,17 +92,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
       uploadBytes(store, imageUrl).then(snapshot => {
         return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
-        db.collection('posts').doc(id).update({
-          message: input,
-          timestamp: firebase.firestore.
-          FieldValue.serverTimestamp(),
-          profilePic: user.picture,
-          username: user.name,
-          image: downloadURL,
-          favourite: fav,
-          gif: false
-        })})
-
+          UpdatePostWithImage('posts', id, input, user.picture, user.name, downloadURL, fav, false)
+        })}
+        )
     }
 
     const postWithNoAttachment = () => {
