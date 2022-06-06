@@ -8,7 +8,7 @@ function UpdatePostFav(posts, id, fav) {
 }
 
 function UpdatePostWithGif(posts, id, input, userPicture, userName, downloadURL, fav, gif) {
-  db.collection('posts').doc(id).update({
+  db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
     FieldValue.serverTimestamp(),
@@ -20,19 +20,31 @@ function UpdatePostWithGif(posts, id, input, userPicture, userName, downloadURL,
   })
 }
 
-function UpdatePostWithImage() {
-  db.collection('posts').doc(id).update({
+function UpdatePostWithImage(posts, id, input, userPicture, userName, fav, gif) {
+  db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
     FieldValue.serverTimestamp(),
-    profilePic: user.picture,
-    username: user.name,
+    profilePic: userPicture,
+    username: userName,
     image: downloadURL,
     favourite: fav,
-    gif: false 
+    gif: gif 
+  })
+}
+
+function UpdatePostWithNoAttachment(posts, id, input, userPicture, userName, fav, gif) {
+  db.collection(posts).doc(id).update({
+    message: input,
+    timestamp: firebase.firestore.
+    FieldValue.serverTimestamp(),
+    profilePic: userPicture,
+    username: userName,
+    favourite: fav,
+    gif: gif
   })
 }
 
 export default UpdatePostFav
 
-export {UpdatePostWithGif, UpdatePostWithImage}
+export {UpdatePostWithGif, UpdatePostWithImage, UpdatePostWithNoAttachment}
