@@ -93,10 +93,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
           UpdatePostWithImage('posts', id, input, user.picture, user.name, downloadURL, fav, false)
-        })}
+        })
     }
   
-
     const postWithNoAttachment = () => {
       UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false)
     }

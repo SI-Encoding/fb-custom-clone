@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat'
 import db from '../firebase/firebase'
 
-function AddMessageWithImageToFirebaseCollection(input,username,downloadURL, userId) {
+function AddMessageWithImageToFirebaseCollection(input, username, downloadURL, userId) {
     db.collection('chat').add({
         message: input,
         username: username,
@@ -11,7 +11,7 @@ function AddMessageWithImageToFirebaseCollection(input,username,downloadURL, use
     })
 }
 
-function AddMessageWithOtherFilesToFirebaseCollection(input,username,fileName,downloadURL,userId) {
+function AddMessageWithOtherFilesToFirebaseCollection(input, username, fileName, downloadURL, userId) {
     db.collection('chat').add({
         message: input,
         username: username,
@@ -22,7 +22,7 @@ function AddMessageWithOtherFilesToFirebaseCollection(input,username,fileName,do
     })
 }
 
-function AddMessageWithNoFilesToFirebaseCollection(input,username,userId) {
+function AddMessageWithNoFilesToFirebaseCollection(input, username, userId) {
     db.collection('chat').add({
         message: input,
         username: username,
@@ -31,7 +31,7 @@ function AddMessageWithNoFilesToFirebaseCollection(input,username,userId) {
     })
 }
 
-function AddPostWithGifToFirebaseCollection(input,userPicture,userName,downloadURL,fav,gif,userId) {
+function AddPostWithGifToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId) {
     db.collection('posts').add({    
         message: input,  
         timestamp: firebase.firestore.      
@@ -43,31 +43,32 @@ function AddPostWithGifToFirebaseCollection(input,userPicture,userName,downloadU
         gif: gif,
         userId: userId            
     })
+}
 
-function AddPostWithImageToFirebaseCollection(input,userPicture,userName,downloadURL,fav,gif,userId) {
+function AddPostWithImageToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId) {
     db.collection('posts').add({            
         message: input,            
         timestamp: firebase.firestore.            
         FieldValue.serverTimestamp(),    
-        profilePic: user.picture,      
-        username: user.name,        
+        profilePic: userPicture,      
+        username: userName,        
         image: downloadURL,      
         favourite: fav,      
-        gif: false,
-        userId: user.id    
+        gif: gif,
+        userId: userId   
     })
 }
 
-function AddPostWithoutImagetoFirebaseCollection(input,userPicture,useName,fav,gif,userId) {
+function AddPostWithoutImagetoFirebaseCollection(input, userPicture, userName, fav, gif, userId) {
     db.collection('posts').add({              
         message: input,              
         timestamp: firebase.firestore.              
         FieldValue.serverTimestamp(),              
-        profilePic: user.picture,              
-        username: user.name,              
+        profilePic: userPicture,              
+        username: userName,              
         favourite: fav,
-        gif: false,
-        userId: user.id    
+        gif: gif,
+        userId: userId    
   })
 }
 export default AddMessageWithImageToFirebaseCollection
