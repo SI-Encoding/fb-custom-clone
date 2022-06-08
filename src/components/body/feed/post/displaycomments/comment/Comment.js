@@ -20,12 +20,6 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
     const editComment = (e) => {
        setEditPop(!editPop)
        e.preventDefault()
-       /*db.collection('posts').doc(postId).collection('comments').doc(commentId).update({
-           message: comment,
-           time: firebase.firestore.FieldValue.serverTimestamp(),
-           user: username.name,
-           userImage: username.picture
-       })*/
        UpdatePostComment('posts', postId, 'comments', commentId, comment, username.name, username.picture)
        setComment('')
     }

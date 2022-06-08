@@ -19,6 +19,7 @@ import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
 import UpdatePostFav, {UpdatePostWithGif, UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
+import UploadPostsWithGif from '../../../../functions/Upload'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -81,11 +82,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     }
 
     const postWithGif = () => {
-      uploadBytes(store, imageUrl).then(snapshot => {
-        return getDownloadURL(snapshot.ref)
-      }).then(downloadURL => {
-        UpdatePostWithGif('posts', id, input, user.picture, user.name, downloadURL, fav, true)
-      })
+      UploadPostsWithGif(fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true)
     }
   
     const postWithImage = () => {
