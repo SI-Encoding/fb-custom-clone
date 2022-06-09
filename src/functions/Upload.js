@@ -15,4 +15,15 @@ function UploadPostsWithGif(fileName, imageUrl, posts, id, input, userPicture, u
   })
 }
 
+function UploadPostsWithImage(fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif) { 
+  let store = storageRef.ref(`/posts/${fileName}`);
+  uploadBytes(store, imageUrl).then(snapshot => {
+      return getDownloadURL(snapshot.ref)
+  }).then(downloadURL => {
+    UpdatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif)
+})
+}
+
 export default UploadPostsWithGif
+
+export {UploadPostsWithImage}

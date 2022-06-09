@@ -9,7 +9,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import MenuIcon from '@material-ui/icons/Menu';
 import {useSelector} from 'react-redux';
 import PostDropDownMenu from './dropdownmenu/PostDropDownMenu'
-import db from '../../../../firebase/firebase'
 import firebase from 'firebase/compat'
 import WriteAComment from './writeacomment/WriteAComment'
 import DisplayComments from './displaycomments/DisplayComments'
@@ -18,8 +17,8 @@ import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
-import UpdatePostFav, {UpdatePostWithGif, UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
-import UploadPostsWithGif from '../../../../functions/Upload'
+import UpdatePostFav, {UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
+import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -86,11 +85,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     }
   
     const postWithImage = () => {
-      uploadBytes(store, imageUrl).then(snapshot => {
-        return getDownloadURL(snapshot.ref)
-      }).then(downloadURL => {
-          UpdatePostWithImage('posts', id, input, user.picture, user.name, downloadURL, fav, false)
-        })
+      UploadPostsWithImage(fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true)
     }
   
     const postWithNoAttachment = () => {
