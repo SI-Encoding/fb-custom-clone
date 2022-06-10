@@ -81,15 +81,15 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     }
 
     const postWithGif = () => {
-      UploadPostsWithGif(fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true)
+      UploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
     }
   
     const postWithImage = () => {
-      UploadPostsWithImage(fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true)
+      UploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
     }
   
     const postWithNoAttachment = () => {
-      UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false)
+      UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
     }
 
     {/* update the post with new message */}

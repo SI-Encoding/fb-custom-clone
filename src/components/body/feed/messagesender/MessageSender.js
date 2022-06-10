@@ -5,13 +5,13 @@ import MessageIcon from '@material-ui/icons/Message'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import {useStateValue} from '../../../../StateProvider'
-import db from '../../../../firebase/firebase'
 import firebase from 'firebase/compat'
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
-import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImagetoFirebaseCollection} from '../../../../functions/Add'
+import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
+import UploadPostsWithGif from '../../../../functions/Upload'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -52,22 +52,17 @@ function MessageSender() {
     {/* Submit differently if file is uploaded */}
     if (imageUrl) {
       if(fileType === 'image/gif') {        
-        uploadBytes(store, imageUrl).then(snapshot => {
-          return getDownloadURL(snapshot.ref)
-        }).then(downloadURL => {
-          AddPostWithGifToFirebaseCollection(input,user.picture,user.name,downloadURL,fav,true,user.id)
-        }
-        )
+        UploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
       } else {            
           uploadBytes(store, imageUrl).then(snapshot => {            
             return getDownloadURL(snapshot.ref)            
           }).then(downloadURL => {            
-            AddPostWithImageToFirebaseCollection(input,user.picture,user.name,downloadURL,fav,false,user.id)
+            AddPostWithImageToFirebaseCollection(input, user.picture, user.name, downloadURL, fav, false, user.id)
           }
           )
       }              
     } else {              
-        AddPostWithoutImagetoFirebaseCollection(input,user.picture,user.name,fav,false,user.id)
+        AddPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
       } 
       resetState();            
   } 

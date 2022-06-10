@@ -29,7 +29,7 @@ function UpdatePostWithImage(posts, id, input, userPicture, userName, downloadUR
     username: userName,
     image: downloadURL,
     favourite: fav,
-    gif: gif 
+    gif: gif
   })
 }
 
