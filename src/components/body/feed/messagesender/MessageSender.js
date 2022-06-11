@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
 import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
-import UploadPostsWithGif from '../../../../functions/Upload'
+import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -54,12 +54,7 @@ function MessageSender() {
       if(fileType === 'image/gif') {        
         UploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
       } else {            
-          uploadBytes(store, imageUrl).then(snapshot => {            
-            return getDownloadURL(snapshot.ref)            
-          }).then(downloadURL => {            
-            AddPostWithImageToFirebaseCollection(input, user.picture, user.name, downloadURL, fav, false, user.id)
-          }
-          )
+          UploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
       }              
     } else {              
         AddPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)

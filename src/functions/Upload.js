@@ -1,7 +1,7 @@
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import firebase from 'firebase/compat'
 import {UpdatePostWithGif, UpdatePostWithImage} from './Update'
-import {AddPostWithGifToFirebaseCollection} from './Add'
+import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection} from './Add'
 
 const storageRef = firebase.storage();
   
@@ -22,9 +22,14 @@ function UploadPostsWithImage(action, fileName, imageUrl, posts, id, input, user
   uploadBytes(store, imageUrl).then(snapshot => {
       return getDownloadURL(snapshot.ref)
   }).then(downloadURL => {
+    action === 'add' ?
+    AddPostWithImageToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId)
+    :
     UpdatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif)
 })
 }
+
+
 
 export default UploadPostsWithGif
 
