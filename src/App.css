@@ -1,5 +1,7 @@
 .app_container {
   display:flex;
+  max-height: max-content;
+  min-height: 100vh;
 }
 
 .app {
