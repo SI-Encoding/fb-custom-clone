@@ -59,7 +59,7 @@ function ChatBody() {
   }
 
   const sendMessageWithNoFiles = () => {
-    AddMessageWithNoFilesToFirebaseCollection(input,user.name,user.Id)
+    AddMessageWithNoFilesToFirebaseCollection(input,user.name,user.id)
   }
  
   useEffect(() => {

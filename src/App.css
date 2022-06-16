@@ -6,6 +6,7 @@
 
 .app {
   background-color: #f1f2f5;
+  min-width: fit-content;
 }
 
 .app.active {
