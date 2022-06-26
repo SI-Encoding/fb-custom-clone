@@ -46,9 +46,7 @@ function MessageSender() {
 
   const handleSubmit = e => {    
     e.preventDefault();
-    const storageRef = firebase.storage();    
-    let store = storageRef.ref(`/posts/${fileName}`);        
-
+     
     {/* Submit differently if file is uploaded */}
     if (imageUrl) {
       if(fileType === 'image/gif') {        
