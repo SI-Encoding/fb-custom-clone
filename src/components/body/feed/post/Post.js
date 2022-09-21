@@ -20,6 +20,7 @@ import DeleteFromFirebaseCollection from '../../../../functions/Delete'
 import UpdatePostFav, {UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
 import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
 import PostImage from './postimage/PostImage'
+import PostMessage from './postmessage/PostMessage'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -127,10 +128,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             {open && <PostDropDownMenu open={open} setOpen={setOpen} postId={id} deleteThis={deleteThis} editThis={editThis}/>}
           </div>
 
-          {/* render the post's bottom icon */}
-          {message!== '' && <div className="post_bottom">
-            <p>{message}</p>
-          </div>
+          {/* render the post's message */}
+          {message!== '' && <PostMessage message={message}/>
           } 
 
           {/* render the post's image */}
