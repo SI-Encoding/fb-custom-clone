@@ -1,26 +1,24 @@
-import React, {useState, forwardRef, useEffect, useRef} from 'react'
+import React, {useState, forwardRef} from 'react'
 import './Post.css'
-import {Avatar} from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import NearMeIcon from '@material-ui/icons/NearMe'
 import {ExpandMoreOutlined} from '@material-ui/icons'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import MenuIcon from '@material-ui/icons/Menu';
 import {useSelector} from 'react-redux';
 import PostDropDownMenu from './dropdownmenu/PostDropDownMenu'
 import firebase from 'firebase/compat'
 import WriteAComment from './writeacomment/WriteAComment'
 import DisplayComments from './displaycomments/DisplayComments'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
-import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
-import UpdatePostFav, {UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
+import UpdatePostFav, {UpdatePostWithNoAttachment} from '../../../../functions/Update'
 import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
 import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
+import PostHeader from './postheader/PostHeader'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -114,30 +112,40 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
      {/* render the post */}
       return (
         <div ref = {ref} className='post_container'>
-          <div className='post_top'>
-            <Avatar src={profilePic} className='post_avatar'/>
-              <div className='post_info_top'>
-                <h3>{username}</h3>
-                <p>{new Date(timestamp?.toDate()).toUTCString()}</p>        
-              </div>  
-              {userId !== user.id ? '' : (<MenuIcon style={{color:'var(--fb-theme-colour-arrow)'}} onClick={()=> setOpen(!open)} className='menu_icon'/>)}   
-          </div>
-
+          {/* render post header */}
+          <PostHeader 
+            profilePic={profilePic} 
+            username={username} 
+            timestamp={timestamp} 
+            setOpen={setOpen} 
+            open={open} 
+            userId={userId} 
+            user={user}
+          />
+          
           {/* render edit and delete menu */}
           <div className='drop_down'>
-            {open && <PostDropDownMenu open={open} setOpen={setOpen} postId={id} deleteThis={deleteThis} editThis={editThis}/>}
+            {open && 
+              <PostDropDownMenu 
+                open={open} 
+                setOpen={setOpen} 
+                postId={id} 
+                deleteThis={deleteThis} 
+                editThis={editThis}
+              />}
           </div>
 
           {/* render the post's message */}
-          {message!== '' && <PostMessage message={message}/>
+          {message!== '' && 
+            <PostMessage 
+              message={message}
+            />
           } 
 
           {/* render the post's image */}
           <PostImage image={image}/>
 
           <div className="post_options">
-          
-
           {/* add post to favourites */}
           <div onClick ={addToFavourite} className={`post_option ${favourite? 'active':'inactive'}`}>
             <ThumbUpIcon/>
@@ -160,10 +168,19 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           </div>
 
           {/* render creating a message */}
-          {writeComment && <WriteAComment  theId={id} setDisplayComment={setDisplayComment}/>}
+          {writeComment && 
+            <WriteAComment  
+              theId={id} 
+              setDisplayComment={setDisplayComment}
+            />
+          }
 
           {/* render displaying the messages */}
-          {displayComment && <DisplayComments theId = {id}/>}
+          {displayComment && 
+            <DisplayComments 
+              theId = {id}
+            />
+          }
 
           {/* render the popup used to update the post */}
           {updatePostPopUp && 
@@ -195,7 +212,10 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
           {/* render the popup used to show wrong file type supported */}
           {error && 
-            <ErrorPopup setError={setError} error={error} />
+            <ErrorPopup 
+              setError={setError} 
+              error={error} 
+            />
           }
         </div>
       )
