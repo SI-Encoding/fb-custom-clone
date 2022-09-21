@@ -19,6 +19,7 @@ import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
 import UpdatePostFav, {UpdatePostWithImage, UpdatePostWithNoAttachment} from '../../../../functions/Update'
 import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
+import PostImage from './postimage/PostImage'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -131,10 +132,12 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             <p>{message}</p>
           </div>
           } 
-          <div className="post_image">
-            <img src={image} />
-          </div>
+
+          {/* render the post's image */}
+          <PostImage image={image}/>
+
           <div className="post_options">
+          
 
           {/* add post to favourites */}
           <div onClick ={addToFavourite} className={`post_option ${favourite? 'active':'inactive'}`}>
