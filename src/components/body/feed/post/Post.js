@@ -1,10 +1,5 @@
 import React, {useState, forwardRef} from 'react'
 import './Post.css'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
-import NearMeIcon from '@material-ui/icons/NearMe'
-import {ExpandMoreOutlined} from '@material-ui/icons'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import {useSelector} from 'react-redux';
 import PostDropDownMenu from './dropdownmenu/PostDropDownMenu'
 import firebase from 'firebase/compat'
@@ -19,6 +14,7 @@ import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Up
 import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
 import PostHeader from './postheader/PostHeader'
+import PostOption from './postoption/PostOption'
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
@@ -132,7 +128,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
                 postId={id} 
                 deleteThis={deleteThis} 
                 editThis={editThis}
-              />}
+              />
+            }
           </div>
 
           {/* render the post's message */}
@@ -145,27 +142,16 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           {/* render the post's image */}
           <PostImage image={image}/>
 
-          <div className="post_options">
-          {/* add post to favourites */}
-          <div onClick ={addToFavourite} className={`post_option ${favourite? 'active':'inactive'}`}>
-            <ThumbUpIcon/>
-            <p>Like</p>
-          </div>
-
-          {/* create a message */}    
-          <div onClick = {() => setWriteComment(!writeComment)} className={`post_option ${writeComment? 'active':'inactive'}`}>
-            <ChatBubbleOutlineIcon />
-            <p>Comment</p>
-          </div>
-          <div className="post_option">
-            <NearMeIcon />
-            <p>Share</p>
-          </div>
-          <div onClick = {() => setDisplayComment(!displayComment) } className={`post_option ${displayComment? 'active' : 'inactive'}`}>
-            <AccountCircleIcon/>
-            <ExpandMoreOutlined className={`post_arrow ${displayComment? 'active' : 'inactive'}`}/>
-          </div>
-          </div>
+          {/* render the post's options */}
+          <PostOption 
+            addToFavourite={addToFavourite} 
+            favourite={favourite} 
+            setWriteComment={setWriteComment} 
+            writeComment={writeComment} 
+            setDisplayComment={setDisplayComment} 
+            displayComment={displayComment}
+          />
+          
 
           {/* render creating a message */}
           {writeComment && 
