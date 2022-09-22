@@ -1,21 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react'
 import './Header.css';
-import HomeIcon from '@material-ui/icons/Home';
-import FlagIcon from '@material-ui/icons/Flag';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
-import {Avatar, IconButton} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import ForumIcon from '@material-ui/icons/Forum';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {useStateValue} from '../../StateProvider'
-import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import HeaderDropDownMenu from './headerdropdownmenu/HeaderDropDownMenu'
 import HeaderLeft from './headerleft/HeaderLeft';
 import HeaderCenter from './headercenter/HeaderCenter';
+import HeaderRight from './headerright/HeaderRight';
 
 function Header() {
     const user = useSelector((state) => state.user)
@@ -84,7 +72,6 @@ function Header() {
     return (
         <div className = "header"> 
             <HeaderLeft/>
-
             <HeaderCenter 
                 homePage = {homePage} 
                 homePageActivated = {homePageActivated} 
@@ -95,31 +82,13 @@ function Header() {
                 otherUsersPostsPage = {otherUsersPostsPage} 
                 otherUsersPostsPageActivated = {otherUsersPostsPageActivated}
             />
-       
              <div className='header_divider'></div>
-             {/* signout */ }
-             <div className = "header_right">
-                <div className= "header_info">
-                    <Avatar src={user.picture}/>
-                    <h4>{user.name}</h4>
-             </div>
-    
-            {/* <IconButton>
-                <AddIcon/>
-                </IconButton>
-                <IconButton>
-                <ForumIcon/>
-                </IconButton>
-                <IconButton>
-                <NotificationsActiveIcon/>
-                </IconButton>
-            */}
-            {/* SignOut */}
-             <IconButton onClick={()=> setLogoutPopup(!logoutPopup)}>
-                <ExpandMoreIcon style={{color:'var(--fb-theme-colour-arrow)'}} className={`header_arrow ${logoutPopup? 'active' : 'inactive'}`}/>
-             </IconButton>
-             </div>
-             {logoutPopup && <div ref={signOutRef} > <HeaderDropDownMenu setLogoutPopup={setLogoutPopup}/> </div>}
+            <HeaderRight 
+                user={user} 
+                setLogoutPopup={setLogoutPopup} 
+                logoutPopup={logoutPopup} 
+                signOutRef={signOutRef}
+            />
         </div>
     )
 }
