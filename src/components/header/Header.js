@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
 import './Header.css';
-import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import FlagIcon from '@material-ui/icons/Flag';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
@@ -15,6 +14,7 @@ import {useStateValue} from '../../StateProvider'
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import HeaderDropDownMenu from './headerdropdownmenu/HeaderDropDownMenu'
+import HeaderLeft from './headerleft/HeaderLeft';
 
 function Header() {
     const user = useSelector((state) => state.user)
@@ -82,13 +82,8 @@ function Header() {
 
     return (
         <div className = "header"> 
-            <div className = "header_left">
-                <img src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png" alt="fb_logo"/>
-            <div className="header__input">
-                <SearchIcon style={{color:'var(--fb-theme-colour-arrow)'}}/>
-                <input placeholder="Search Facebook" type="text" disabled/>
-            </div>
-            </div>
+            <HeaderLeft/>
+
             <div className = "header_center">
            {/* link to homepage*/}
            <Link to="/" style={{ color: `${homePage? 'var(--fb-theme-colour-blue)' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}> 
