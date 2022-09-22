@@ -15,6 +15,7 @@ import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import HeaderDropDownMenu from './headerdropdownmenu/HeaderDropDownMenu'
 import HeaderLeft from './headerleft/HeaderLeft';
+import HeaderCenter from './headercenter/HeaderCenter';
 
 function Header() {
     const user = useSelector((state) => state.user)
@@ -84,38 +85,17 @@ function Header() {
         <div className = "header"> 
             <HeaderLeft/>
 
-            <div className = "header_center">
-           {/* link to homepage*/}
-           <Link to="/" style={{ color: `${homePage? 'var(--fb-theme-colour-blue)' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}> 
-                <div onClick = {homePageActivated} className={ `header_option  ${homePage? 'active' : 'inactive'}`}>
-                    <HomeIcon fontSize="large"/> 
-                </div>
-            </Link>
-            {/* move to flagPage*/}           
-           {/* <Link to="favourites" style={{ color: `${flagPage? '#2e81f4' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}>
-                <div onClick = {flagPageActivated} className={ `header_option ${flagPage? 'active' : 'inactive'}`}>
-                    <FlagIcon fontSize="large"/> 
-                </div>
-            </Link> */}
-            {/* move to gifpage */}
-            <Link to="gifposts" style={{ color: `${gifsPage? 'var(--fb-theme-colour-blue)' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}>
-                <div onClick = {gifsPageActivated} className={ `header_option ${gifsPage? 'active' : 'inactive'}`}>
-                    <SubscriptionsIcon fontSize="large"/> 
-                </div>
-            </Link>
-            {/* move to myposts */}  
-            <Link to="myposts" style={{ color: `${myPostsPage? 'var(--fb-theme-colour-blue)' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}> 
-                <div onClick = {myPostsPageActivated} className={ `header_option ${myPostsPage? 'active' : 'inactive'}`}>
-                    <StorefrontIcon fontSize="large"/> 
-                </div>
-            </Link>
-             {/* move to otherusersposts */}         
-             <Link to="otherusersposts" style={{ color: `${otherUsersPostsPage? 'var(--fb-theme-colour-blue)' : 'var(--fb-theme-colour-grey)'}`, textDecoration: 'none'}}> 
-                <div onClick = {otherUsersPostsPageActivated} className={ `header_option ${otherUsersPostsPage? 'active' : 'inactive'}`}>
-                    <SupervisedUserCircleIcon fontSize="large"/> 
-                </div>
-             </Link>
-             </div>
+            <HeaderCenter 
+                homePage = {homePage} 
+                homePageActivated = {homePageActivated} 
+                gifsPage = {gifsPage} 
+                gifsPageActivated = {gifsPageActivated} 
+                myPostsPage = {myPostsPage}
+                myPostsPageActivated = {myPostsPageActivated} 
+                otherUsersPostsPage = {otherUsersPostsPage} 
+                otherUsersPostsPageActivated = {otherUsersPostsPageActivated}
+            />
+       
              <div className='header_divider'></div>
              {/* signout */ }
              <div className = "header_right">
