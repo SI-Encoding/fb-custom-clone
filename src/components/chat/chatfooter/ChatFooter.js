@@ -2,6 +2,7 @@ import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
 import {handleFile} from '../../../functions/Upload'
+import ChatEmojis from '../chatemojis/ChatEmojis.js'
 
 function ChatFooter(
   {
@@ -27,6 +28,11 @@ function ChatFooter(
       sendMessage(e)
       }
     }  
+  }
+
+  const adjustSelect = () => {
+    if (!input) {} else { setInput(input + ' ');}
+          autoSelect();
   }
 
   useEffect( () => {
@@ -55,35 +61,100 @@ function ChatFooter(
   }
   },[openEmoji])
   
+  const emojisSet1 = [
+    {
+      icon: '😀',
+      label: 'Happy Face'
+    },
+    {
+      icon: '😃',
+      label: 'Big eyes'
+    },
+    {
+      icon: '😄',
+      label: 'Grinning eyes'
+    },
+    {
+      icon: '😁',
+      label: 'Beaming face'
+    },
+  ]
+
+  const emojisSet2 = [
+    {
+      icon: '😆',
+      label: 'Grinning face'
+    },
+    {
+      icon: '😅',
+      label: 'Grinning Face with Sweat'
+    },
+    {
+      icon: '🤣',
+      label: 'Rolling on the Floor Laughing'
+    },
+    {
+      icon: '😂',
+      label: 'Face with Tears of Joy'
+    }, 
+  ]
+
+  const emojisSet3 = [
+    {
+      icon: '🙂',
+      label: 'Slightly Smiling Face'
+    },
+    {
+      icon: '🙃',
+      label: 'Upside-Down Face'
+    },
+    {
+      icon: '😉',
+      label: 'Winking Face'
+    },
+    {
+      icon: '😊',
+      label: 'Smiling Face with Smiling Eyes'
+    },
+  ]
+
+  const emojisSet4 = [
+    {
+      icon: '😇',
+      label: 'Smiling Face with Halo'
+    },
+    {
+      icon: '🥰',
+      label: 'Smiling Face with Hearts'
+    },
+    {
+      icon: '😍',
+      label: 'Smiling Face with Heart-Eyes'
+    },
+    {
+      icon: '🤩',
+      label: 'Star-Struck'
+    },
+  ]
+
+  const emojis = [emojisSet1, emojisSet2, emojisSet3, emojisSet4]
+
   return (
     <div className='chat_footer'>
       <InsertEmoticonIcon onClick={() => setOpenEmoji(!openEmoji)} className='insert_icon'/>
       {/* Emoji container */}
-      {openEmoji && <div ref={emojiRef} className='emoji-container'>
-      <div>
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😀'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Happy Face">😀</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😃'); setOpenEmoji(!openEmoji); autoSelect()}}  role="img" aria-label="Big eyes">😃</span>   
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😄'); setOpenEmoji(!openEmoji); autoSelect()}}  role="img" aria-label="Grinning eyes">😄</span>   
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😁'); setOpenEmoji(!openEmoji); autoSelect()}}  role="img" aria-label="Beaming face">😁</span>  
-      </div> 
-      <div>
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😆'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Grinning face">😆</span>   
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😅'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Grinning Face with Sweat">😅</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'🤣'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Rolling on the Floor Laughing">🤣</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😂'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Face with Tears of Joy">😂</span>  
-      </div> 
-      <div>
-        <span className='emoji-icon' onClick={()=> {setInput(input +'🙂'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Slightly Smiling Face">🙂</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'🙃'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Upside-Down Face">🙃</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😉'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Winking Face">😉</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😊'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Smiling Face with Smiling Eyes">😊</span>  
-      </div> 
-      <div>
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😇'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Smiling Face with Halo">😇</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'🥰'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Smiling Face with Hearts">🥰</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'😍'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Smiling Face with Heart-Eyes">😍</span>  
-        <span className='emoji-icon' onClick={()=> {setInput(input +'🤩'); setOpenEmoji(!openEmoji); autoSelect()}} role="img" aria-label="Star-Struck">🤩</span>  
-      </div>      
+      {openEmoji && 
+      <div ref={emojiRef} className='emoji-container'>
+        {emojis.map((emoji) => (
+          <ChatEmojis 
+          emojis={emoji} 
+          setInput={setInput} 
+          setOpenEmoji={setOpenEmoji} 
+          openEmoji={openEmoji} 
+          input={input} 
+          autoSelect={autoSelect}
+        />
+        ))}
       </div>
       }
       {/* Submit message */}
@@ -98,8 +169,7 @@ function ChatFooter(
       <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {
         if (e.target.files[0]) {
           handleFile(e, setPreviewFile, function(){}, undefined, setFile, setFileName, setFileType)
-          if (!input) {} else { setInput(input + ' ');}
-          autoSelect();
+          adjustSelect()
         }
       }}
         />
