@@ -90,15 +90,36 @@ function ChatBody() {
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>
         {chat.map(c => ( 
-          <ChatMessage key = {c.id} userId = {c.data.userId} id = {c.id} username = {c.data.username} message = {c.data.message} time = {c.data.time} img = {c.data.img} fileName = {c.data.fileName} url = {c.data.url} deleteComment = {deleteComment}/>
+          <ChatMessage 
+            key = {c.id} 
+            userId = {c.data.userId} 
+            id = {c.id} 
+            username = {c.data.username} 
+            message = {c.data.message} 
+            time = {c.data.time} 
+            img = {c.data.img} 
+            fileName = {c.data.fileName} 
+            url = {c.data.url} 
+            deleteComment = {deleteComment}
+          />
         ))}
         {previewFile && <div id='preview' className='preview_container'> 
           <div className='preview_delete' onClick={()=> {setPreviewFile(null); autoSelect();}}> <CancelIcon/> </div>
-          {fileType.includes('image') ?<img src={previewFile} className='preview_image'/>: <a href={fileName}>{fileName}</a> }
+          {fileType.includes('image') ?<img src={previewFile} className='preview_image' alt={fileName}/>: <a href={fileName}>{fileName}</a> }
         </div>
         }        
         </div> 
-      <ChatFooter autoSelect={autoSelect} previewFile={previewFile} sendMessage={sendMessage} input={input} setInput={setInput} setFile={setFile} setPreviewFile={setPreviewFile} setFileName={setFileName} setFileType={setFileType}/>
+      <ChatFooter 
+        autoSelect={autoSelect} 
+        previewFile={previewFile} 
+        sendMessage={sendMessage} 
+        input={input} 
+        setInput={setInput} 
+        setFile={setFile} 
+        setPreviewFile={setPreviewFile} 
+        setFileName={setFileName} 
+        setFileType={setFileType}
+      />
     </>
   )
 }
