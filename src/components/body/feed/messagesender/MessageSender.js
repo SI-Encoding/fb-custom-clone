@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
 import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
-import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
+import UploadPostsWithGif, {UploadPostsWithImage, handleFile} from '../../../../functions/Upload'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -34,16 +34,6 @@ function MessageSender() {
     setFileType(null);
   }
   
-  const handleFile = e => {
-    setImagePreview(URL.createObjectURL(e.target.files[0]));                
-    setOpenPopup(!openPopup); 
-    setImageUrl(e.target.files[0]); 
-    setFileName(e.target.files[0].name); 
-    setFileType(e.target.files[0].type);    
-    URL.revokeObjectURL(e.target.files[0]);   
-    e.target.value = null;
-  }
-
   const handleSubmit = e => {    
     e.preventDefault();
      
@@ -97,7 +87,7 @@ function MessageSender() {
               setError(true)
               e.target.value = null;
             } else {               
-                handleFile(e)       
+                handleFile(e, setImagePreview, setOpenPopup, openPopup, setImageUrl, setFileName, setFileType)       
             }
           } 
         }

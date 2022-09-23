@@ -29,8 +29,16 @@ function UploadPostsWithImage(action, fileName, imageUrl, posts, id, input, user
 })
 }
 
-
+const handleFile = (e, setImagePreview, setPopup, popUp, setImageUrl, setFileName, setFileType) => {
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
+    setPopup(!popUp); 
+    setImageUrl(e.target.files[0]); 
+    setFileName(e.target.files[0].name); 
+    setFileType(e.target.files[0].type);
+    URL.revokeObjectURL(e.target.files[0]);
+    e.target.value = null;
+}
 
 export default UploadPostsWithGif
 
-export {UploadPostsWithImage}
+export {UploadPostsWithImage, handleFile}

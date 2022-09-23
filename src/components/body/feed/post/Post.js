@@ -10,7 +10,7 @@ import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import DeleteFromFirebaseCollection from '../../../../functions/Delete'
 import UpdatePostFav, {UpdatePostWithNoAttachment} from '../../../../functions/Update'
-import UploadPostsWithGif, {UploadPostsWithImage} from '../../../../functions/Upload'
+import UploadPostsWithGif, {UploadPostsWithImage, handleFile} from '../../../../functions/Upload'
 import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
 import PostHeader from './postheader/PostHeader'
@@ -58,153 +58,150 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     setFileType(null);
   }
 
-  const handleFile = (e) => {
-    setImagePreview(URL.createObjectURL(e.target.files[0]));
-    setPopUpAttachmentPopUp(!popUpAttachmentPopUp); 
-    setImageUrl(e.target.files[0]); 
-    setFileName(e.target.files[0].name); 
-    setFileType(e.target.files[0].type);
-    URL.revokeObjectURL(e.target.files[0]);
-    e.target.value = null;
-  }
-
   const deleteThis = (id) => {
     setUpdatePostPopUp(false)
     DeleteFromFirebaseCollection('posts',id)
   }
-    const editThis = () => {
-      setUpdatePostPopUp(true)
-    }
-
-    const postWithGif = () => {
-      UploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
-    }
   
-    const postWithImage = () => {
-      UploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
-    }
-  
-    const postWithNoAttachment = () => {
-      UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
-    }
+  const editThis = () => {
+    setUpdatePostPopUp(true)
+  }
 
-    {/* update the post with new message */}
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setUpdatePostPopUp(false)
-        
-        if (imageUrl) { 
-          if(fileType === 'image/gif'){
-            postWithGif()
-          } else {
-            postWithImage()
-            }
-          } else {
-            postWithNoAttachment()
+  const postWithGif = () => {
+    UploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+  }
+
+  const postWithImage = () => {
+    UploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+  }
+
+  const postWithNoAttachment = () => {
+    UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
+  }
+
+  {/* update the post with new message */}
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      setUpdatePostPopUp(false)
+      
+      if (imageUrl) { 
+        if(fileType === 'image/gif'){
+          postWithGif()
+        } else {
+          postWithImage()
           }
-          resetState(); 
+        } else {
+          postWithNoAttachment()
         }
-   
-     {/* render the post */}
-      return (
-        <div ref = {ref} className='post_container'>
-          {/* render post header */}
-          <PostHeader 
-            profilePic={profilePic} 
-            username={username} 
-            timestamp={timestamp} 
-            setOpen={setOpen} 
-            open={open} 
-            userId={userId} 
-            user={user}
-          />
-          
-          {/* render edit and delete menu */}
-          <div className='drop_down'>
-            {open && 
-              <PostDropDownMenu 
-                open={open} 
-                setOpen={setOpen} 
-                postId={id} 
-                deleteThis={deleteThis} 
-                editThis={editThis}
-              />
-            }
-          </div>
-
-          {/* render the post's message */}
-          {message!== '' && 
-            <PostMessage 
-              message={message}
-            />
-          } 
-
-          {/* render the post's image */}
-          <PostImage image={image}/>
-
-          {/* render the post's options */}
-          <PostOption 
-            addToFavourite={addToFavourite} 
-            favourite={favourite} 
-            setWriteComment={setWriteComment} 
-            writeComment={writeComment} 
-            setDisplayComment={setDisplayComment} 
-            displayComment={displayComment}
-          />
-          
-
-          {/* render creating a message */}
-          {writeComment && 
-            <WriteAComment  
-              theId={id} 
-              setDisplayComment={setDisplayComment}
-            />
-          }
-
-          {/* render displaying the messages */}
-          {displayComment && 
-            <DisplayComments 
-              theId = {id}
-            />
-          }
-
-          {/* render the popup used to update the post */}
-          {updatePostPopUp && 
-            <UpdatePost 
-              updatePostPopUp={updatePostPopUp} 
-              setUpdatePostPopUp = {setUpdatePostPopUp} 
-              input={input} 
-              setInput={setInput} 
-              handleFile={handleFile} 
-              handleSubmit={handleSubmit} 
-              setError={setError} 
-              imageUrl={imageUrl}
-            />
-          }
-
-          {/* render the popup used to upload preview of image */}
-          {popUpAttachmentPopUp && 
-            <PopupAttachment 
-              imagePreview={imagePreview} 
-              setImagePreview={setImagePreview} 
-              setOpenPopup={setPopUpAttachmentPopUp} 
-              openPopup={popUpAttachmentPopUp} 
-              handleSubmit={handleSubmit} 
-              setImageUrl={setImageUrl} 
-              setFileName={setFileName} 
-              setFileType={setFileType}
-            />
-          }
-
-          {/* render the popup used to show wrong file type supported */}
-          {error && 
-            <ErrorPopup 
-              setError={setError} 
-              error={error} 
+        resetState(); 
+      }
+  
+    {/* render the post */}
+    return (
+      <div ref = {ref} className='post_container'>
+        {/* render post header */}
+        <PostHeader 
+          profilePic={profilePic} 
+          username={username} 
+          timestamp={timestamp} 
+          setOpen={setOpen} 
+          open={open} 
+          userId={userId} 
+          user={user}
+        />
+        
+        {/* render edit and delete menu */}
+        <div className='drop_down'>
+          {open && 
+            <PostDropDownMenu 
+              open={open} 
+              setOpen={setOpen} 
+              postId={id} 
+              deleteThis={deleteThis} 
+              editThis={editThis}
             />
           }
         </div>
-      )
+
+        {/* render the post's message */}
+        {message!== '' && 
+          <PostMessage 
+            message={message}
+          />
+        } 
+
+        {/* render the post's image */}
+        <PostImage image={image}/>
+
+        {/* render the post's options */}
+        <PostOption 
+          addToFavourite={addToFavourite} 
+          favourite={favourite} 
+          setWriteComment={setWriteComment} 
+          writeComment={writeComment} 
+          setDisplayComment={setDisplayComment} 
+          displayComment={displayComment}
+        />
+        
+
+        {/* render creating a message */}
+        {writeComment && 
+          <WriteAComment  
+            theId={id} 
+            setDisplayComment={setDisplayComment}
+          />
+        }
+
+        {/* render displaying the messages */}
+        {displayComment && 
+          <DisplayComments 
+            theId = {id}
+          />
+        }
+
+        {/* render the popup used to update the post */}
+        {updatePostPopUp && 
+          <UpdatePost 
+            updatePostPopUp={updatePostPopUp} 
+            setUpdatePostPopUp = {setUpdatePostPopUp} 
+            input={input} 
+            setInput={setInput} 
+            handleFile={handleFile} 
+            handleSubmit={handleSubmit} 
+            setError={setError} 
+            imageUrl={imageUrl}
+            setImagePreview={setImagePreview}
+            setPopUpAttachmentPopUp={setPopUpAttachmentPopUp}
+            setImageUrl={setImageUrl}
+            setFileName={setFileName}
+            setFileType={setFileType}
+            popUpAttachmentPopUp={popUpAttachmentPopUp}
+          />
+        }
+
+        {/* render the popup used to upload preview of image */}
+        {popUpAttachmentPopUp && 
+          <PopupAttachment 
+            imagePreview={imagePreview} 
+            setImagePreview={setImagePreview} 
+            setOpenPopup={setPopUpAttachmentPopUp} 
+            openPopup={popUpAttachmentPopUp} 
+            handleSubmit={handleSubmit} 
+            setImageUrl={setImageUrl} 
+            setFileName={setFileName} 
+            setFileType={setFileType}
+          />
+        }
+
+        {/* render the popup used to show wrong file type supported */}
+        {error && 
+          <ErrorPopup 
+            setError={setError} 
+            error={error} 
+          />
+        }
+      </div>
+    )
 })
 
 export default Post

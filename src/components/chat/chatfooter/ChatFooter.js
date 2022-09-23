@@ -1,6 +1,7 @@
 import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
+import {handleFile} from '../../../functions/Upload'
 
 function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setFileName, setFileType, previewFile, autoSelect }) {
   const [openEmoji, setOpenEmoji] = useState(false)
@@ -15,17 +16,6 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       sendMessage(e)
       }
     }  
-  }
-
-  const handleFile = (e) => {
-    setPreviewFile(URL.createObjectURL(e.target.files[0])); 
-    setFileName(e.target.files[0].name); 
-    setFileType(e.target.files[0].type); 
-    setFile(e.target.files[0]); 
-    if (!input) {} else { setInput(input + ' ');}
-    autoSelect();
-    URL.revokeObjectURL(e.target.files[0]);
-    e.target.value = null;
   }
 
   useEffect( () => {
@@ -96,7 +86,9 @@ function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setF
       </label>
       <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {
         if (e.target.files[0]) {
-          handleFile(e)
+          handleFile(e, setPreviewFile, function(){}, undefined, setFile, setFileName, setFileType)
+          if (!input) {} else { setInput(input + ' ');}
+          autoSelect();
         }
       }}
         />
