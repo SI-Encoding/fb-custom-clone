@@ -2,7 +2,8 @@ import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
 import {handleFile} from '../../../functions/Upload'
-import ChatEmojis from '../chatemojis/ChatEmojis.js'
+import ChatEmojis from './chatemojis/ChatEmojis.js'
+import ChatTextfield from './chattextfield/ChatTextfield.js'
 
 function ChatFooter(
   {
@@ -158,10 +159,13 @@ function ChatFooter(
       </div>
       }
       {/* Submit message */}
-      <form>
-        <input id="textfield" onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder="Type a message"/>
-        <button type="submit" onClick={sendMessage} disabled={!input}> Send a Message</button>
-      </form>
+      <ChatTextfield 
+        handleKeyDown={handleKeyDown} 
+        input={input}  
+        setInput={setInput} 
+        sendMessage={sendMessage}
+      />
+      
       {/* Attach File */}
       <label htmlFor="inputFile">
         <AddIcon className='addIcon' />
