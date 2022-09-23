@@ -1,9 +1,9 @@
 import React,{useState, useRef, useEffect} from 'react'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
-import AddIcon from '@material-ui/icons/Add';
 import {handleFile} from '../../../functions/Upload'
 import ChatEmojis from './chatemojis/ChatEmojis.js'
 import ChatTextfield from './chattextfield/ChatTextfield.js'
+import ChatAttachFile from './chatattachfile/ChatAttachFile'
 
 function ChatFooter(
   {
@@ -167,16 +167,15 @@ function ChatFooter(
       />
       
       {/* Attach File */}
-      <label htmlFor="inputFile">
-        <AddIcon className='addIcon' />
-      </label>
-      <input type="file" id="inputFile" ref={fileUploadRef} style={{display:"none"}} onChange={(e) => {
-        if (e.target.files[0]) {
-          handleFile(e, setPreviewFile, function(){}, undefined, setFile, setFileName, setFileType)
-          adjustSelect()
-        }
-      }}
-        />
+      <ChatAttachFile 
+        fileUploadRef={fileUploadRef} 
+        handleFile={handleFile} 
+        setPreviewFile={setPreviewFile}  
+        setFile={setFile} 
+        setFileName={setFileName} 
+        setFileType={setFileType} 
+        adjustSelect={adjustSelect}
+      />
     </div> 
   )
 }
