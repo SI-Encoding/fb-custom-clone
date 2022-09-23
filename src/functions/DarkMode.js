@@ -1,4 +1,4 @@
-function setPropertyOfDarkMode() {
+const setPropertyOfDarkMode = () => {
     document.documentElement.style.setProperty("--fb-theme-colour-white-header", darkModeColours.header);
     document.documentElement.style.setProperty("--fb-theme-colour-white-posts", darkModeColours.posts);
     document.documentElement.style.setProperty("--fb-theme-colour-textfield", darkModeColours.textField);

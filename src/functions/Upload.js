@@ -5,7 +5,7 @@ import {addPostWithGifToFirebaseCollection, addPostWithImageToFirebaseCollection
 
 const storageRef = firebase.storage();
   
-function uploadPostsWithGif(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
+const uploadPostsWithGif = (action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) => { 
     let store = storageRef.ref(`/posts/${fileName}`);
     uploadBytes(store, imageUrl).then(snapshot => {
         return getDownloadURL(snapshot.ref)
@@ -17,7 +17,7 @@ function uploadPostsWithGif(action, fileName, imageUrl, posts, id, input, userPi
   })
 }
 
-function uploadPostsWithImage(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
+const uploadPostsWithImage = (action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) => { 
   let store = storageRef.ref(`/posts/${fileName}`);
   uploadBytes(store, imageUrl).then(snapshot => {
       return getDownloadURL(snapshot.ref)

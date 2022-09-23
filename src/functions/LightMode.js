@@ -1,4 +1,4 @@
-function setPropertyOfLightMode() {
+const setPropertyOfLightMode = () => {
     document.documentElement.style.setProperty("--fb-theme-colour-white-header", lightModeColours.header);
     document.documentElement.style.setProperty("--fb-theme-colour-white-posts", lightModeColours.posts);
     document.documentElement.style.setProperty("--fb-theme-colour-textfield", lightModeColours.textField);
