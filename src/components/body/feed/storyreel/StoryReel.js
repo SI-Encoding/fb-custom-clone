@@ -38,10 +38,10 @@ function StoryReel() {
         }
     ];
 
-    const changePage = (page) => {
+    const changePage = (page, title) => {
         dispatch({
             type: set_page,
-            page: page
+            page: {src: page, title: title}
         })
     }
 
@@ -49,7 +49,7 @@ function StoryReel() {
         <div className="storyreel_container">
             { storyData.map((story)=> 
                 (
-                <div style={{display:'flex'}} onClick={() => changePage(story.page)}>
+                <div style={{display:'flex'}} onClick={() => changePage(story.page, story.title)}>
                     <Story 
                         image={story.image}
                         profileSrc={story.profileSrc}

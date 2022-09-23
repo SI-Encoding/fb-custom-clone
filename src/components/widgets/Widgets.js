@@ -8,7 +8,9 @@ function Widgets() {
 
 return (
     <div className='widgets_container'>
-        <iframe src= {page}
+        <iframe 
+            src= {page.src}
+            title= {page.title}
             width='340'
             height='100%'
             style={{border: 'none', overflow: 'hidden'}}

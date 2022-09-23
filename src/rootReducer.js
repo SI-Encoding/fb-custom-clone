@@ -2,7 +2,10 @@ const mode = localStorage.getItem('mode')
 
 export const initialState = {
     user: null,
-    page: 'https://www.facebook.com/plugins/page.php?href=https://https://www.facebook.com/Javascript&tabs=timeline&width=340&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId',
+    page: 
+    { src:'https://www.facebook.com/plugins/page.php?href=https://https://www.facebook.com/Javascript&tabs=timeline&width=340&height=1500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId',
+      title: 'Javascript'
+    },
     darkMode: mode
 }
 
