@@ -8,8 +8,8 @@ import ChatMessage from './chatmessage/ChatMessage'
 import ChatFooter from '../chatfooter/ChatFooter'
 import {uploadBytes, getDownloadURL} from 'firebase/storage'
 import DeleteFromFirebaseCollection from '../../../functions/Delete'
-import AddMessageWithImageToFirebaseCollection from '../../../functions/Add'
-import {AddMessageWithOtherFilesToFirebaseCollection, AddMessageWithNoFilesToFirebaseCollection} from '../../../functions/Add'
+import addMessageWithImageToFirebaseCollection from '../../../functions/Add'
+import {addMessageWithOtherFilesToFirebaseCollection, addMessageWithNoFilesToFirebaseCollection} from '../../../functions/Add'
 
 function ChatBody() {
   const user = useSelector((state) => (state.user))
@@ -46,7 +46,7 @@ function ChatBody() {
     uploadBytes(store, file).then(snapshot => {
       return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
-        AddMessageWithImageToFirebaseCollection(input,user.name,downloadURL, user.id)
+        addMessageWithImageToFirebaseCollection(input,user.name,downloadURL, user.id)
       })
   }
 
@@ -54,12 +54,12 @@ function ChatBody() {
     uploadBytes(store, file).then(snapshot => {
       return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
-        AddMessageWithOtherFilesToFirebaseCollection(input,user.name,fileName,downloadURL,user.id)
+        addMessageWithOtherFilesToFirebaseCollection(input,user.name,fileName,downloadURL,user.id)
       })
   }
 
   const sendMessageWithNoFiles = () => {
-    AddMessageWithNoFilesToFirebaseCollection(input,user.name,user.id)
+    addMessageWithNoFilesToFirebaseCollection(input,user.name,user.id)
   }
  
   useEffect(() => {

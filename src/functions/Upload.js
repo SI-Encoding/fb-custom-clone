@@ -1,31 +1,31 @@
 import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import firebase from 'firebase/compat'
-import {UpdatePostWithGif, UpdatePostWithImage} from './Update'
-import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection} from './Add'
+import {updatePostWithGif, updatePostWithImage} from './Update'
+import {addPostWithGifToFirebaseCollection, addPostWithImageToFirebaseCollection} from './Add'
 
 const storageRef = firebase.storage();
   
-function UploadPostsWithGif(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
+function uploadPostsWithGif(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
     let store = storageRef.ref(`/posts/${fileName}`);
     uploadBytes(store, imageUrl).then(snapshot => {
         return getDownloadURL(snapshot.ref)
   }).then(downloadURL => {
     action === 'add' ?
-    AddPostWithGifToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId)
+    addPostWithGifToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId)
     :
-    UpdatePostWithGif(posts, id, input, userPicture, userName, downloadURL, fav, gif)
+    updatePostWithGif(posts, id, input, userPicture, userName, downloadURL, fav, gif)
   })
 }
 
-function UploadPostsWithImage(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
+function uploadPostsWithImage(action, fileName, imageUrl, posts, id, input, userPicture, userName, fav, gif, userId) { 
   let store = storageRef.ref(`/posts/${fileName}`);
   uploadBytes(store, imageUrl).then(snapshot => {
       return getDownloadURL(snapshot.ref)
   }).then(downloadURL => {
     action === 'add' ?
-    AddPostWithImageToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId)
+    addPostWithImageToFirebaseCollection(input, userPicture, userName, downloadURL, fav, gif, userId)
     :
-    UpdatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif)
+    updatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif)
 })
 }
 
@@ -39,6 +39,6 @@ const handleFile = (e, setImagePreview, setPopup, popUp, setImageUrl, setFileNam
     e.target.value = null;
 }
 
-export default UploadPostsWithGif
+export default uploadPostsWithGif
 
-export {UploadPostsWithImage, handleFile}
+export {uploadPostsWithImage, handleFile}

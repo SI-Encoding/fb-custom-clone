@@ -4,14 +4,11 @@ import {Avatar} from '@material-ui/core'
 import MessageIcon from '@material-ui/icons/Message'
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
-import {useStateValue} from '../../../../StateProvider'
-import firebase from 'firebase/compat'
-import {getDownloadURL, uploadBytes} from 'firebase/storage'
 import {useSelector} from 'react-redux'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
-import {AddPostWithGifToFirebaseCollection, AddPostWithImageToFirebaseCollection, AddPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
-import UploadPostsWithGif, {UploadPostsWithImage, handleFile} from '../../../../functions/Upload'
+import {addPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
+import uploadPostsWithGif, {uploadPostsWithImage, handleFile} from '../../../../functions/Upload'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
@@ -40,12 +37,12 @@ function MessageSender() {
     {/* Submit differently if file is uploaded */}
     if (imageUrl) {
       if(fileType === 'image/gif') {        
-        UploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
+        uploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
       } else {            
-        UploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
+        uploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
       }              
     } else {              
-        AddPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
+        addPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
       } 
       resetState();            
   } 

@@ -8,9 +8,9 @@ import DisplayComments from './displaycomments/DisplayComments'
 import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
-import DeleteFromFirebaseCollection from '../../../../functions/Delete'
-import UpdatePostFav, {UpdatePostWithNoAttachment} from '../../../../functions/Update'
-import UploadPostsWithGif, {UploadPostsWithImage, handleFile} from '../../../../functions/Upload'
+import deleteFromFirebaseCollection from '../../../../functions/Delete'
+import updatePostFav, {updatePostWithNoAttachment} from '../../../../functions/Update'
+import uploadPostsWithGif, {uploadPostsWithImage, handleFile} from '../../../../functions/Upload'
 import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
 import PostHeader from './postheader/PostHeader'
@@ -47,7 +47,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const addToFavourite = (e) => {
     e.preventDefault()
     setFav(!fav)
-    UpdatePostFav('posts', id, fav)
+    updatePostFav('posts', id, fav)
   }
 
   const resetState = () => {
@@ -60,7 +60,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
   const deleteThis = (id) => {
     setUpdatePostPopUp(false)
-    DeleteFromFirebaseCollection('posts',id)
+    deleteFromFirebaseCollection('posts',id)
   }
 
   const editThis = () => {
@@ -68,15 +68,15 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   }
 
   const postWithGif = () => {
-    UploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+    uploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
   }
 
   const postWithImage = () => {
-    UploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+    uploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
   }
 
   const postWithNoAttachment = () => {
-    UpdatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
+    updatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
   }
 
   {/* update the post with new message */}

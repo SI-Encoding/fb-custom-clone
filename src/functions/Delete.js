@@ -1,6 +1,6 @@
 import db from '../firebase/firebase'
 
-function DeleteFromFirebaseCollection(collection, id) {
+function deleteFromFirebaseCollection(collection, id) {
     db.collection(collection).doc(id).delete().then(() => {
         console.log('comment successfully deleted ')
     }).catch((error) => {
@@ -8,7 +8,7 @@ function DeleteFromFirebaseCollection(collection, id) {
     })
 }
 
-function DeletePostCommentFromFirebaseCollection (posts, comments, postId, commentId) {
+function deletePostCommentFromFirebaseCollection (posts, comments, postId, commentId) {
     db.collection(posts).doc(postId).collection(comments).doc(commentId).delete().then(() => {
         console.log('comment successfully deleted ')
     }).catch((error) => {
@@ -16,5 +16,5 @@ function DeletePostCommentFromFirebaseCollection (posts, comments, postId, comme
     })
 }
 
-export default DeleteFromFirebaseCollection;
-export {DeletePostCommentFromFirebaseCollection}
+export default deleteFromFirebaseCollection;
+export {deletePostCommentFromFirebaseCollection}

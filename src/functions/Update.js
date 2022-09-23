@@ -1,13 +1,13 @@
 import db from '../firebase/firebase'
 import firebase from 'firebase/compat'
 
-function UpdatePostFav(posts, id, fav) {
+function updatePostFav(posts, id, fav) {
     db.collection(posts).doc(id).update({
         favourite: fav
     })  
 }
 
-function UpdatePostWithGif(posts, id, input, userPicture, userName, downloadURL, fav, gif) {
+function updatePostWithGif(posts, id, input, userPicture, userName, downloadURL, fav, gif) {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
@@ -20,7 +20,7 @@ function UpdatePostWithGif(posts, id, input, userPicture, userName, downloadURL,
   })
 }
 
-function UpdatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif) {
+function updatePostWithImage(posts, id, input, userPicture, userName, downloadURL, fav, gif) {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
@@ -33,7 +33,7 @@ function UpdatePostWithImage(posts, id, input, userPicture, userName, downloadUR
   })
 }
 
-function UpdatePostWithNoAttachment(posts, id, input, userPicture, userName, fav, gif) {
+function updatePostWithNoAttachment(posts, id, input, userPicture, userName, fav, gif) {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
@@ -45,7 +45,7 @@ function UpdatePostWithNoAttachment(posts, id, input, userPicture, userName, fav
   })
 }
 
-function UpdatePostComment(posts, postId, comments, commentId, comment, usernameName, usernamePicture) {
+function updatePostComment(posts, postId, comments, commentId, comment, usernameName, usernamePicture) {
   db.collection(posts).doc(postId).collection(comments).doc(commentId).update({
     message: comment,
     time: firebase.firestore.FieldValue.serverTimestamp(),
@@ -54,6 +54,6 @@ function UpdatePostComment(posts, postId, comments, commentId, comment, username
 })
 }
 
-export default UpdatePostFav
+export default updatePostFav
 
-export {UpdatePostWithGif, UpdatePostWithImage, UpdatePostWithNoAttachment, UpdatePostComment}
+export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment}

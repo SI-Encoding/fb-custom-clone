@@ -7,8 +7,8 @@ import './Comment.css'
 import '../../writeacomment/WriteAComment.css'
 import db from '../../../../../../firebase/firebase'
 import firebase from 'firebase/compat'
-import {DeletePostCommentFromFirebaseCollection} from '../../../../../../functions/Delete'
-import {UpdatePostComment} from '../../../../../../functions/Update'
+import {deletePostCommentFromFirebaseCollection} from '../../../../../../functions/Delete'
+import {updatePostComment} from '../../../../../../functions/Update'
 
 const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref) => {
     const [displayMenuItems, setDisplayMenuItems] = useState(false)
@@ -20,12 +20,12 @@ const  Comment = forwardRef(({postId, commentId,message,time,user,userImage},ref
     const editComment = (e) => {
        setEditPop(!editPop)
        e.preventDefault()
-       UpdatePostComment('posts', postId, 'comments', commentId, comment, username.name, username.picture)
+       updatePostComment('posts', postId, 'comments', commentId, comment, username.name, username.picture)
        setComment('')
     }
 
     const deleteComment = () => {
-        DeletePostCommentFromFirebaseCollection('posts', 'comments', postId, commentId)
+        deletePostCommentFromFirebaseCollection('posts', 'comments', postId, commentId)
     }
 
     return (
