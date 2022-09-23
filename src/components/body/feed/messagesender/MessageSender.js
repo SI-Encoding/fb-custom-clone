@@ -19,7 +19,7 @@ function MessageSender() {
   const [fav, setFav] = useState(false)
   const [imagePreview, setImagePreview] = useState(null)    
   const [imageUrl, setImageUrl] = useState(null)    
-  const [openPopup, setOpenPopup] = useState(false)    
+  const [popUp, setPopup] = useState(false)    
   const [fileName, setFileName] = useState(null)    
   const [fileType, setFileType] = useState(null)    
   const [error, setError] = useState(false)    
@@ -42,7 +42,7 @@ function MessageSender() {
       if(fileType === 'image/gif') {        
         UploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
       } else {            
-          UploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
+        UploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
       }              
     } else {              
         AddPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
@@ -52,8 +52,8 @@ function MessageSender() {
 
   useEffect( () => {            
     const detectOutside = e => {            
-      if (openPopup && popupRef.current && !popupRef.current.contains(e.target)) {            
-        setOpenPopup(false);            
+      if (popUp && popupRef.current && !popupRef.current.contains(e.target)) {            
+        setPopup(false);            
         setImageUrl(null);        
         setFileName(null);
         setImagePreview(null);    
@@ -64,9 +64,8 @@ function MessageSender() {
     return () => {
       window.removeEventListener('click', detectOutside )
     }        
-  },[openPopup])    
-
-                
+  },[popUp])    
+          
  return (               
   <div className = 'messageSender'>     
     <div className = 'messageSender__top'>        
@@ -87,7 +86,7 @@ function MessageSender() {
               setError(true)
               e.target.value = null;
             } else {               
-                handleFile(e, setImagePreview, setOpenPopup, openPopup, setImageUrl, setFileName, setFileType)       
+                handleFile(e, setImagePreview, setPopup, popUp, setImageUrl, setFileName, setFileType)       
             }
           } 
         }
@@ -113,12 +112,12 @@ function MessageSender() {
       </div>                
     </div>    
 
-    {openPopup && <div ref = {popupRef}>                
+    {popUp && <div ref = {popupRef}>                
       <PopupAttachment setFileType = {setFileType} 
         imagePreview = {imagePreview} 
         setImagePreview = {setImagePreview} 
-        setOpenPopup = {setOpenPopup} 
-        openPopup = {openPopup} 
+        setOpenPopup = {setPopup} 
+        openPopup = {popUp} 
         handleSubmit = {handleSubmit} 
         setImageUrl = {setImageUrl} 
         setFileName = {setFileName}/>                

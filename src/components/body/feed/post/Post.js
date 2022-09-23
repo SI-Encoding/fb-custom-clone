@@ -32,7 +32,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
   // State to manage popups
   const [updatePostPopUp, setUpdatePostPopUp] = useState(false)
-  const [popUpAttachmentPopUp, setPopUpAttachmentPopUp] = useState(false)
+  const [popUp, setPopUp] = useState(false)
   const [error, setError] = useState(false)
 
   // State to manage uploading files
@@ -62,7 +62,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
     setUpdatePostPopUp(false)
     DeleteFromFirebaseCollection('posts',id)
   }
-  
+
   const editThis = () => {
     setUpdatePostPopUp(true)
   }
@@ -171,21 +171,21 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
             setError={setError} 
             imageUrl={imageUrl}
             setImagePreview={setImagePreview}
-            setPopUpAttachmentPopUp={setPopUpAttachmentPopUp}
+            setPopUp={setPopUp}
             setImageUrl={setImageUrl}
             setFileName={setFileName}
             setFileType={setFileType}
-            popUpAttachmentPopUp={popUpAttachmentPopUp}
+            popUp={popUp}
           />
         }
 
         {/* render the popup used to upload preview of image */}
-        {popUpAttachmentPopUp && 
+        {popUp && 
           <PopupAttachment 
             imagePreview={imagePreview} 
             setImagePreview={setImagePreview} 
-            setOpenPopup={setPopUpAttachmentPopUp} 
-            openPopup={popUpAttachmentPopUp} 
+            setOpenPopup={setPopUp} 
+            openPopup={popUp} 
             handleSubmit={handleSubmit} 
             setImageUrl={setImageUrl} 
             setFileName={setFileName} 

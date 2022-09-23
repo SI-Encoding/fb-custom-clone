@@ -5,7 +5,23 @@ import MessageIcon from '@material-ui/icons/Message';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
-function UpdatePost({updatePostPopUp, setUpdatePostPopUp, input, setInput, handleFile, handleSubmit, setError, imageUrl, setImagePreview, setPopUpAttachmentPopUp, setImageUrl, setFileName, setFileType, popUpAttachmentPopUp}) {
+function UpdatePost(
+  {
+    updatePostPopUp, 
+    setUpdatePostPopUp, 
+    input, 
+    setInput, 
+    handleFile, 
+    handleSubmit, 
+    setError, 
+    imageUrl, 
+    setImagePreview, 
+    setPopUp, 
+    setImageUrl, 
+    setFileName, 
+    setFileType, 
+    popUp
+  }) {
     const user = useSelector((state) => (state.user))
     const popUpRef = useRef(null)
 
@@ -48,7 +64,7 @@ function UpdatePost({updatePostPopUp, setUpdatePostPopUp, input, setInput, handl
                     if (!fileTypeData.includes('image/')) {
                       setError(true)
                     } else {
-                        handleFile(e, setImagePreview, setPopUpAttachmentPopUp, popUpAttachmentPopUp, setImageUrl, setFileName, setFileType)
+                      handleFile(e, setImagePreview, setPopUp, popUp, setImageUrl, setFileName, setFileType)
                     }
                 }  
               }}

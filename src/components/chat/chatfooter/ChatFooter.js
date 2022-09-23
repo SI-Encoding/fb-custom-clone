@@ -3,7 +3,18 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import AddIcon from '@material-ui/icons/Add';
 import {handleFile} from '../../../functions/Upload'
 
-function ChatFooter({sendMessage, input, setInput, setFile, setPreviewFile, setFileName, setFileType, previewFile, autoSelect }) {
+function ChatFooter(
+  {
+    sendMessage, 
+    input, 
+    setInput, 
+    setFile, 
+    setPreviewFile, 
+    setFileName, 
+    setFileType, 
+    previewFile, 
+    autoSelect 
+  }) {
   const [openEmoji, setOpenEmoji] = useState(false)
   const [openPopup, setOpenPopup] = useState(false)
   const emojiRef = useRef()
