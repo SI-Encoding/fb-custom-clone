@@ -26,8 +26,15 @@
     color: var(--fb-theme-colour-blue);
 }
 
+.people_body {
+    flex-direction: column; 
+    display: inline; 
+    margin-top: 10px;
+}
+
 .add_friend_button {
     width: 122px;
+    margin-left: 36px;
     background-color: var(--fb-theme-colour-blue);
     color: #eff2f5;
     font-weight: 800;

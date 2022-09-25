@@ -33,7 +33,7 @@ function Login() {
             userId: userProfile.userId,
             username: userProfile.username,
             profilePic: userProfile.profilePic
-        })
+        }, { merge: true });
     }
     
 return (
