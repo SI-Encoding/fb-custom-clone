@@ -5,25 +5,41 @@ import db from '../../../../firebase/firebase'
 
 export default function People({usersId ,id, profilePic, username, friends}) {
 
-    console.log(friends)
-    const addFriend = () => {
-      
-      db.collection('users').doc(usersId).set({
-        friends: {[id]: 'Accept Request'}
-      }, {merge: 'true'})
-      db.collection('users').doc(id).set({
-        friends: {[usersId]: 'Friend Request Sent'}
-      }, {merge: 'true'})
-
+    const request = () => {
+      switch(friends){
+        case 'Accept Request':
+           db.collection('users').doc(usersId).set({
+                friends: {[id]: 'Remove'}
+            }, {merge: 'true'})
+           db.collection('users').doc(id).set({
+                friends: {[usersId]: 'Remove'}
+            }, {merge: 'true'})
+            break;
+        case 'Remove':
+            db.collection('users').doc(usersId).set({
+                friends: {[id]: 'Add Friend'}  
+            }, {merge: 'true'})        
+            db.collection('users').doc(id).set({        
+                friends: {[usersId]: 'Add Friend'}     
+            }, {merge: 'true'})        
+            break;
+        default:
+            db.collection('users').doc(usersId).set({
+                friends: {[id]: 'Accept Request'}
+        }, {merge: 'true'})
+            db.collection('users').doc(id).set({
+                friends: {[usersId]: 'Friend Request Sent'}
+        }, {merge: 'true'})
+            break;
+      }
     }
 
-    
   return (
     <div>
         <div className="people_container"> 
             {profilePic && <Avatar src={profilePic}/>}
             <h4 className="person_username">{username}</h4>
-            <button className="add_friend_button" onClick={()=> addFriend()}>
+            <button className="add_friend_button" onClick={()=> request()}>
                 <div>
                     <PersonAddIcon/> {friends !== undefined? friends: 'Add Friend'}
                 </div>
