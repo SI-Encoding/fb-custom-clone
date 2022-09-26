@@ -1,17 +1,20 @@
-import React,{useEffect, useState} from 'react'
+import React from 'react'
 import {Avatar} from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import db from '../../../../firebase/firebase'
 
-export default function People({usersId ,id, profilePic, username, invites, setInvites, setRender}) {
+export default function People({usersId ,id, profilePic, username, friends}) {
 
+    console.log(friends)
     const addFriend = () => {
-        db.collection('friends').doc(usersId).set({
-            [id]: 'Friend Request Sent'
-        }, { merge: true })
-  
-      setInvites(invites.set(id,'Friend Request Sent'))
-      setRender(Math.floor(Math.random() * 5))
+      
+      db.collection('users').doc(usersId).set({
+        friends: {[id]: 'Accept Request'}
+      }, {merge: 'true'})
+      db.collection('users').doc(id).set({
+        friends: {[usersId]: 'Friend Request Sent'}
+      }, {merge: 'true'})
+
     }
 
     
@@ -22,7 +25,7 @@ export default function People({usersId ,id, profilePic, username, invites, setI
             <h4 className="person_username">{username}</h4>
             <button className="add_friend_button" onClick={()=> addFriend()}>
                 <div>
-                 <PersonAddIcon/> {invites.get(id) !== undefined? invites.get(id): 'Add Friend'}
+                    <PersonAddIcon/> {friends !== undefined? friends: 'Add Friend'}
                 </div>
             </button>
             {/* <button className='remove_person_button'>
