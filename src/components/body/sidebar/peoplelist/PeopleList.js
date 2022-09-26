@@ -42,7 +42,7 @@ export default function PeopleList() {
             id={person.id}
             profilePic={person.data.profilePic}
             username={person.data.username}
-            friends={checkForKey(person.data.friends, user.id)}
+            status={checkForKey(person.data.friends, user.id)}
         />
        ))
        } 

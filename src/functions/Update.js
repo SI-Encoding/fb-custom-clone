@@ -54,6 +54,33 @@ const updatePostComment = (posts, postId, comments, commentId, comment, username
   })
 }
 
+const addFriend = (usersId, id, users) => {
+  db.collection(users).doc(usersId).set({
+            friends: {[id]: 'Accept Request'}
+    }, {merge: 'true'})
+        db.collection(users).doc(id).set({
+            friends: {[usersId]: 'Friend Request Sent'}
+    }, {merge: 'true'})
+}
+
+const acceptRequest = (usersId, id, users) => {
+  db.collection(users).doc(usersId).set({
+            friends: {[id]: 'Remove'}
+        }, {merge: 'true'})
+       db.collection(users).doc(id).set({
+            friends: {[usersId]: 'Remove'}
+        }, {merge: 'true'})
+}
+
+const removeFriend = (usersId, id, users) => {
+  db.collection(users).doc(usersId).set({
+        friends: {[id]: 'Add Friend'}  
+    }, {merge: 'true'})        
+    db.collection(users).doc(id).set({        
+        friends: {[usersId]: 'Add Friend'}     
+    }, {merge: 'true'})  
+}
+
 export default updatePostFav
 
-export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment}
+export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment, addFriend, acceptRequest, removeFriend}

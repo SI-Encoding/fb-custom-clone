@@ -64,7 +64,7 @@
 .remove_person_button {
     width: 80px;
     height: 24px;
-    margin-left: 5px;
+    margin-left: auto;
     font-weight: 800;
     padding: 0;
     border: #ccd0d5;
