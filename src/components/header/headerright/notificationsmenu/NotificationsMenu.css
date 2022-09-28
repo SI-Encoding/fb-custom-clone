@@ -1,0 +1,55 @@
+.notifications_container {
+    position: absolute;
+}
+
+.header_menu_signin_nav_arrow {
+    top: 36px;
+    left: 36px;
+    border-style: solid;
+    border-width: 9px;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom: 9px solid #fff;
+    width: 0;
+    height: 0;
+    position: absolute;
+ }
+ 
+ .header-menu-signin-nav-inner-arrow {
+    border-style: solid;
+    border-width: 9px;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom: 9px solid #fff;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 1px;
+    left: -9px;
+ }
+ 
+ .header-menu-signin-nav-tooltip {
+    text-align: center;
+ }
+
+ .friends_request_container {
+    width: fit-content; /*width: 311px;*/
+    background: white;
+    position: absolute;
+    height: 50px;
+    top: 45px;
+    right: -115px
+ }
+
+ .friends_request_container > h4{
+    margin-left: 8px;
+    margin-top: 6px;
+ }
+
+
+
+ .friends_request_container > div > div > .people_container > h4 {
+    color: black;
+ }

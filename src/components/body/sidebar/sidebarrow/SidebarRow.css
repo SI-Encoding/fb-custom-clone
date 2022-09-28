@@ -17,7 +17,7 @@
 
 .person_username {
     text-overflow: ellipsis;
-    max-width: 65px;
+    max-width: 50px;/*max-width: 65px;*/
     overflow:hidden;
 }
 
