@@ -1,12 +1,11 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {Avatar} from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {addFriend, acceptRequest, removeFriend} from '../../../../functions/Update'
-import {useDispatch} from 'react-redux';
-import {set_chat_user_info} from '../../../../rootReducer'
+import db from '../../../../firebase/firebase'
 
 export default function People({usersId ,id, profilePic, username, status}) {
-    const dispatch = useDispatch()
+    const [latestMessage,setLatestMessage] = useState('')
 
     const request = () => {
       switch(status){
@@ -16,29 +15,60 @@ export default function People({usersId ,id, profilePic, username, status}) {
         case 'Remove':      
             removeFriend(usersId, id, 'users')
             break;
-        case 'Message':
-            dispatch({
-                type: set_chat_user_info,
-                chatUserInfo: {id:id, username: username, profilePic: profilePic}
-            })
-            break;
         default:
             addFriend(usersId, id, 'users')
             break;
       }
     }
 
+    useEffect(()=> {
+      db.collection('chat').doc(usersId).collection('messages').doc(id).collection('message').orderBy('time','desc')
+      .limit(1).get().then((doc) => {setLatestMessage({message:checkForMessage(doc), time: checkForTimestamp(doc)})})
+
+
+      const checkForMessage = (doc) => {
+        try {
+            if(doc.docs[0]._delegate !== undefined) {
+              return doc.docs[0]._delegate._document.data.value.mapValue.fields.message.stringValue;
+            }
+        } catch(e) {
+            console.error(e)
+        }
+      }
+
+      const checkForTimestamp = (doc) => {
+        try {
+          let str = doc.docs[0]._delegate._document.data.value.mapValue.fields.time.timestampValue;
+          
+          let time = str.slice(str.indexOf('T') + 1, str.lastIndexOf(':'))
+
+            if(doc.docs[0]._delegate !== undefined) {
+              console.log(time)
+              return time
+            }
+        } catch(e) {
+            console.error(e)
+        }
+      }
+    },[])
+ 
   return (
-    <div>
+    <>
         <div className="people_container"> 
             {profilePic && <Avatar src={profilePic}/>}
             <h4 className="person_username">{username}</h4>
-            <button className={status === "Remove" ? "remove_person_button" : "add_friend_button"} onClick={()=> request()}>
+            {status === 'Message' ?  
+              <div className="latest_message_container">
+                <div className="latest_message"><span>{latestMessage.message}</span></div>
+                <div className="chat_time">{latestMessage.time}</div>
+              </div> 
+              :
+              <button className={status === "Remove" ? "remove_person_button" : "add_friend_button"} onClick={()=> request()}>
                 <div>
                   {status === "Remove" ?  ' ' : <PersonAddIcon/>}   {status !== undefined? status: 'Add Friend'}
                 </div>
-            </button>
+            </button>}     
         </div>
-    </div>
+    </>
   )
 }

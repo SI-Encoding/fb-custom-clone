@@ -52,7 +52,6 @@ const addMessageWithNoFilesToFirebaseCollection = (input, username, userId, chat
         time: firebase.firestore.FieldValue.serverTimestamp(),
         userId: userId
     }).then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
         db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').doc(docRef.id).set({
             message: input,
             username: username,

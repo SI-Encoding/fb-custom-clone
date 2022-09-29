@@ -1,16 +1,16 @@
 import React, {useState,useEffect} from 'react'
 import './ChatList.css'
 import db from '../../../firebase/firebase'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import People from '../../body/sidebar/peoplelist/People'
+import {set_chat_user_info} from '../../../rootReducer'
 
 export default function ChatList() {
     
       const user = useSelector((state) => state.user)
-      const [notifications, setNotifications] = useState([])
       const [requests, setRequests] = useState([])  
+      const dispatch = useDispatch()
     
-      let activeRequests = []
       useEffect(() => {
         
         db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
@@ -23,9 +23,7 @@ export default function ChatList() {
       );
     
       const resetState = () => {
-          setNotifications([])
           setRequests([])
-          activeRequests = []
       }
     
       const checkForId = (person, id) => {
@@ -34,7 +32,7 @@ export default function ChatList() {
               return id;
             }
         } catch(e) {
-    
+            console.error(e)
         }
       }
       
@@ -42,8 +40,6 @@ export default function ChatList() {
         try{
             if(person.friends[id] !== undefined) {
                 if(person.friends[id] === 'Accept Request') {
-                  activeRequests.push(person.friends[id])
-                  setNotifications(activeRequests)
                   return person
                 }
             }
@@ -52,10 +48,17 @@ export default function ChatList() {
         }
     }},[])
 
+  const fetchChatInfo = (id, username, profilePic) => {
+      dispatch({
+        type: set_chat_user_info,
+        chatUserInfo: {id:id, username: username, profilePic: profilePic}
+    })
+  } 
+
   return (
-    <div className="chat_list">
+    <div className="chat_list" >
          {requests.map((person) => (
-                    <div style={{background:'white'}}>
+                    <div className="chat_item" onClick={() => fetchChatInfo(person.id, person.username, person.profilePic)}>
                     { person.data.friends[user.id] === 'Remove' &&
                         <People
                             usersId={user.id}
@@ -69,7 +72,6 @@ export default function ChatList() {
                     </div>
                 ))
                 }  
-
     </div>
   )
 }

@@ -2,6 +2,7 @@
     display:flex;
     align-items: center;
     padding: 10px;
+   
 }
 
 .sidebarrow_container:hover {
@@ -17,7 +18,8 @@
 
 .person_username {
     text-overflow: ellipsis;
-    max-width: 50px;/*max-width: 65px;*/
+    max-width: 200px;
+    width: 150px;
     overflow:hidden;
 }
 
@@ -78,4 +80,28 @@
 
 .remove_person_button:hover {
     cursor: pointer;
+}
+
+.chat_time {
+    margin-left: auto;
+}
+
+.latest_message_container {
+    display: flex;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+.latest_message {
+    display: flex;
+    max-width: 130px;
+    max-height: 21px;
+}
+
+.latest_message > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
