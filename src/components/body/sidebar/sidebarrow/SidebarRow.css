@@ -90,7 +90,6 @@
     display: flex;
     width: -webkit-fill-available;
     width: -moz-available;
-    width: fill-available;
     margin-left: 20px;
     white-space: nowrap;
 }
