@@ -7,7 +7,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ChatMessage from './chatmessage/ChatMessage'
 import ChatFooter from '../chatfooter/ChatFooter'
 import {uploadBytes, getDownloadURL} from 'firebase/storage'
-import DeleteFromFirebaseCollection from '../../../functions/Delete'
+import {deleteMessageFromFirebaseCollection} from '../../../functions/Delete'
 import addMessageWithImageToFirebaseCollection from '../../../functions/Add'
 import {addMessageWithOtherFilesToFirebaseCollection, addMessageWithNoFilesToFirebaseCollection} from '../../../functions/Add'
 
@@ -40,7 +40,7 @@ function ChatBody({chatUserInfo}) {
   }
 
   const deleteComment = (id) => {
-    DeleteFromFirebaseCollection('chat', id)
+    deleteMessageFromFirebaseCollection('chat', user.id, 'messages', 'message', id, chatUserInfo)
   }
 
   const sendMessageWithImage = () => {

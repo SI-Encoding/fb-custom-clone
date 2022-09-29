@@ -8,14 +8,18 @@ const addMessageWithImageToFirebaseCollection = (input, username, downloadURL, u
         time: firebase.firestore.FieldValue.serverTimestamp(),
         img: downloadURL,
         userId: userId
-    })
-    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
-        message: input,
-        username: username,
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-        img: downloadURL,
-        userId: userId
-    })
+    }).then((docRef) => {
+        db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').doc(docRef.id).set({
+            message: input,
+            username: username,
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            img: downloadURL,
+            userId: userId
+        }, {merge:'true'})
+    }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+    
 }
 
 const addMessageWithOtherFilesToFirebaseCollection = (input, username, fileName, downloadURL, userId, chatUserInfo) => {
@@ -26,15 +30,19 @@ const addMessageWithOtherFilesToFirebaseCollection = (input, username, fileName,
         url: downloadURL,
         fileName: fileName,
         userId: userId
-    })
-    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
-        message: input,
-        username: username,
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-        url: downloadURL,
-        fileName: fileName,
-        userId: userId
-    })
+    }).then((docRef) => {
+        db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').doc(docRef.id).set({
+            message: input,
+            username: username,
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            url: downloadURL,
+            fileName: fileName,
+            userId: userId
+        }, {merge: 'true'})
+    }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+   
 }
 
 const addMessageWithNoFilesToFirebaseCollection = (input, username, userId, chatUserInfo) => {
@@ -43,13 +51,19 @@ const addMessageWithNoFilesToFirebaseCollection = (input, username, userId, chat
         username: username,
         time: firebase.firestore.FieldValue.serverTimestamp(),
         userId: userId
+    }).then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').doc(docRef.id).set({
+            message: input,
+            username: username,
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            userId: userId
+        }, {merge: 'true'})
     })
-    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
-        message: input,
-        username: username,
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: userId
-    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+    
 }
 
 const addPostWithGifToFirebaseCollection = (input, userPicture, userName, downloadURL, fav, gif, userId) => {
