@@ -11,7 +11,8 @@ import DeleteFromFirebaseCollection from '../../../functions/Delete'
 import addMessageWithImageToFirebaseCollection from '../../../functions/Add'
 import {addMessageWithOtherFilesToFirebaseCollection, addMessageWithNoFilesToFirebaseCollection} from '../../../functions/Add'
 
-function ChatBody() {
+
+function ChatBody({chatUserInfo}) {
   const user = useSelector((state) => (state.user))
   const [input, setInput] = useState('')
   const [chat, setChat] = useState([])
@@ -46,7 +47,7 @@ function ChatBody() {
     uploadBytes(store, file).then(snapshot => {
       return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
-        addMessageWithImageToFirebaseCollection(input,user.name,downloadURL, user.id)
+        addMessageWithImageToFirebaseCollection(input, user.name, downloadURL, user.id, chatUserInfo)
       })
   }
 
@@ -54,21 +55,21 @@ function ChatBody() {
     uploadBytes(store, file).then(snapshot => {
       return getDownloadURL(snapshot.ref)
       }).then(downloadURL => {
-        addMessageWithOtherFilesToFirebaseCollection(input,user.name,fileName,downloadURL,user.id)
+        addMessageWithOtherFilesToFirebaseCollection(input, user.name, fileName, downloadURL, user.id, chatUserInfo)
       })
   }
 
   const sendMessageWithNoFiles = () => {
-    addMessageWithNoFilesToFirebaseCollection(input,user.name,user.id)
+    addMessageWithNoFilesToFirebaseCollection(input, user.name, user.id, chatUserInfo)
   }
  
   useEffect(() => {
-    db.collection('chat').orderBy('time','asc').onSnapshot((snapshot) => {
-      setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
-        if (messageRef.current) {
-          messageRef.current.scrollTop = messageRef.current.scrollHeight;  
-        }
-    })   
+    db.collection('chat').doc(user.id).collection('messages').doc(chatUserInfo.id).collection('message').orderBy('time','asc').onSnapshot((snapshot) => {
+        setChat(snapshot.docs.map((doc) => ({id:doc.id, data:doc.data()}))) 
+          if (messageRef.current) {
+            messageRef.current.scrollTop = messageRef.current.scrollHeight;  
+          }
+        })
     autoSelect()       
   },[])
 
@@ -86,6 +87,7 @@ function ChatBody() {
       resetState();
   }
  
+    console.log(chat)
   return (
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>
@@ -107,8 +109,8 @@ function ChatBody() {
           <div className='preview_delete' onClick={()=> {setPreviewFile(null); autoSelect();}}> <CancelIcon/> </div>
           {fileType.includes('image') ?<img src={previewFile} className='preview_image' alt={fileName}/>: <a href={fileName}>{fileName}</a> }
         </div>
-        }        
-        </div> 
+        }       
+        </div>  
       <ChatFooter 
         autoSelect={autoSelect} 
         previewFile={previewFile} 

@@ -11,7 +11,7 @@ function ChatHeader({expand, expandMenu}) {
                 <span className='status'/>
             </div>
             <div>
-            <p className='title'>Public Chat</p>
+            <p className='title'>Messenger</p>
             </div>
             <div className='toobar_enlarger_button'>
             {expand? <MaximizeIcon onClick={expandMenu} className='minus'/> :<CheckBoxOutlineBlankIcon onClick={expandMenu} className='max'/>}
@@ -21,8 +21,3 @@ function ChatHeader({expand, expandMenu}) {
 }
 
 export default ChatHeader
-
-
-    
-
-

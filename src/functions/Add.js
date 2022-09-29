@@ -1,8 +1,15 @@
 import firebase from 'firebase/compat'
 import db from '../firebase/firebase'
 
-const addMessageWithImageToFirebaseCollection = (input, username, downloadURL, userId) => {
-    db.collection('chat').add({
+const addMessageWithImageToFirebaseCollection = (input, username, downloadURL, userId, chatUserInfo) => {
+    db.collection('chat').doc(userId).collection('messages').doc(chatUserInfo.id).collection('message').add({
+        message: input,
+        username: username,
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        img: downloadURL,
+        userId: userId
+    })
+    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
         message: input,
         username: username,
         time: firebase.firestore.FieldValue.serverTimestamp(),
@@ -11,8 +18,16 @@ const addMessageWithImageToFirebaseCollection = (input, username, downloadURL, u
     })
 }
 
-const addMessageWithOtherFilesToFirebaseCollection = (input, username, fileName, downloadURL, userId) => {
-    db.collection('chat').add({
+const addMessageWithOtherFilesToFirebaseCollection = (input, username, fileName, downloadURL, userId, chatUserInfo) => {
+    db.collection('chat').doc(userId).collection('messages').doc(chatUserInfo.id).collection('message').add({
+        message: input,
+        username: username,
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        url: downloadURL,
+        fileName: fileName,
+        userId: userId
+    })
+    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
         message: input,
         username: username,
         time: firebase.firestore.FieldValue.serverTimestamp(),
@@ -22,8 +37,14 @@ const addMessageWithOtherFilesToFirebaseCollection = (input, username, fileName,
     })
 }
 
-const addMessageWithNoFilesToFirebaseCollection = (input, username, userId) => {
-    db.collection('chat').add({
+const addMessageWithNoFilesToFirebaseCollection = (input, username, userId, chatUserInfo) => {
+    db.collection('chat').doc(userId).collection('messages').doc(chatUserInfo.id).collection('message').add({
+        message: input,
+        username: username,
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        userId: userId
+    })
+    db.collection('chat').doc(chatUserInfo.id).collection('messages').doc(userId).collection('message').add({
         message: input,
         username: username,
         time: firebase.firestore.FieldValue.serverTimestamp(),

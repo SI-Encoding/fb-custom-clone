@@ -2,7 +2,11 @@ import React from 'react'
 import {Avatar} from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {addFriend, acceptRequest, removeFriend} from '../../../../functions/Update'
+import {useDispatch} from 'react-redux';
+import {set_chat_user_info} from '../../../../rootReducer'
+
 export default function People({usersId ,id, profilePic, username, status}) {
+    const dispatch = useDispatch()
 
     const request = () => {
       switch(status){
@@ -11,6 +15,12 @@ export default function People({usersId ,id, profilePic, username, status}) {
             break;
         case 'Remove':      
             removeFriend(usersId, id, 'users')
+            break;
+        case 'Message':
+            dispatch({
+                type: set_chat_user_info,
+                chatUserInfo: {id:id, username: username, profilePic: profilePic}
+            })
             break;
         default:
             addFriend(usersId, id, 'users')

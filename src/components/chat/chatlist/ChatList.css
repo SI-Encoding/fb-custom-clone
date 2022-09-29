@@ -1,0 +1,14 @@
+.chat_list {
+    bottom: 0;
+    right: 2px;
+    width:367px;
+    margin-left: 2px;
+    height: 544px;
+    background-color:#c8c9cb;
+    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2); 
+    overflow-y:scroll;
+    overflow-x: hidden;
+    padding-bottom: 5px;
+    position: relative;
+    display: inline-block;
+}
