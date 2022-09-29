@@ -23,7 +23,7 @@ export default function People({usersId ,id, profilePic, username, status}) {
 
     useEffect(()=> {
       db.collection('chat').doc(usersId).collection('messages').doc(id).collection('message').orderBy('time','desc')
-      .limit(1).get().then((doc) => {setLatestMessage({message:checkForMessage(doc), time: checkForTimestamp(doc)})})
+      .limit(1).onSnapshot((doc) => {setLatestMessage({message:checkForMessage(doc), time: checkForTimestamp(doc)})})
 
 
       const checkForMessage = (doc) => {
