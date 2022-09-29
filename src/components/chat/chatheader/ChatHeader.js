@@ -15,7 +15,7 @@ function ChatHeader({expand, expandMenu}) {
             </div>
             <div className='toobar_enlarger_button'>
             {expand? <MaximizeIcon onClick={expandMenu} className='minus'/> :<CheckBoxOutlineBlankIcon onClick={expandMenu} className='max'/>}
-            </div>            
+            </div>  
         </div>   
     )
 }

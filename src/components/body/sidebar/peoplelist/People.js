@@ -43,7 +43,6 @@ export default function People({usersId ,id, profilePic, username, status}) {
           let time = str.slice(str.indexOf('T') + 1, str.lastIndexOf(':'))
 
             if(doc.docs[0]._delegate !== undefined) {
-              console.log(time)
               return time
             }
         } catch(e) {

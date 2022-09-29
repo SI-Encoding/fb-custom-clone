@@ -88,7 +88,6 @@ function ChatBody({chatUserInfo}) {
       resetState();
   }
  
-    console.log(chat)
   return (
     <>
       <div ref={messageRef} id='chat_body' className='chat_body'>

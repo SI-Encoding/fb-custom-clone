@@ -58,7 +58,7 @@ export default function ChatList() {
   return (
     <div className="chat_list" >
          {requests.map((person) => (
-                    <div className="chat_item" onClick={() => fetchChatInfo(person.id, person.username, person.profilePic)}>
+                    <div className="chat_item" onClick={() => fetchChatInfo(person.id, person.data.username, person.data.profilePic)}>
                     { person.data.friends[user.id] === 'Remove' &&
                         <People
                             usersId={user.id}
