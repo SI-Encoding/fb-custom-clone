@@ -32,7 +32,8 @@ function Login() {
         db.collection('users').doc(userProfile.userId).set({
             userId: userProfile.userId,
             username: userProfile.username,
-            profilePic: userProfile.profilePic
+            profilePic: userProfile.profilePic,
+            online: true
         }, { merge: true });
     }
     
