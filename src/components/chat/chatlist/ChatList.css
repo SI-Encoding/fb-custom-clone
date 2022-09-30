@@ -13,7 +13,7 @@
     display: inline-block;
 }
 
-.chat_item {
+.chat_item, .chat_header_info{
     background: white;
     border-bottom: 1px solid #d9dadd;
 }

@@ -2,11 +2,15 @@
     bottom: 0;
     right: 2px;
     align-items: center;
-    width:348px;
-    height:15px;
+    width: 348px;
+    height: 15px;
     background-color: var(--fb-theme-colour-chat-toolbar);
     padding: 10px;
-    display:flex;
+    display: flex;
+}
+
+.chat_header > .MuiSvgIcon-root{
+    color:white;
 }
 
 .chat_header.active {
@@ -14,38 +18,38 @@
     right: 2px;
     bottom: 0;
     align-items: center;
-    width:348px;
-    height:15px;
+    width: 348px;
+    height: 15px;
     background-color: var(--fb-theme-colour-chat-toolbar);
-    display:flex;
+    display: flex;
 }
 
 .toolbar_status_logo {
     background-color: var(--fb-theme-colour-chat-toolbar);
     padding: 10px;
-    display:flex;
+    display: flex;
     top: 100px;
 }
 
 .toobar_enlarger_button {
-    display:flex;
+    display: flex;
     margin-left: auto;
 }
 .max {
-    color: #fff;
+    color:#fff;
 }
 
 .minus {
-    color: #fff;
+    color:#fff;
     margin-top: 7.5px;
 }
 
 .minus:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .max:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .status {
@@ -60,5 +64,5 @@
 .title {
     color: var(--fb-theme-colour-white);
     text-shadow: 1px 1px 2px, 0 0 25px blue, 0 0 5px darkblue;
+    margin-left: 10px;
 }
- 
