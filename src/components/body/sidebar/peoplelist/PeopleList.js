@@ -43,6 +43,7 @@ export default function PeopleList() {
             profilePic={person.data.profilePic}
             username={person.data.username}
             status={checkForKey(person.data.friends, user.id)}
+            online={person.data.online}
         />
        ))
        } 

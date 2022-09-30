@@ -25,7 +25,6 @@
 }
 
 .toolbar_status_logo {
-    background-color: var(--fb-theme-colour-chat-toolbar);
     padding: 10px;
     display: flex;
     top: 100px;
@@ -52,7 +51,7 @@
     cursor: pointer;
 }
 
-.status {
+.status-online {
     height: 12px;
     width: 12px;
     background-color: #40d421;
@@ -60,6 +59,15 @@
     display: inline-block;
     margin-right: 10px;
   }
+
+.status-offline {
+    height: 12px;
+    width: 12px;
+    background-color: #f44336;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
 
 .title {
     color: var(--fb-theme-colour-white);

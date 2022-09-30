@@ -8,9 +8,6 @@ function ChatHeader({expand, expandMenu}) {
 
     return (
         <div className={`chat_header ${expand ? 'active' : 'inactive'}`}>
-            {/* <div className='toolbar_status_logo'>
-                <span className='status'/>
-            </div> */}
             <ChatIcon/>
             <div>
             <p className='title'>Chat</p>

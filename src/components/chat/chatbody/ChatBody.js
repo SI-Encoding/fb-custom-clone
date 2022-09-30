@@ -70,7 +70,6 @@ function ChatBody({chatUserInfo}) {
             messageRef.current.scrollTop = messageRef.current.scrollHeight;  
           }
         })
-        console.log(chat[chat.length-1])
     autoSelect()       
   },[])
 

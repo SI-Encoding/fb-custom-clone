@@ -3,8 +3,9 @@ import {Avatar} from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {addFriend, acceptRequest, removeFriend} from '../../../../functions/Update'
 import db from '../../../../firebase/firebase'
+import PeopleActivity from './PeopleActivity';
 
-export default function People({usersId ,id, profilePic, username, status}) {
+export default function People({usersId ,id, profilePic, username, status, online}) {
     const [latestMessage,setLatestMessage] = useState('')
 
     const request = () => {
@@ -50,10 +51,11 @@ export default function People({usersId ,id, profilePic, username, status}) {
         }
       }
     },[])
- 
   return (
     <>
         <div className="people_container"> 
+            {status === 'Remove' && <PeopleActivity online={online}/>}
+           
             {profilePic && <Avatar src={profilePic}/>}
             <h4 className="person_username">{username}</h4>
             {status === 'Message' ?  

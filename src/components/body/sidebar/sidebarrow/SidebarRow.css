@@ -23,6 +23,14 @@
     overflow:hidden;
 }
 
+.person_online {
+    color: #00b0ff;
+}
+
+.person_offline {
+    color: #f44336;
+}
+
 .sidebarrow_container > .MuiSvgIcon-root, .people_container > .MuiSvgIcon-root{
     font-size: xx-large;
     color: var(--fb-theme-colour-blue);
