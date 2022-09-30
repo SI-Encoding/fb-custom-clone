@@ -23,7 +23,7 @@ export default function PostOption({addToFavourite, favourite, setWriteComment, 
             text: <p>Comment</p>
         },
         {
-            func: '',
+            func: () => {},
             class: '',
             icon: <NearMeIcon/>,
             text: <p>Share</p>

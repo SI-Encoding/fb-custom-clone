@@ -3,18 +3,18 @@ import { useSelector } from 'react-redux';
 import './NotificationsMenu.css'
 import People from '../../../body/sidebar/peoplelist/People';
 
-export default function NotificationsMenu({requests, notifications, setMenu}) {
+export default function NotificationsMenu({requests, notifications, setNotificationMenu, notificationsRef}) {
     const user = useSelector((state) => state.user)
 
     useEffect(()=> {
 
         if (notifications.length === 0) {
-            setMenu(false)
+            setNotificationMenu(false)
         }
     },[notifications])
    
   return (
-    <div className="notifications_container">
+    <div className="notifications_container" ref={notificationsRef}>
         { notifications.length !== 0 && 
             <>
                 <div className="header_menu_signin_nav_arrow"></div>

@@ -15,7 +15,9 @@ function Header() {
     const [otherUsersPostsPage, setOtherUsersPostsPage] = useState(false)
     const [logoutPopup, setLogoutPopup] = useState(false)
     const signOutRef = useRef()
-    
+    const notificationsRef = useRef()
+    const [notificationMenu, setNotificationMenu] = useState(false)
+
     const homePageActivated = () => {
         setHomePage(true)
         setFlagPage(false)
@@ -63,9 +65,17 @@ function Header() {
             }
         }
 
+        const notificationMenuUpdate = e => {
+            if (notificationMenu && notificationsRef.current && !notificationsRef.current.contains(e.target)){
+                setNotificationMenu(!notificationMenu)
+            }
+        }
+
         window.addEventListener('click', pageUpdater)
+        window.addEventListener('click', notificationMenuUpdate)
         return ()=> {
             window.removeEventListener('click', pageUpdater)
+            window.removeEventListener('click', notificationMenuUpdate)
         }
     },[logoutPopup])
 
@@ -84,10 +94,13 @@ function Header() {
             />
              <div className='header_divider'></div>
             <HeaderRight 
-                user={user} 
-                setLogoutPopup={setLogoutPopup} 
-                logoutPopup={logoutPopup} 
-                signOutRef={signOutRef}
+                user= {user} 
+                setLogoutPopup= {setLogoutPopup} 
+                logoutPopup= {logoutPopup} 
+                notificationMenu= {notificationMenu}
+                setNotificationMenu= {setNotificationMenu}
+                signOutRef= {signOutRef}
+                notificationsRef= {notificationsRef}
             />
         </div>
     )

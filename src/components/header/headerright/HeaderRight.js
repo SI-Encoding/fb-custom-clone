@@ -6,14 +6,21 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import db from '../../../firebase/firebase'
 import NotificationsMenu from './notificationsmenu/NotificationsMenu';
 
-export default function HeaderRight({user, setLogoutPopup, logoutPopup, signOutRef}) {
+export default function HeaderRight({
+  user, 
+  setLogoutPopup, 
+  logoutPopup, 
+  notificationMenu, 
+  setNotificationMenu, 
+  signOutRef, 
+  notificationsRef
+}) {
   const [notifications, setNotifications] = useState([])
   const [requests, setRequests] = useState([])  
-  const [menu, setMenu] = useState(false)
+
 
   let activeRequests = []
   useEffect(() => {
-    
     db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
     {
       resetState()
@@ -56,13 +63,20 @@ export default function HeaderRight({user, setLogoutPopup, logoutPopup, signOutR
   return (
     <div className = "header_right">
       {/* Notifications */}
-        <div className={"notification"} onClick={() => setMenu(true)}>
+        <div className={"notification"} onClick={() => setNotificationMenu(true)}>
           <PeopleAltIcon style={{fontSize: '30px'}}/> 
           <span style={{background: notifications.length !== 0 ? '#e40000' : 'none'}}>
             {notifications.length !== 0 ? notifications.length > 99 ? '99+': notifications.length : ''}
           </span>
         </div>
-        {menu && <NotificationsMenu notifications={notifications} requests={requests} setMenu={setMenu}/>}
+        {notificationMenu && 
+          <NotificationsMenu 
+            notifications={notifications} 
+            requests={requests} 
+            setNotificationMenu={setNotificationMenu} 
+            ref={notificationsRef}
+          />
+        }
         <div className="header_info">
             <Avatar src={user.picture}/>
             <h4>{user.name}</h4>
