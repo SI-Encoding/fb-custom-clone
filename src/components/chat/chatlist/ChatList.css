@@ -4,7 +4,7 @@
     width:367px;
     margin-left: 2px;
     height: 544px;
-    background-color:white;
+    background-color:var(--fb-theme-colour-white);
     box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2); 
     overflow-y:scroll;
     overflow-x: hidden;
@@ -14,8 +14,8 @@
 }
 
 .chat_item, .chat_header_info{
-    background: white;
-    border-bottom: 1px solid #d9dadd;
+    background: var(--fb-theme-colour-white);
+    border-bottom: 1px solid var(--fb-theme-colour-chat-header);
 }
 
 .chat_item:hover {

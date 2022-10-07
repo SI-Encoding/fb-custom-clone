@@ -10,7 +10,7 @@
 }
 
 .chat_header > .MuiSvgIcon-root{
-    color:white;
+    color:var(--fb-theme-colour-white);
 }
 
 .chat_header.active {
@@ -35,11 +35,11 @@
     margin-left: auto;
 }
 .max {
-    color:#fff;
+    color:var(--fb-theme-colour-white);
 }
 
 .minus {
-    color:#fff;
+    color:var(--fb-theme-colour-white);
     margin-top: 7.5px;
 }
 
@@ -54,7 +54,7 @@
 .status-online {
     height: 12px;
     width: 12px;
-    background-color: #40d421;
+    background-color: var(--fb-theme-colour-online);
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;
@@ -63,7 +63,7 @@
 .status-offline {
     height: 12px;
     width: 12px;
-    background-color: #f44336;
+    background-color: var(--fb-theme-colour-offline);
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;

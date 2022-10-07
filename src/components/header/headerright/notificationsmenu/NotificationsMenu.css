@@ -9,7 +9,7 @@
     border-width: 9px;
     border-color: transparent;
     border-top-width: 0;
-    border-bottom: 9px solid #fff;
+    border-bottom: 9px solid var(--fb-theme-colour-white);
     width: 0;
     height: 0;
     position: absolute;
@@ -20,7 +20,7 @@
     border-width: 9px;
     border-color: transparent;
     border-top-width: 0;
-    border-bottom: 9px solid #fff;
+    border-bottom: 9px solid var(--fb-theme-colour-white);
     width: 0;
     height: 0;
     font-size: 0;
@@ -36,7 +36,7 @@
 
  .friends_request_container {
     width: fit-content; /*width: 311px;*/
-    background: white;
+    background: var(--fb-theme-colour-white);
     position: absolute;
     height: 50px;
     top: 45px;
@@ -47,8 +47,6 @@
     margin-left: 8px;
     margin-top: 6px;
  }
-
-
 
  .friends_request_container > div > div > .people_container > h4 {
     color: black;

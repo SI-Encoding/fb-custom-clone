@@ -71,8 +71,8 @@
 }
 
 .notification > span {
-    color: #fcfefd;
-    background: #e40000;
+    color: var(--fb-theme-colour-notification-text);
+    background: var(--fb-theme-colour-notification-background);
     width: fit-content;
     padding: 2px 5px;
     right: 20px;
@@ -81,7 +81,7 @@
 }
 
 .header_option:hover, .notification:hover{
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-button-hover);
     border-radius: 10px;
     align-items: center;
     padding: 0 30px;

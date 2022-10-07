@@ -27,7 +27,7 @@ li {
      
 li:hover {
   cursor: pointer;
-  background-color: #eff2f5;
+  background-color: var(--fb-theme-colour-button-hover);
   border-radius: 10px;
   color: var(--fb-theme-colour-blue);
 }

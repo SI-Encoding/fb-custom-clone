@@ -24,11 +24,11 @@
 }
 
 .person_online {
-    color: #00b0ff;
+    color: var(--fb-theme-colour-chat-online);
 }
 
 .person_offline {
-    color: #f44336;
+    color: var(--fb-theme-colour-offline);
 }
 
 .sidebarrow_container > .MuiSvgIcon-root, .people_container > .MuiSvgIcon-root{
@@ -46,7 +46,7 @@
     width: 122px;
     margin-left: 36px;
     background-color: var(--fb-theme-colour-blue);
-    color: #eff2f5;
+    color: var(--fb-theme-colour-button-hover);
     font-weight: 800;
     padding: 0;
     border: none;
@@ -77,8 +77,8 @@
     margin-left: auto;
     font-weight: 800;
     padding: 0;
-    border: #ccd0d5;
-    background-color: #f5f6f7;
+    border: var(--fb-theme-colour-remove-friend-border);
+    background-color: var(--fb-theme-colour-remove-friend-background);
     display: flex;
     justify-content: center;
     font-size: 11px;

@@ -35,12 +35,12 @@
 }
  
 .popup_label {
-  border: 1px solid #ccc;
+  border: 1px solid var(--fb-theme-colour-border);
   display: flex;
   padding: 6px 12px;
   cursor: pointer;
   background-color: var(--fb-theme-colour-blue);
-  color: #eff2f5;
+  color: var(--fb-theme-colour-button-hover);
   font-weight: 800;
   width:23%;
  }
@@ -78,7 +78,7 @@
 .popup_error_buttons > button {
    cursor: pointer;
    background-color: var(--fb-theme-colour-blue);
-   color: #eff2f5;
+   color: var(--fb-theme-colour-button-hover);
    font-weight: 800;
    width: 200px;
    margin-top: 12px;
@@ -86,7 +86,7 @@
  }
  
 .popup_error_buttons > button:hover {
-   background-color: #eff2f5;
+   background-color: var(--fb-theme-colour-button-hover);
    color: var(--fb-theme-colour-blue);
  }
  

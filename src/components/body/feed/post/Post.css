@@ -37,7 +37,7 @@
 }
 
 .menu_icon:hover {
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-button-hover);
     border-radius: 10px;
     color: var(--fb-theme-colour-blue);
     cursor: pointer;
@@ -74,7 +74,7 @@
 }
 
 .post_option:hover{
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-button-hover);
     border-radius: 10px;
 }
 
@@ -117,4 +117,3 @@
 .post_arrow.active {
     transform: rotate(180deg)
 }
-

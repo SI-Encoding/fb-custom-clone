@@ -4,7 +4,7 @@
     width:367px;
     margin-left: 2px;
     height: 489px;
-    background-color:#c8c9cb;
+    background-color:var(--fb-theme-colour-message-background);
     box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2); 
     overflow-y:scroll;
     overflow-x: hidden;
@@ -26,7 +26,7 @@
     font-size: 16px;
     border-radius: 10px;
     padding: 10px;
-    background-color: #f44336;
+    background-color: var(--fb-theme-colour-chat-message);
     width: fit-content;
     margin-left: 10px;
     word-break: break-word;
@@ -81,7 +81,7 @@
     padding: 10px;
     border: none;
     margin: 0 10px 10px 10px;
-    background-color:#eff2f5;
+    background-color:var(--fb-theme-colour-button-hover);
     outline-width: 0;
 }
 

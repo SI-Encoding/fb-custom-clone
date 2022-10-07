@@ -12,6 +12,7 @@ body {
 }
 
 :root {
+  --fb-theme-colour-app-backgound: #f1f2f5;
   --fb-theme-colour-blue: #2e81f4;
   --fb-theme-colour-white: white;
   --fb-theme-colour-white-posts: white;
@@ -20,14 +21,28 @@ body {
   --fb-theme-colour-black: #000000;
   --fb-theme-colour-background: #f1f2f5;
   --fb-theme-colour-textfield: #eff2f5;
+  --fb-theme-colour-button-hover: #eff2f5;
+  --fb-theme-colour-message-background: #c8c9cb;
   --fb-theme-colour-text: #000000;
   --fb-theme-colour-post-option: gray;
   --fb-theme-colour-post-border-top: lightgray;
   --fb-theme-colour-post-text: #000000;
+  --fb-theme-colour-icon-selected: #1976d2;
+  --fb-theme-colour-icon-update: #149815;
   --fb-theme-colour-messenger-sender-border-top: #eff2f5;
+  --fb-theme-colour-border: #ccc;
   --fb-theme-colour-arrow: rgba(0, 0, 0, 0.54);
   --fb-theme-colour-storyreel: #2e81f4;
   --fb-theme-colour-chat-toolbar: royalblue;
+  --fb-theme-colour-chat-header: #d9dadd;
+  --fb-theme-colour-chat-message: #f44336;
+  --fb-theme-colour-notification-text: #fcfefd;
+  --fb-theme-colour-notification-background: #e40000;
+  --fb-theme-colour-remove-friend-border: #ccd0d5;
+  --fb-theme-colour-remove-friend-background:#f5f6f7;
+  --fb-theme-colour-chat-online: #00b0ff;
+  --fb-theme-colour-online: #40d421;
+  --fb-theme-colour-offline: #f44336;
 }
 
 code {

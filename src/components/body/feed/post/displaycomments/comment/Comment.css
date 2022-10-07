@@ -15,7 +15,7 @@
 }
 
 .displayComments_area:hover {
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-button-hover);
 }
 
 .display_avatar {
@@ -51,8 +51,8 @@
 }
 
 .icon_update {
-    color: #fff;
-    background-color: #149815;
+    color: var(--fb-theme-colour-white);
+    background-color: var(--fb-theme-colour-icon-update);
     margin: 4px;
     padding: 8px 16px;
     box-sizing: content-box;
@@ -67,4 +67,3 @@
 .icon_update:hover {
     cursor:pointer;
 }
-

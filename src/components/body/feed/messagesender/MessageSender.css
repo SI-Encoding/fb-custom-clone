@@ -28,7 +28,6 @@
    background-color: var(--fb-theme-colour-textfield);
 }
 
-
 .messageSender__top > form >button {
     display:none;
 }
@@ -55,11 +54,10 @@
     margin-left: 5px;
 }
 
-
 .upload_button {
     cursor: pointer;
     background-color: var(--fb-theme-colour-blue);
-    color: #eff2f5;
+    color: var(--fb-theme-colour-button-hover);
     font-weight: 800;
     width: 151px;
     font-size: 0.875rem;
@@ -75,6 +73,6 @@
   }
   
   .upload_button:hover {
-    background-color: #eff2f5;
+    background-color: var(--fb-theme-colour-button-hover);
     color: var(--fb-theme-colour-blue);
   }
