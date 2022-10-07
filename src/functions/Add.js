@@ -65,7 +65,7 @@ const addMessageWithNoFilesToFirebaseCollection = (input, username, userId, chat
     
 }
 
-const addPostWithGifToFirebaseCollection = (input, userPicture, userName, downloadURL, fav, gif, userId) => {
+const addPostWithMediaToFirebaseCollection = (input, userPicture, userName, downloadURL, fav, gif, userId) => {
     db.collection('posts').add({    
         message: input,  
         timestamp: firebase.firestore.      
@@ -76,20 +76,6 @@ const addPostWithGifToFirebaseCollection = (input, userPicture, userName, downlo
         favourite: fav,  
         gif: gif,
         userId: userId            
-    })
-}
-
-const addPostWithImageToFirebaseCollection = (input, userPicture, userName, downloadURL, fav, gif, userId) => {
-    db.collection('posts').add({            
-        message: input,            
-        timestamp: firebase.firestore.            
-        FieldValue.serverTimestamp(),    
-        profilePic: userPicture,      
-        username: userName,        
-        image: downloadURL,      
-        favourite: fav,      
-        gif: gif,
-        userId: userId   
     })
 }
 
@@ -108,4 +94,4 @@ const addPostWithoutImageToFirebaseCollection = (input, userPicture, userName, f
 
 export default addMessageWithImageToFirebaseCollection
 
-export {addMessageWithOtherFilesToFirebaseCollection, addMessageWithNoFilesToFirebaseCollection, addPostWithGifToFirebaseCollection, addPostWithImageToFirebaseCollection, addPostWithoutImageToFirebaseCollection}
+export {addMessageWithOtherFilesToFirebaseCollection, addMessageWithNoFilesToFirebaseCollection, addPostWithMediaToFirebaseCollection, addPostWithoutImageToFirebaseCollection}
