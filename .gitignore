@@ -27,3 +27,5 @@ yarn-error.log*
 .firebaserc
 .env
 /.firebase
+
+/server/node_modules

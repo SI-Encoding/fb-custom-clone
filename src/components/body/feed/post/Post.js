@@ -17,7 +17,7 @@ import PostHeader from './postheader/PostHeader'
 import PostOption from './postoption/PostOption'
 
 
-const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId},ref) =>{
+const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId, sharedFrom},ref) =>{
   const user = useSelector((state) => (state.user))
   
   // State to manage submitting posts
@@ -108,6 +108,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           open={open} 
           userId={userId} 
           user={user}
+          sharedFrom={sharedFrom}
         />
         
         {/* render edit and delete menu */}

@@ -39,6 +39,7 @@ function Feed() {
                         image = {post.data.image}
                         favourite = {post.data.favourite}
                         userId = {post.data.userId}
+                        sharedFrom = {post.data.sharedFrom}
                     />
                 </FlipMove>
             ))}
