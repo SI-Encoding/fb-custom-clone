@@ -19,7 +19,8 @@ app.post('/fb-clone-post',  (req,res) => {
         favourite: req.body.favourite,  
         gif: req.body.gif,
         userId: req.body.userId,
-        sharedFrom: req.body.sharedFrom            
+        sharedFrom: req.body.sharedFrom,
+        link: req.body.link            
     })
 
     res.status(200).send('Successfully shared post')

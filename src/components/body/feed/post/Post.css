@@ -32,6 +32,10 @@
     margin-top: 3px;
 }
 
+.post_shared_from:hover {
+    cursor: pointer;
+}
+
 .menu_icon{
     margin-left: auto; 
 }

@@ -17,7 +17,7 @@ import PostHeader from './postheader/PostHeader'
 import PostOption from './postoption/PostOption'
 
 
-const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId, sharedFrom},ref) =>{
+const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId, sharedFrom, link},ref) =>{
   const user = useSelector((state) => (state.user))
   
   // State to manage submitting posts
@@ -96,6 +96,10 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         resetState(); 
       }
   
+      const openInNewTab = url => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
+
     {/* render the post */}
     return (
       <div ref = {ref} className='post_container'>
@@ -109,6 +113,8 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           userId={userId} 
           user={user}
           sharedFrom={sharedFrom}
+          link={link}
+          openInNewTab={openInNewTab}
         />
         
         {/* render edit and delete menu */}
@@ -132,7 +138,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         } 
 
         {/* render the post's image */}
-        <PostImage image={image}/>
+        <PostImage image={image} sharedFrom={sharedFrom} link={link} openInNewTab={openInNewTab}/>
 
         {/* render the post's options */}
         <PostOption 
