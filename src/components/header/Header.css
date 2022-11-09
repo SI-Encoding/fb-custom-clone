@@ -19,9 +19,9 @@
 }
 
 .header_center {
-    display:flex;
-    flex: 1;
-    justify-content: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header__input {

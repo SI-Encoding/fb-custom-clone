@@ -92,7 +92,6 @@ function Header() {
                 otherUsersPostsPage = {otherUsersPostsPage} 
                 otherUsersPostsPageActivated = {otherUsersPostsPageActivated}
             />
-             <div className='header_divider'></div>
             <HeaderRight 
                 user= {user} 
                 setLogoutPopup= {setLogoutPopup} 
