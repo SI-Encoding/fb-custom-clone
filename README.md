@@ -29,7 +29,12 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 4. Next, run 'npm update --force' to fix any dependency issues.
 5. Finally, run 'npm start'.
 
-# Features
+### Testing
+
+1. Change your directory to the server, and run 'npm test'.
+
+
+## Features
 
 ---
 
