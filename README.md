@@ -21,6 +21,13 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 8. Next, run 'npm update --force' to fix any dependency issues.
 9. Finally, run 'npm start'.
 
+### Testing
+
+1. In your terminal, run 'firebase init emulators' and select firestore as the option.
+2. Run 'firebase emulators:start'.
+3. In another terminal, run 'npm test'.
+
+
 ## For Server Side
 
 1. In the Firebase console, go to project settings -> service accounts. Click 'generate new private key'. Download the file and copy the JSON object to your clipboard.
