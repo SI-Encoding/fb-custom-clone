@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "firebase": "^9.7.0",
+    "firebase-admin": "^9.12.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-flip-move": "^3.0.4",
@@ -27,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --runTestsByPath src/test/functions.test.js -- --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
