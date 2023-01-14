@@ -25,7 +25,7 @@ function Login() {
             userProfile.username = result.additionalUserInfo.profile.name
             userProfile.profilePic = result.additionalUserInfo.profile.picture
             registerUser()
-            navigate(-1);
+            navigate('/');
     })).catch(error => alert(error.message));
     }
 
