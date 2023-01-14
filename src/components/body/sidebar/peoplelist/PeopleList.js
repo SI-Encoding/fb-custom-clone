@@ -11,9 +11,11 @@ export default function PeopleList() {
         let isMounted = true;
         
         if (isMounted) {
+            if (user) {
                 db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
                     setPeople(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
                 );
+            }
         }
         return () => { 
             isMounted = false
@@ -34,8 +36,8 @@ export default function PeopleList() {
 
   return (
     <div className="people_container people_body">
-       <h4> People you may know </h4>
-       {people.map((person) => (
+       { user && <h4> People you may know </h4> }
+       { user && people.map((person) => (
         <People
             usersId={user.id}
             key={person.id}
