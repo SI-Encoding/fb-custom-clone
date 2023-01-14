@@ -13,9 +13,11 @@ function GifPosts() {
         let isMounted = true;
         
         if (isMounted) {
-            db.collection("posts").where("userId", "!=", user.id).onSnapshot((snapshot) => 
-            setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
-        );
+            if(user) {
+                db.collection("posts").where("userId", "!=", user.id).onSnapshot((snapshot) => 
+                 setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
+             );
+            }
         }
 
         return () => {
