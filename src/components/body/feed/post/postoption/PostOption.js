@@ -4,26 +4,28 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import NearMeIcon from '@material-ui/icons/NearMe'
 import {ExpandMoreOutlined} from '@material-ui/icons'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import {useSelector} from 'react-redux'
 
-export default function PostOption({addToFavourite, favourite, setWriteComment, writeComment, setDisplayComment, displayComment}) {
-
-    let postOptions = [
+export default function PostOption({addToFavourite, favourite, share, setShare, setWriteComment, writeComment, setDisplayComment, displayComment, setMustSignin, mustSignin}) {
+    const user = useSelector(state => state.user)
+    const postOptions = [
         {
-            func: addToFavourite,
-            state: document.createEvent('Event'),
+            func: user ? addToFavourite : setMustSignin,
+            state: user ? document.createEvent('Event') : !mustSignin,
             class: favourite,
             icon: <ThumbUpIcon/>,
             text: <p>Like</p>
         },
         {
-            func: setWriteComment,
-            state: !writeComment,
+            func: user ? setWriteComment : setMustSignin,
+            state: user ? !writeComment : !mustSignin,
             class: writeComment,
             icon: <ChatBubbleOutlineIcon/>,
             text: <p>Comment</p>
         },
         {
-            func: () => {},
+            func: user ? setShare : setMustSignin,
+            state: user? !share : !mustSignin,
             class: '',
             icon: <NearMeIcon/>,
             text: <p>Share</p>

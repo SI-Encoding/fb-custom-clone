@@ -15,6 +15,7 @@ import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
 import PostHeader from './postheader/PostHeader'
 import PostOption from './postoption/PostOption'
+import SigninPopup from '../../signinpopup/SigninPopup';
 
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId, sharedFrom, link},ref) =>{
@@ -25,6 +26,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const [input, setInput] = useState("")
   const [imageUrl, setImageUrl] = useState("")
   const [fav, setFav] = useState(false)
+  const [share, setShare] = useState(false)
 
   // State to manage commenting on posts
   const [writeComment, setWriteComment] = useState('')
@@ -34,6 +36,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   const [updatePostPopUp, setUpdatePostPopUp] = useState(false)
   const [popUp, setPopUp] = useState(false)
   const [error, setError] = useState(false)
+  const [mustSignin, setMustSignin] = useState(false)
 
   // State to manage uploading files
   const [fileName, setFileName] = useState(null)
@@ -100,6 +103,12 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         window.open(url, '_blank', 'noopener,noreferrer');
       };
 
+      const checkIfUserExists = () => {
+        if (typeof user === null) {
+          return user = {id: 0}
+        }  
+      }
+
     {/* render the post */}
     return (
       <div ref = {ref} className='post_container'>
@@ -111,7 +120,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           setOpen={setOpen} 
           open={open} 
           userId={userId} 
-          user={user}
+          user={user ? user : checkIfUserExists}
           sharedFrom={sharedFrom}
           link={link}
           openInNewTab={openInNewTab}
@@ -144,10 +153,14 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
         <PostOption 
           addToFavourite={addToFavourite} 
           favourite={favourite} 
+          share = {share}
+          setShare = {setShare}
           setWriteComment={setWriteComment} 
           writeComment={writeComment} 
           setDisplayComment={setDisplayComment} 
           displayComment={displayComment}
+          setMustSignin = {setMustSignin}
+          mustSignin = {mustSignin}
         />
         
 
@@ -205,6 +218,14 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
           <ErrorPopup 
             setError={setError} 
             error={error} 
+          />
+        }
+
+        {/* render the popup used to allow the user to signin */}
+        {mustSignin && 
+          <SigninPopup 
+            setMustSignin={setMustSignin} 
+            mustSignin={mustSignin} 
           />
         }
       </div>

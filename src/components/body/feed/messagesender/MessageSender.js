@@ -9,9 +9,11 @@ import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopUp from '../../error/ErrorPopUp'
 import {addPostWithoutImageToFirebaseCollection} from '../../../../functions/Add'
 import uploadPostsWithGif, {uploadPostsWithImage, handleFile} from '../../../../functions/Upload'
+import {useNavigate} from 'react-router-dom'
 
 function MessageSender() {
   const user = useSelector((state) => state.user)
+  const navigate = useNavigate();
   const [input, setInput] = useState("")    
   const [fav, setFav] = useState(false)
   const [imagePreview, setImagePreview] = useState(null)    
@@ -35,16 +37,22 @@ function MessageSender() {
     e.preventDefault();
      
     {/* Submit differently if file is uploaded */}
-    if (imageUrl) {
-      if(fileType === 'image/gif') {        
-        uploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
-      } else {            
-        uploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
-      }              
-    } else {              
-        addPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
-      } 
-      resetState();            
+    if (user) {
+      if (imageUrl) {
+        if(fileType === 'image/gif') {        
+          uploadPostsWithGif('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, true, user.id)
+        } else {            
+          uploadPostsWithImage('add', fileName, imageUrl, 'posts', null, input, user.picture, user.name, fav, false, user.id)
+        }              
+      } else {              
+          addPostWithoutImageToFirebaseCollection(input, user.picture, user.name, fav, false, user.id)
+        } 
+        resetState();
+    } else {
+      navigate('signin')
+    
+    
+    }            
   } 
 
   useEffect( () => {            
@@ -66,17 +74,17 @@ function MessageSender() {
  return (               
   <div className = 'messageSender'>     
     <div className = 'messageSender__top'>        
-      <Avatar src={user.picture}/>            
+      { user ? <Avatar src={user.picture}/> : <Avatar/>}
       <form>                
         <input            
           value = {input}                 
           onChange = {e => setInput(e.target.value)}                
-          placeholder = {`What's on your mind?, ${user.name}?`}                
+          placeholder = {`What's on your mind?, ${user ? user.name + '?' : ''}`}                
           className = "messageSender__input"/>                
         <label htmlFor = "imageFile" className = 'upload_button'>                
-          <div style={{marginTop:'7px'}}> Upload Image</div>
+          <div style={{marginTop:'7px'}} onClick={() => !user && navigate('signin')}>{user ? "Upload Image" : "signin"}</div>
         </label>           
-        <input type="file" id="imageFile" accept="image/*" style={{display:"none"}} onChange={(e) => {                 
+        <input type="file" id="imageFile" accept="image/*" style={{display:"none"}} disabled={!user} onChange={(e) => {                 
           if (e.target.files[0]) {                
             let fileTypeData = e.target.files[0].type;                
             if (!fileTypeData.includes('image/')) {             
