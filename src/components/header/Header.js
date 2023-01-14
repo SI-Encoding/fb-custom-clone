@@ -34,28 +34,28 @@ function Header() {
         setOtherUsersPostsPage(false)
     }
 
-    const myPostsPageActivated = () => {      
+    const myPostsPageActivated = () => {   
+        setMyPostsPage(true)   
         setHomePage(false)
         setFlagPage(false)
-        setMyPostsPage(true)
         setGifsPage(false)
         setOtherUsersPostsPage(false)
     }
 
-    const gifsPageActivated = () => {  
+    const gifsPageActivated = () => { 
+        setGifsPage(true)
         setHomePage(false)
         setFlagPage(false)
         setMyPostsPage(false)
-        setGifsPage(true)
         setOtherUsersPostsPage(false)
     }
 
     const otherUsersPostsPageActivated = () => {
+        setOtherUsersPostsPage(true)
         setHomePage(false)
         setFlagPage(false)
         setMyPostsPage(false)
         setGifsPage(false)
-        setOtherUsersPostsPage(true)
     }
 
     useEffect( () => {

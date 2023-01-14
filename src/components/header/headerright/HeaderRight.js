@@ -5,6 +5,7 @@ import HeaderDropDownMenu from '../headerdropdownmenu/HeaderDropDownMenu'
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import db from '../../../firebase/firebase'
 import NotificationsMenu from './notificationsmenu/NotificationsMenu';
+import {Link} from 'react-router-dom'
 
 export default function HeaderRight({
   user, 
@@ -18,17 +19,18 @@ export default function HeaderRight({
   const [notifications, setNotifications] = useState([])
   const [requests, setRequests] = useState([])  
 
-
   let activeRequests = []
   useEffect(() => {
-    db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
-    {
-      resetState()
-      setRequests(snapshot.docs.filter((doc) => ({ id: checkForId(doc.data(),user.id), data: checkForKey(doc.data(), user.id)}))
-      .filter((doc) => doc.data().friends !== undefined)
-      .map((doc) => ({id:doc.id, data:doc.data()})))
-    }
-  );
+    if(user) {
+      db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
+        {
+          resetState()
+          setRequests(snapshot.docs.filter((doc) => ({ id: checkForId(doc.data(),user.id), data: checkForKey(doc.data(), user.id)}))
+          .filter((doc) => doc.data().friends !== undefined)
+          .map((doc) => ({id:doc.id, data:doc.data()})))
+        }
+      );
+    } 
 
   const resetState = () => {
       setNotifications([])
@@ -42,7 +44,7 @@ export default function HeaderRight({
           return id;
         }
     } catch(e) {
-
+      console.error(e)
     }
   }
   
@@ -78,8 +80,18 @@ export default function HeaderRight({
           />
         }
         <div className="header_info">
-            <Avatar src={user.picture}/>
-            <h4>{user.name}</h4>
+          { user ?
+            <>
+              <Avatar src={user.picture}/>
+              <h4>{user.name}</h4>
+            </>
+             :
+            <Link to={'/signin'} style={{textDecoration: 'none'}}> 
+              <div className='upload_button'> 
+                  <div>Signin</div>
+              </div>
+            </Link>
+          }  
         </div>
         {/* SignOut */}
         <IconButton onClick={()=> setLogoutPopup(!logoutPopup)}>

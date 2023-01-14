@@ -16,15 +16,17 @@ function DropDownSignOutPopup({setLogoutPopup}){
     const darkMode = useSelector((state) => state.darkMode)
 
     const signOut = () => {
-        db.collection('users').doc(user.id).set({
-            online: false
-        }, { merge: true });
-        dispatch({
-            type: set_user,
-            user: null
-        })   
-        auth.signOut();
-        setLogoutPopup(false)
+        if (user) {
+            db.collection('users').doc(user.id).set({
+                online: false
+            }, { merge: true });
+            dispatch({
+                type: set_user,
+                user: null
+            })   
+            auth.signOut();
+            setLogoutPopup(false)
+        }  
     }
 
     const setMode = (mode) => {
@@ -44,7 +46,7 @@ function DropDownSignOutPopup({setLogoutPopup}){
         <div className='dropDownSignOut_container'>
             <ul>
                 <li onClick={()=> darkMode? setMode(false) : setMode(true)}> {darkMode?  (<><LightModeIcon/>Light Mode</>) : (<><DarkModeIcon/>Dark Mode</>)}</li>
-                <li onClick={signOut}><EditIcon/>Sign Out</li>
+                {user && <li onClick={signOut}><EditIcon/>Sign Out</li>}
             </ul>
         </div>    
     )

@@ -27,19 +27,19 @@ export default function HeaderCenter(
             icon: <HomeIcon fontSize="large"/>
         },
         {
-            link: 'gifposts',
+            link: '/gifposts',
             state: gifsPage,
             function: gifsPageActivated,
             icon: <SubscriptionsIcon fontSize="large"/>
         },
         {
-            link: 'myposts',
+            link: '/myposts',
             state: myPostsPage,
             function: myPostsPageActivated,
             icon: <StorefrontIcon fontSize="large"/>
         },
         {
-            link: 'otherusersposts',
+            link: '/otherusersposts',
             state: otherUsersPostsPage,
             function: otherUsersPostsPageActivated,
             icon: <SupervisedUserCircleIcon fontSize="large"/>
