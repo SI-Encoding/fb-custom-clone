@@ -5,7 +5,6 @@ import SideBar from './components/body/sidebar/SideBar';
 import Feed from './components/body/feed/Feed';
 import Widgets from './components/widgets/Widgets'
 import Login from './components/login/Login'
-import {useStateValue} from'./StateProvider'
 import {useSelector} from 'react-redux'
 import ChatContainer from './components/chat/ChatContainer'
 import { Routes, Route } from "react-router-dom"
@@ -67,25 +66,16 @@ useEffect(()=> {
 }, [user])
 
 return (
-  <div className={`app ${user? 'active':'inactive'}`}>
-    {!user ? <Login/> : (
-      <>
-      <Header /> 
-      <div className="app_container">
-      <SideBar />       
-      <Routes>
-        <Route path="/" element={ <Feed/> } />
-        <Route path='favourites' element={ <Favourites/>} />
-        <Route path='myposts' element={ <MyPosts/>} />
-        <Route path='gifposts' element={ <GifPosts/>} />
-        <Route path='otherusersposts' element={ <OtherUsersPosts/>} />
-      </Routes>
-      <Widgets/>
-      <ChatContainer/>
-      </div>
+      <>       
+        <Routes>
+          <Route path="/" element={ <><Header/><div className={"app_container"}><SideBar/><Feed/><Widgets/><ChatContainer/></div></>}/>
+          <Route path='/favourites' element={ <><Header/><div className="app_container"><SideBar/><Favourites/><Widgets/><ChatContainer/></div></>}/>
+          <Route path='/myposts' element={ <><Header/><div className="app_container"><SideBar/><MyPosts/><Widgets/><ChatContainer/></div></>}/>
+          <Route path='/gifposts' element={ <><Header/><div className="app_container"><SideBar/><GifPosts/><Widgets/><ChatContainer/></div></>}/>
+          <Route path='/otherusersposts' element={ <><Header/><div className="app_container"><SideBar/><OtherUsersPosts/><Widgets/><ChatContainer/></div></>}/>
+          <Route path='/signin' element={<Login/>} />
+        </Routes>
       </>
-    )}
-  </div>
 );
 }
 

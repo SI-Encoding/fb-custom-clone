@@ -12,6 +12,7 @@
     display:grid;
     place-items: center;
     height: 100vh;
+    background-color: var(--fb-theme-colour-app-background);
 }
 
 .login_button {

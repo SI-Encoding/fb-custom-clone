@@ -2,13 +2,5 @@
   display:flex;
   max-height: max-content;
   min-height: 100vh;
-}
-
-.app {
-  background-color: var(--fb-theme-colour-app-backgound);
-  min-width: fit-content;
-}
-
-.app.active {
   background-color: var(--fb-theme-colour-background);
 }
