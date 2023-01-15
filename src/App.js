@@ -14,7 +14,7 @@ import GifPosts from './components/body/gifposts/GifPosts';
 import OtherUsersPosts from './components/body/otherusersposts/OtherUsersPosts';
 import DarkMode from './functions/DarkMode' 
 import LightMode from './functions/LightMode'
-import db from './firebase/firebase'
+import ActivityTimer from './functions/ActivityTimer';
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -25,44 +25,11 @@ useEffect(()=> {
 },[darkMode])
 
 useEffect(()=> {
-  let timeoutInMiliseconds = 60000;
-  let timeoutId; 
-
   if (user) {
-  const resetTimer = () => { 
-    window.clearTimeout(timeoutId)
-    startTimer();
-  }
-    
-  const startTimer = () => { 
-      db.collection('users').doc(user.id).set({
-        online: true
-    }, { merge: true });
-      timeoutId = window.setTimeout(doInactive, timeoutInMiliseconds)
-  }
-    
-  const doInactive = () => {
-      db.collection('users').doc(user.id).set({
-        online: false
-    }, { merge: true });
-  }
-   
-  const setupTimers = () => {
-      document.addEventListener("mousemove", resetTimer, false);
-      document.addEventListener("mousedown", resetTimer, false);
-      document.addEventListener("keypress", resetTimer, false);
-      document.addEventListener("touchmove", resetTimer, false);
-      window.addEventListener('beforeunload', (e) => {
-        e.preventDefault();
-        db.collection('users').doc(user.id).set({
-          online: false
-        }, { merge: true });
-      return null
-    });
-      startTimer();
-  }
-  setupTimers()
-  } 
+
+  ActivityTimer.setupTimers(user);
+
+   } 
 }, [user])
 
 return (
