@@ -33,7 +33,7 @@ useEffect(()=> {
 }, [user])
 
 return (
-      <>       
+      <div class="app">       
         <Routes>
           <Route path="/" element={ <><Header/><div className={"app_container"}><SideBar/><Feed/><Widgets/><ChatContainer/></div></>}/>
           <Route path='/favourites' element={ <><Header/><div className="app_container"><SideBar/><Favourites/><Widgets/><ChatContainer/></div></>}/>
@@ -42,7 +42,7 @@ return (
           <Route path='/otherusersposts' element={ <><Header/><div className="app_container"><SideBar/><OtherUsersPosts/><Widgets/><ChatContainer/></div></>}/>
           <Route path='/signin' element={<Login/>} />
         </Routes>
-      </>
+      </div>
 );
 }
 
