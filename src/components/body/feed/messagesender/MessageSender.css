@@ -26,6 +26,7 @@
    margin: 0 10px;
    border-radius: 999px;
    background-color: var(--fb-theme-colour-textfield);
+   color: var(--fb-theme-colour-text);
 }
 
 .messageSender__top > form >button {
