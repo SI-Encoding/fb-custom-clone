@@ -18,7 +18,7 @@ function ChatContainer() {
   <>
    {user && 
     <div className='chat_toolbar_container'>
-        <ChatHeader expand={expand} expandMenu={expandMenu} chatUserInfo={chatUserInfo}/>
+        <ChatHeader expand={expand} expandMenu={expandMenu}/>
         {expand && chatUserInfo !== null && <ChatHeaderInfo chatUserInfo={chatUserInfo}/>}
         {expand && chatUserInfo !== null && <ChatBody chatUserInfo={chatUserInfo}/>}
         {expand && chatUserInfo === null && <ChatList/>}
