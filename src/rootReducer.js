@@ -16,7 +16,6 @@ const set_dark_mode = 'SET_DARK_MODE'
 const set_chat_user_info = 'SET_CHAT_USER_INFO'
 
 const rootReducer = (state = initialState, action) => {
-    console.log(action);
     switch(action.type) {
         case 'SET_USER':
             return {

@@ -1,13 +1,13 @@
 import db from '../firebase/firebase'
 import firebase from 'firebase/compat'
 
-const updatePostFav = (posts, id, fav) => {
-    db.collection(posts).doc(id).update({
-        favourite: fav
-    })  
+const likedPost = (posts, id, like, usersId) => {
+  db.collection(posts).doc(id).set({
+    likes: {[usersId]: like === true ? like : firebase.firestore.FieldValue.delete()}
+  }, {merge: 'true'})
 }
 
-const updatePostWithGif = (posts, id, input, userPicture, userName, downloadURL, fav, gif) => {
+const updatePostWithGif = (posts, id, input, userPicture, userName, downloadURL, gif) => {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
@@ -15,12 +15,11 @@ const updatePostWithGif = (posts, id, input, userPicture, userName, downloadURL,
     profilePic: userPicture,
     username: userName,
     image: downloadURL,
-    favourite: fav,
     gif: gif
   })
 }
 
-const updatePostWithImage = (posts, id, input, userPicture, userName, downloadURL, fav, gif) => {
+const updatePostWithImage = (posts, id, input, userPicture, userName, downloadURL, gif) => {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
@@ -28,19 +27,17 @@ const updatePostWithImage = (posts, id, input, userPicture, userName, downloadUR
     profilePic: userPicture,
     username: userName,
     image: downloadURL,
-    favourite: fav,
     gif: gif
   })
 }
 
-const updatePostWithNoAttachment = (posts, id, input, userPicture, userName, fav, gif) => {
+const updatePostWithNoAttachment = (posts, id, input, userPicture, userName, gif) => {
   db.collection(posts).doc(id).update({
     message: input,
     timestamp: firebase.firestore.
     FieldValue.serverTimestamp(),
     profilePic: userPicture,
     username: userName,
-    favourite: fav,
     gif: gif
   })
 }
@@ -81,6 +78,6 @@ const removeFriend = (usersId, id, users) => {
     }, {merge: 'true'})  
 }
 
-export default updatePostFav
+export default likedPost
 
 export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment, addFriend, acceptRequest, removeFriend}

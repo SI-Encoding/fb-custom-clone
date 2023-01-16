@@ -8,36 +8,36 @@ import FlipMove from 'react-flip-move'
 
 function Feed() {
     const [posts,setPosts] = useState([]);
-    
-    useEffect( () => {
-        let isMounted = true;
-        
-        if (isMounted) {
-            db.collection("posts").orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
-            setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
-            );
-        }
 
-        return () => { 
-            isMounted = false 
+    useEffect( () => {
+        db.collection("posts").orderBy('timestamp', 'desc').onSnapshot((snapshot) => 
+        setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data()})))
+        );
+ 
+        return () => {
+            setPosts([]); 
         };
+        
     },[]);
-    
+
     return (
         <div className="feed_container">
             <StoryReel/>
             <MessageSender/>
-            {posts.map((post) => (
+            {posts.map((post, index) => (
                 <FlipMove typeName={null}>
                     <Post
                         key = {post.id}
+                        index = {index}
+                        posts= {posts}
                         id = {post.id}
                         profilePic = {post.data.profilePic}
                         message = {post.data.message}
                         timestamp = {post.data.timestamp}
                         username = {post.data.username}
                         image = {post.data.image}
-                        favourite = {post.data.favourite}
+                        likes = {Object.keys(post.data.likes || {}).length}
+                        liked = {post.data.likes}
                         userId = {post.data.userId}
                         sharedFrom = {post.data.sharedFrom}
                         link = {post.data.link}

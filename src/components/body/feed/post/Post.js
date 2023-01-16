@@ -1,4 +1,4 @@
-import React, {useState, forwardRef} from 'react'
+import React, {useState, forwardRef, useEffect} from 'react'
 import './Post.css'
 import {useSelector} from 'react-redux';
 import PostDropDownMenu from './dropdownmenu/PostDropDownMenu'
@@ -9,7 +9,7 @@ import PopupAttachment from '../../popupattachment/PopupAttachment'
 import ErrorPopup from '../../error/ErrorPopUp'
 import UpdatePost from './updatepost/UpdatePost'
 import deleteFromFirebaseCollection from '../../../../functions/Delete'
-import updatePostFav, {updatePostWithNoAttachment} from '../../../../functions/Update'
+import likedPost, {updatePostWithNoAttachment} from '../../../../functions/Update'
 import uploadPostsWithGif, {uploadPostsWithImage, handleFile} from '../../../../functions/Upload'
 import PostImage from './postimage/PostImage'
 import PostMessage from './postmessage/PostMessage'
@@ -17,40 +17,52 @@ import PostHeader from './postheader/PostHeader'
 import PostOption from './postoption/PostOption'
 import SigninPopup from '../../signinpopup/SigninPopup';
 
-
-const Post = forwardRef(({id, profilePic, image, username, timestamp, message, favourite, userId, sharedFrom, link},ref) =>{
-  const user = useSelector((state) => (state.user))
+const Post = forwardRef(({id, profilePic, image, username, timestamp, message, likes, liked, userId, sharedFrom, link},ref) =>{
+  const user = useSelector((state) => (state.user));
   
   // State to manage submitting posts
-  const [open, setOpen] = useState(false)
-  const [input, setInput] = useState("")
-  const [imageUrl, setImageUrl] = useState("")
-  const [fav, setFav] = useState(false)
-  const [share, setShare] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [like, setLike] = useState(false);
+  const [share, setShare] = useState(false);
 
   // State to manage commenting on posts
-  const [writeComment, setWriteComment] = useState('')
-  const [displayComment, setDisplayComment] = useState(false)
+  const [writeComment, setWriteComment] = useState('');
+  const [displayComment, setDisplayComment] = useState(false);
 
   // State to manage popups
-  const [updatePostPopUp, setUpdatePostPopUp] = useState(false)
-  const [popUp, setPopUp] = useState(false)
-  const [error, setError] = useState(false)
-  const [mustSignin, setMustSignin] = useState(false)
+  const [updatePostPopUp, setUpdatePostPopUp] = useState(false);
+  const [popUp, setPopUp] = useState(false);
+  const [error, setError] = useState(false);
+  const [mustSignin, setMustSignin] = useState(false);
 
   // State to manage uploading files
-  const [fileName, setFileName] = useState(null)
-  const [imagePreview, setImagePreview] = useState(null)
-  const [fileType, setFileType] = useState(null)
+  const [fileName, setFileName] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [fileType, setFileType] = useState(null);
   
   const storageRef = firebase.storage();
   let store = storageRef.ref(`/posts/${fileName}`);
+ 
+  useEffect(() => {
+     const checkIfUserLiked = (userId) => {
+      try {
+          return liked[userId];
+      } catch(error) {
+        console.log(error);
+        return false;
+      }
+    }
+    if (user) {
+      setLike(checkIfUserLiked(user.id))
+    }
+  },[])
 
-  {/* add to favourites */}
-  const addToFavourite = (e) => {
-    e.preventDefault()
-    setFav(!fav)
-    updatePostFav('posts', id, fav)
+  {/* like post */}
+  const likePost = (like) => {
+    setLike(like);
+    likedPost('posts', id, like, user.id);
   }
 
   const resetState = () => {
@@ -62,39 +74,39 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
   }
 
   const deleteThis = (id) => {
-    setUpdatePostPopUp(false)
-    deleteFromFirebaseCollection('posts',id)
+    setUpdatePostPopUp(false);
+    deleteFromFirebaseCollection('posts',id);
   }
 
   const editThis = () => {
-    setUpdatePostPopUp(true)
+    setUpdatePostPopUp(true);
   }
 
   const postWithGif = () => {
-    uploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+    uploadPostsWithGif('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, true, user.id);
   }
 
   const postWithImage = () => {
-    uploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, fav, true, user.id)
+    uploadPostsWithImage('update',fileName, imageUrl, 'posts', id, input, user.picture, user.name, true, user.id);
   }
 
   const postWithNoAttachment = () => {
-    updatePostWithNoAttachment('posts', id, input, user.picture, user.name, fav, false, user.id)
+    updatePostWithNoAttachment('posts', id, input, user.picture, user.name, false, user.id);
   }
 
   {/* update the post with new message */}
   const handleSubmit = (e) => {
-      e.preventDefault()
-      setUpdatePostPopUp(false)
+      e.preventDefault();
+      setUpdatePostPopUp(false);
       
       if (imageUrl) { 
         if(fileType === 'image/gif'){
-          postWithGif()
+          postWithGif();
         } else {
-          postWithImage()
+          postWithImage();
           }
         } else {
-          postWithNoAttachment()
+          postWithNoAttachment();
         }
         resetState(); 
       }
@@ -151,8 +163,9 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, f
 
         {/* render the post's options */}
         <PostOption 
-          addToFavourite={addToFavourite} 
-          favourite={favourite} 
+          likePost={likePost} 
+          like={like} 
+          numberOfLikes={likes}
           share = {share}
           setShare = {setShare}
           setWriteComment={setWriteComment} 

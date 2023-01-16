@@ -6,13 +6,14 @@ import {ExpandMoreOutlined} from '@material-ui/icons'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import {useSelector} from 'react-redux'
 
-export default function PostOption({addToFavourite, favourite, share, setShare, setWriteComment, writeComment, setDisplayComment, displayComment, setMustSignin, mustSignin}) {
+export default function PostOption({likePost, like, numberOfLikes, share, setShare, setWriteComment, writeComment, setDisplayComment, displayComment, setMustSignin, mustSignin}) {
     const user = useSelector(state => state.user)
     const postOptions = [
         {
-            func: user ? addToFavourite : setMustSignin,
-            state: user ? document.createEvent('Event') : !mustSignin,
-            class: favourite,
+            func: user ? likePost : setMustSignin,
+            state: user ? !like : !mustSignin,
+            class: like,
+            like: numberOfLikes !== 0 && numberOfLikes,
             icon: <ThumbUpIcon/>,
             text: <p>Like</p>
         },
@@ -46,6 +47,7 @@ export default function PostOption({addToFavourite, favourite, share, setShare, 
      <div className="post_options">
        { postOptions.map((postOption) => (
           <div onClick ={() => postOption.func(postOption.state)} className={`post_option ${postOption.class? 'active':'inactive'}`}>
+            {postOption.like}
             {postOption.icon}
             {postOption.text}
           </div>
