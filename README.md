@@ -2,7 +2,7 @@
 
 ---
 
-This a single page application created using React.js library to create the user interface, and interacts with and stores data using Firebase services.
+This is a single page application created using React.js library to create the user interface, and interacts with and stores data using Firebase services.
 The purpose of this application is to demonstrate CRUD functionalities mimicking common Facebook features.
 
 # Instructions to SETUP and RUN
