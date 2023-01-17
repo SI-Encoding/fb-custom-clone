@@ -79,7 +79,7 @@ function MessageSender() {
         <input            
           value = {input}                 
           onChange = {e => setInput(e.target.value)}                
-          placeholder = {`What's on your mind?, ${user ? user.name + '?' : ''}`}                
+          placeholder = {`What's on your mind? ${user ? user.name : ''}`}                
           className = "messageSender__input"/>                
         <label htmlFor = "imageFile" className = 'upload_button'>                
           <div style={{marginTop:'7px'}} onClick={() => !user && navigate('signin')}>{user ? "Upload Image" : "signin"}</div>
