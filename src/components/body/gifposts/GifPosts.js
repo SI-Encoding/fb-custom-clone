@@ -32,6 +32,8 @@ function GifPosts() {
                         message = {post.data.message}
                         timestamp = {post.data.timestamp}
                         username = {post.data.username}
+                        likes = {Object.keys(post.data.likes || {}).length}
+                        liked = {post.data.likes}
                         image = {post.data.image}
                         favourite = {post.data.favourite}
                         userId = {post.data.userId}
