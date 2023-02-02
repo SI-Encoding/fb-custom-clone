@@ -21,3 +21,8 @@
 .chat_item:hover {
     cursor: pointer;
 }
+
+.share_item {
+    display: flex;
+    justify-content: center;
+}

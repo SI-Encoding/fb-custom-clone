@@ -1,6 +1,18 @@
 import db from '../firebase/firebase'
 import firebase from 'firebase/compat'
 
+const sharedPost = (shared, personsId, image, message, personsUsername, personsProfilePic) => {
+  db.collection(shared).doc(personsId).collection(personsId).add({
+    profilePic: personsProfilePic,
+    personsId: personsId,
+    username: personsUsername,
+    image: image ? image : '',
+    message: message,
+    time: firebase.firestore.FieldValue.serverTimestamp(),
+    seen: false
+})
+}
+
 const likedPost = (posts, id, like, usersId) => {
   db.collection(posts).doc(id).set({
     likes: {[usersId]: like === true ? like : firebase.firestore.FieldValue.delete()}
@@ -80,4 +92,4 @@ const removeFriend = (usersId, id, users) => {
 
 export default likedPost
 
-export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment, addFriend, acceptRequest, removeFriend}
+export {updatePostWithGif, updatePostWithImage, updatePostWithNoAttachment, updatePostComment, addFriend, acceptRequest, removeFriend, sharedPost}

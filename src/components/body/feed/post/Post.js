@@ -16,6 +16,7 @@ import PostMessage from './postmessage/PostMessage'
 import PostHeader from './postheader/PostHeader'
 import PostOption from './postoption/PostOption'
 import SigninPopup from '../../signinpopup/SigninPopup';
+import SharePostPopup from '../../sharepopup/SharePostPopup';
 
 const Post = forwardRef(({id, profilePic, image, username, timestamp, message, likes, liked, userId, sharedFrom, link},ref) =>{
   const user = useSelector((state) => (state.user));
@@ -58,6 +59,11 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, l
       setLike(checkIfUserLiked(user.id))
     }
   },[])
+
+  {/* share post */}
+  const sharePost = (share) => {
+    setShare(share);
+  }
 
   {/* like post */}
   const likePost = (like) => {
@@ -167,7 +173,7 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, l
           like={like} 
           numberOfLikes={likes}
           share = {share}
-          setShare = {setShare}
+          sharePost = {sharePost}
           setWriteComment={setWriteComment} 
           writeComment={writeComment} 
           setDisplayComment={setDisplayComment} 
@@ -239,6 +245,16 @@ const Post = forwardRef(({id, profilePic, image, username, timestamp, message, l
           <SigninPopup 
             setMustSignin={setMustSignin} 
             mustSignin={mustSignin} 
+          />
+        }
+
+         {/* render the popup used to allow the user to share this post */}
+         {share && 
+          <SharePostPopup 
+            setShare={setShare} 
+            share={share}
+            image={image} 
+            message={message}
           />
         }
       </div>

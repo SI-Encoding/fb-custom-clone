@@ -24,12 +24,10 @@ function Feed() {
         <div className="feed_container">
             <StoryReel/>
             <MessageSender/>
-            {posts.map((post, index) => (
+            {posts.map((post) => (
                 <FlipMove typeName={null}>
                     <Post
                         key = {post.id}
-                        index = {index}
-                        posts= {posts}
                         id = {post.id}
                         profilePic = {post.data.profilePic}
                         message = {post.data.message}

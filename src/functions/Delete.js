@@ -1,5 +1,14 @@
 import db from '../firebase/firebase'
 
+const removeSharedPost = (shared, personsId, id) => {
+    db.collection(shared).doc(personsId).collection(personsId).doc(id).delete().then(() => {
+      console.log('shared post successfully deleted ')
+  }).catch((error) => {
+      console.log('error failed to delete shared post', error)
+  })
+  
+}
+
 const deleteFromFirebaseCollection = (collection, id) => {
     db.collection(collection).doc(id).delete().then(() => {
         console.log('comment successfully deleted ')
@@ -30,4 +39,4 @@ const deletePostCommentFromFirebaseCollection = (posts, comments, postId, commen
 }
 
 export default deleteFromFirebaseCollection;
-export {deletePostCommentFromFirebaseCollection, deleteMessageFromFirebaseCollection}
+export {deletePostCommentFromFirebaseCollection, deleteMessageFromFirebaseCollection, removeSharedPost}

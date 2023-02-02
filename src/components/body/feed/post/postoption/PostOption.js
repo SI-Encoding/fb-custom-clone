@@ -6,7 +6,7 @@ import {ExpandMoreOutlined} from '@material-ui/icons'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import {useSelector} from 'react-redux'
 
-export default function PostOption({likePost, like, numberOfLikes, share, setShare, setWriteComment, writeComment, setDisplayComment, displayComment, setMustSignin, mustSignin}) {
+export default function PostOption({likePost, like, numberOfLikes, share, sharePost, setWriteComment, writeComment, setDisplayComment, displayComment, setMustSignin, mustSignin}) {
     const user = useSelector(state => state.user)
     const postOptions = [
         {
@@ -25,7 +25,7 @@ export default function PostOption({likePost, like, numberOfLikes, share, setSha
             text: <p>Comment</p>
         },
         {
-            func: user ? setShare : setMustSignin,
+            func: user ? sharePost : setMustSignin,
             state: user? !share : !mustSignin,
             class: '',
             icon: <NearMeIcon/>,

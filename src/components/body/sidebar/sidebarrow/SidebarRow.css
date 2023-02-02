@@ -102,6 +102,17 @@
     white-space: nowrap;
 }
 
+.latest_message_container > img {
+    margin-left: auto;
+    margin-right: auto;
+    height: 23px;
+    width: 28px;
+}
+
+.shared_post:hover {
+    cursor: pointer;
+}
+
 .latest_message {
     display: flex;
     max-width: 130px;
