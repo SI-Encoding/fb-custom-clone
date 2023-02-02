@@ -6,20 +6,29 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import db from '../../../firebase/firebase'
 import NotificationsMenu from './notificationsmenu/NotificationsMenu';
 import {Link} from 'react-router-dom'
+import MailIcon from '@material-ui/icons/Mail';
+import SharedPostMenu from './sharedpostmenu/SharedPostMenu';
 
 export default function HeaderRight({
   user, 
   setLogoutPopup, 
   logoutPopup, 
   notificationMenu, 
-  setNotificationMenu, 
+  setNotificationMenu,
+  sharedPostMenu,
+  setSharedPostMenu, 
   signOutRef, 
-  notificationsRef
+  notificationsRef,
+  sharedPostRef
 }) {
   const [notifications, setNotifications] = useState([])
-  const [requests, setRequests] = useState([])  
+  const [sharedPostNotifications, setSharedPostNotifications] = useState([])
+  const [requests, setRequests] = useState([])
+  const [sharedPosts, setSharedPosts] = useState([])  
 
   let activeRequests = []
+  let activeSharedRequests = []
+
   useEffect(() => {
     if(user) {
       db.collection("users").where("userId", "!=", user.id).onSnapshot((snapshot) => 
@@ -31,7 +40,7 @@ export default function HeaderRight({
         }
       );
     } 
-
+    
   const resetState = () => {
       setNotifications([])
       setRequests([])
@@ -62,9 +71,56 @@ export default function HeaderRight({
     }
 }},[])
 
+useEffect(()=> {
+  if(user) {
+    db.collection("shared").doc(user.id).collection(user.id).orderBy('time', 'desc').onSnapshot((snapshot) => 
+      {
+        resetState()
+        setSharedPosts(snapshot.docs.map(doc=> ({ id: doc.id, data: lengthOfSharedPosts(doc.data())})))
+        lengthOfSharedPosts()
+      }
+    );
+  } 
+
+const lengthOfSharedPosts = (data) => {
+  if(data){
+    activeSharedRequests.push(data)
+    setSharedPostNotifications(activeSharedRequests)
+    return data
+  }
+}
+
+const resetState = () => {
+  setSharedPostNotifications([])
+  setSharedPosts([])
+  activeSharedRequests = []
+}
+
+return () => {
+  setSharedPostNotifications([])
+  setSharedPosts([])
+  activeSharedRequests = []
+}
+}, [])
+
   return (
     <div className = "header_right">
-      {/* Notifications */}
+      {/* Notifications shared post*/}
+        <div className={"notification"} onClick={() => setSharedPostMenu(true)}>
+          <MailIcon style={{fontSize: '30px'}}/> 
+          <span style={{background: sharedPostNotifications.length !== 0 ? '#e40000' : 'none'}}>
+            {sharedPostNotifications.length !== 0 ?sharedPostNotifications.length > 99 ? '99+': sharedPostNotifications.length : ''}
+          </span>
+        </div>
+        {sharedPostMenu && 
+          <SharedPostMenu 
+            sharedPostNotifications={sharedPostNotifications} 
+            sharedPosts={sharedPosts} 
+            setSharedPostMenu={setSharedPostMenu} 
+            ref={sharedPostRef}
+          />
+        }
+      {/* Notifications friends request*/}
         <div className={"notification"} onClick={() => setNotificationMenu(true)}>
           <PeopleAltIcon style={{fontSize: '30px'}}/> 
           <span style={{background: notifications.length !== 0 ? '#e40000' : 'none'}}>
