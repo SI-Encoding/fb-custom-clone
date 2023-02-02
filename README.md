@@ -47,6 +47,6 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 
 - Single sign-on using Google account using Firebase Auth
 - Create, edit, and delete posts and posts' comments using Firebase Cloud Firestore (The posts may contain messages with and/or supported image files)
-- Like posts, send friend requests, receive notifications for requests, and privately chat with your friend by sending messages with emojis and attaching files like images or text (All files are stored using Firebase Cloud Storage)
+- Like and share posts, send friend requests, receive notifications for requests, and privately chat with your friend by sending messages with emojis and attaching files like images or text (All files are stored using Firebase Cloud Storage)
 - Change the app's theme to dark or light
 - Backend Node.js server to allow apps to share their content over to the fb-custom-clone
