@@ -7,13 +7,15 @@ export const initialState = {
       title: 'Facebook'
     },
     darkMode: mode,
-    chatUserInfo: null
+    chatUserInfo: null,
+    video: {status: false, remoteId: ''}
 }
 
 const set_user = 'SET_USER'
 const set_page = 'SET_PAGE'
 const set_dark_mode = 'SET_DARK_MODE'
 const set_chat_user_info = 'SET_CHAT_USER_INFO'
+const set_video_mode = 'SET_VIDEO_MODE'
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -37,10 +39,15 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 chatUserInfo:action.chatUserInfo,
             }
+        case 'SET_VIDEO_MODE':
+            return {
+                ...state,
+                video:action.video,
+            }    
             default:
                 return state;
     }
 }
-export {set_user, set_page, set_dark_mode, set_chat_user_info}
+export {set_user, set_page, set_dark_mode, set_chat_user_info, set_video_mode}
 
 export default rootReducer ;
