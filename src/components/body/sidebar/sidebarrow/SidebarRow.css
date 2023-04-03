@@ -31,6 +31,13 @@
     color: var(--fb-theme-colour-offline);
 }
 
+.phone_icon {
+    margin-left: auto;
+}
+
+.phone_icon:hover {
+    cursor: pointer;
+}
 .sidebarrow_container > .MuiSvgIcon-root, .people_container > .MuiSvgIcon-root{
     font-size: xx-large;
     color: var(--fb-theme-colour-blue);
