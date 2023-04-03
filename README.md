@@ -50,3 +50,4 @@ The purpose of this application is to demonstrate CRUD functionalities mimicking
 - Like and share posts, send friend requests, receive notifications for requests, and privately chat with your friend by sending messages with emojis and attaching files like images or text (All files are stored using Firebase Cloud Storage)
 - Change the app's theme to dark or light
 - Backend Node.js server to allow apps to share their content over to the fb-custom-clone
+- WebRTC video communication with peer
